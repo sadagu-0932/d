@@ -59,6 +59,12 @@ python play.py --episodes 5          # 5판만 플레이하고 종료
 python play.py --model model/best.pth
 ```
 
+이 저장소에는 미리 학습된 `model/best.pth`가 포함되어 있어서, `train.py`를 직접
+돌리지 않아도 `python play.py`만으로 바로 플레이를 볼 수 있습니다. 총 2,500 에피소드
+학습 후 탐험 없이(순수 정책) 20판을 평가했을 때 평균 26.65점(최저 11 / 최고 47,
+0점으로 죽은 판 없음)을 기록한 체크포인트입니다. 직접 처음부터 학습시키고 싶다면
+`train.py`를 실행하면 이 파일이 새 신기록으로 덮어써집니다.
+
 ## 설계 개요
 
 ### State (15차원 벡터, `STATE_SIZE`)

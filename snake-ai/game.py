@@ -49,6 +49,15 @@ REWARD_MOVE = 0.1         # 그냥 이동(생존)했을 때 주는 소량의 보
 REWARD_LENGTH_BONUS = 1   # 사망 시, 시작 길이를 초과한 몸길이 1칸당 얹어주는 보너스
 INITIAL_SNAKE_LENGTH = 3  # 게임 시작 시 뱀의 길이
 
+# 방향을 꺾을 때(직진이 아닌 우회전/좌회전)마다 주는 소량의 페널티.
+# 많이 꺾을수록(지그재그로 움직일수록) 누적 감점이 커지도록 해서, 불필요하게
+# 자주 방향을 트는 경로를 억제한다. 특히 좁은 공간에서 계속 꺾으며 이동하면
+# 자기 몸통으로 'ㄷ'자(U자) 모양을 만들다가 그 안에 스스로 갇히는 경우가 많은데,
+# 꺾는 행동 자체에 비용을 매겨 이런 경로를 덜 선호하게 만드는 것이 목적이다.
+# (먹이를 먹거나 죽음을 피하기 위해 꼭 필요한 회전은 그 보상/페널티가 훨씬 크므로
+# 여전히 선택된다 — 이 페널티는 '불필요한' 지그재그만 줄이는 정도의 크기로 잡는다)
+REWARD_TURN_PENALTY = -0.2
+
 # length_bonus가 아무리 커져도 사망 시 reward가 -5보다 좋아지지(0에 가까워지지) 않도록 하는 상한.
 # REWARD_COLLISION + MAX_LENGTH_BONUS == -5 가 항상 성립 (REWARD_COLLISION 값이 바뀌어도 동일).
 MAX_LENGTH_BONUS = REWARD_COLLISION * -1 - 5
@@ -209,6 +218,13 @@ class SnakeGameAI:
         else:
             self.snake.pop()  # 먹이를 못 먹었으면 꼬리를 잘라 길이를 유지
             reward = REWARD_MOVE  # 죽지 않고 이동한 것 자체에 소량의 보상
+
+        # 2.5) 이번 행동이 (직진이 아니라) 방향을 꺾은 것이었다면 소량의 페널티를 추가.
+        # 먹이를 먹었어도 예외 없이 적용 — REWARD_FOOD(10)에 비하면 무시할 수준이라
+        # 필요한 회전(먹이 쪽으로 꺾기)을 막지는 않으면서, 불필요하게 자주 꺾는
+        # 지그재그 경로만 누적 페널티로 억제한다.
+        if not np.array_equal(action, [1, 0, 0]):
+            reward += REWARD_TURN_PENALTY
 
         # 3) (옵션) 거리 기반 보조 보상 - 먹이를 먹은 스텝이 아닐 때만 추가로 적용
         if self.use_distance_reward and not ate_food:

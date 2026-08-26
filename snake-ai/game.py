@@ -42,6 +42,18 @@ BLUE1 = (0, 0, 255)
 BLUE2 = (0, 100, 255)
 BLACK = (0, 0, 0)
 
+# ---- 보상 설계 -----------------------------------------------------------
+REWARD_FOOD = 10          # 먹이 섭취
+REWARD_COLLISION = -20    # 충돌/게임오버 (죽는 것에 대한 페널티를 크게)
+REWARD_MOVE = 0.1         # 그냥 이동(생존)했을 때 주는 소량의 보상
+REWARD_LENGTH_BONUS = 1   # 사망 시, 시작 길이를 초과한 몸길이 1칸당 얹어주는 보너스
+INITIAL_SNAKE_LENGTH = 3  # 게임 시작 시 뱀의 길이
+
+# 먹이를 못 먹고 맴돌기만 할 때 게임을 강제 종료시키는 기준.
+# frame_iteration(누적 스텝 수)이 TIMEOUT_STEPS_PER_SEGMENT * len(snake)를 넘으면 종료.
+# (몸이 길어질수록 허용 스텝도 늘어나므로, 결과적으로 '최근 먹이를 못 먹은 시간'과 비슷하게 동작)
+TIMEOUT_STEPS_PER_SEGMENT = 150
+
 # 시계 방향으로 방향을 나열해두면, 오른쪽으로 90도 회전 = 다음 인덱스,
 # 왼쪽으로 90도 회전 = 이전 인덱스로 아주 간단하게 계산할 수 있음.
 CLOCK_WISE = [Direction.RIGHT, Direction.DOWN, Direction.LEFT, Direction.UP]
@@ -86,9 +98,8 @@ class SnakeGameAI:
 
         self.head = Point(self.w // 2, self.h // 2)
         self.snake = [
-            self.head,
-            Point(self.head.x - BLOCK_SIZE, self.head.y),
-            Point(self.head.x - 2 * BLOCK_SIZE, self.head.y),
+            Point(self.head.x - i * BLOCK_SIZE, self.head.y)
+            for i in range(INITIAL_SNAKE_LENGTH)
         ]
 
         self.score = 0
@@ -129,20 +140,30 @@ class SnakeGameAI:
         game_over = False
 
         # 충돌하거나, 너무 오랫동안 먹이를 못 먹으면(맴돌기 방지) 게임 종료
-        if self.is_collision() or self.frame_iteration > 100 * len(self.snake):
+        # -> 맴돌기로 REWARD_MOVE를 계속 챙기는 꼼수도 결국 이 페널티로 막힘
+        if self.is_collision() or self.frame_iteration > TIMEOUT_STEPS_PER_SEGMENT * len(self.snake):
             game_over = True
-            reward = -10
+            # 시작 길이를 초과한 몸길이(= 지금까지 먹은 먹이 개수 = score)만큼 보너스를
+            # 더해, 오래 살아남아 몸을 키운 뒤 죽는 것이 초반에 바로 죽는 것보다
+            # 덜 아프도록(때로는 상쇄되도록) 함.
+            # 주의: 이 시점의 self.snake는 방금 insert()로 새 머리가 추가된 직후라
+            # len(self.snake)를 그대로 쓰면 1칸 더 많게 계산되므로, 대신 먹은 먹이
+            # 개수인 self.score를 사용한다 (score만큼만 몸이 늘어났으므로 동일한 값).
+            length_bonus = REWARD_LENGTH_BONUS * self.score
+            reward = REWARD_COLLISION + length_bonus
             return self._get_state(), reward, game_over, self.score
 
-        if self.head == self.food:
+        ate_food = self.head == self.food
+        if ate_food:
             self.score += 1
-            reward = 10
+            reward = REWARD_FOOD
             self._place_food()
         else:
             self.snake.pop()  # 먹이를 못 먹었으면 꼬리를 잘라 길이를 유지
+            reward = REWARD_MOVE  # 죽지 않고 이동한 것 자체에 소량의 보상
 
-        # 3) (옵션) 거리 기반 보조 보상 - 주 보상(먹이/충돌)이 없을 때만 적용
-        if self.use_distance_reward and reward == 0:
+        # 3) (옵션) 거리 기반 보조 보상 - 먹이를 먹은 스텝이 아닐 때만 추가로 적용
+        if self.use_distance_reward and not ate_food:
             new_distance = self._food_distance()
             reward += 1 if new_distance < prev_distance else -1
 

@@ -49,6 +49,10 @@ REWARD_MOVE = 0.1         # 그냥 이동(생존)했을 때 주는 소량의 보
 REWARD_LENGTH_BONUS = 1   # 사망 시, 시작 길이를 초과한 몸길이 1칸당 얹어주는 보너스
 INITIAL_SNAKE_LENGTH = 3  # 게임 시작 시 뱀의 길이
 
+# length_bonus가 아무리 커져도 사망 시 reward가 -5보다 좋아지지(0에 가까워지지) 않도록 하는 상한.
+# REWARD_COLLISION + MAX_LENGTH_BONUS == -5 가 항상 성립 (REWARD_COLLISION 값이 바뀌어도 동일).
+MAX_LENGTH_BONUS = REWARD_COLLISION * -1 - 5
+
 # 먹이를 못 먹고 맴돌기만 할 때 게임을 강제 종료시키는 기준.
 # frame_iteration(누적 스텝 수)이 TIMEOUT_STEPS_PER_SEGMENT * len(snake)를 넘으면 종료.
 # (몸이 길어질수록 허용 스텝도 늘어나므로, 결과적으로 '최근 먹이를 못 먹은 시간'과 비슷하게 동작)
@@ -145,11 +149,12 @@ class SnakeGameAI:
             game_over = True
             # 시작 길이를 초과한 몸길이(= 지금까지 먹은 먹이 개수 = score)만큼 보너스를
             # 더해, 오래 살아남아 몸을 키운 뒤 죽는 것이 초반에 바로 죽는 것보다
-            # 덜 아프도록(때로는 상쇄되도록) 함.
+            # 덜 아프도록 함. 단, 보너스가 아무리 커져도 사망 reward는 항상 최소
+            # -5는 남도록(= 죽는 것 자체는 절대 이득이 되지 않도록) MAX_LENGTH_BONUS로 캡을 씌운다.
             # 주의: 이 시점의 self.snake는 방금 insert()로 새 머리가 추가된 직후라
             # len(self.snake)를 그대로 쓰면 1칸 더 많게 계산되므로, 대신 먹은 먹이
             # 개수인 self.score를 사용한다 (score만큼만 몸이 늘어났으므로 동일한 값).
-            length_bonus = REWARD_LENGTH_BONUS * self.score
+            length_bonus = min(REWARD_LENGTH_BONUS * self.score, MAX_LENGTH_BONUS)
             reward = REWARD_COLLISION + length_bonus
             return self._get_state(), reward, game_over, self.score
 

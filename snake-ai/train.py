@@ -13,7 +13,13 @@ DQN 에이전트를 스네이크 게임 환경에서 반복 학습시키는 메�
   즉, 최근 세트에서 잘 풀렸던 플레이를 기반으로 조금씩(작은 학습률의 경사하강 스텝)
   정책을 다듬어 나가는 효과를 냅니다. 세트가 다 차면(SET_SIZE게임) 그 세트의
   평균/최고 점수를 콘솔에 요약 출력하고 다음 세트를 새로 시작합니다.
+- 매 에피소드마다 (episode, score, mean_score, avg_loss)를 TRAINING_LOG_PATH
+  (기본: training_log.csv)에 한 줄씩 기록합니다. avg_loss는 그 에피소드 동안
+  발생한 모든 학습 스텝(QTrainer.train_step)의 loss 평균으로, 점수가 주기적으로
+  진동하는 구간과 loss가 튀는 구간이 겹치는지 나중에 분석하기 위한 용도입니다.
 """
+
+import csv
 
 import matplotlib.pyplot as plt
 
@@ -24,6 +30,11 @@ from game import SnakeGameAI
 # 최대한 빠르게 많은 에피소드를 돌리고 싶다면 False로 바꾸세요.
 RENDER_WHILE_TRAINING = True
 GAME_SPEED = 80  # 렌더링을 켰을 때의 FPS (높을수록 화면이 빨리 진행됨)
+
+# 학습 기록(episode, score, mean_score, avg_loss)을 저장할 CSV 경로.
+# train() 실행마다 새로 시작하므로(항상 n_games=0부터), 매번 덮어써서(w 모드) 새로
+# 기록한다.
+TRAINING_LOG_PATH = "training_log.csv"
 
 
 plt.ion()  # matplotlib 대화형(interactive) 모드 -> 창을 새로 띄우지 않고 실시간 갱신
@@ -56,6 +67,11 @@ def train():
     state_old = game.reset()
     episode_transitions = []  # 현재 진행 중인 한 판의 transition들을 순서대로 모아둠
 
+    log_file = open(TRAINING_LOG_PATH, "w", newline="", encoding="utf-8")
+    log_writer = csv.writer(log_file)
+    log_writer.writerow(["episode", "score", "mean_score", "avg_loss"])
+    log_file.flush()
+
     while True:
         # 1) 현재 state로부터 행동 선택 (epsilon-greedy)
         action = agent.get_action(state_old)
@@ -85,6 +101,10 @@ def train():
             agent.train_from_best_episode()
             episode_transitions = []
 
+            # 이 에피소드 동안(단기/장기/best-episode 학습 전부 포함) 발생한
+            # 학습 loss의 평균. 다음 에피소드를 위해 내부적으로 리셋된다.
+            avg_loss = agent.pop_episode_avg_loss()
+
             # 방금 이 호출로 한 세트(SET_SIZE게임)가 마감됐다면 요약을 출력
             if len(agent.set_history) > sets_completed_before:
                 finished_set = agent.set_history[-1]
@@ -102,13 +122,18 @@ def train():
 
             print(
                 f"Game {agent.n_games:>5} | Score: {score:>3} | Record: {record:>3} "
-                f"| Epsilon: {agent.get_epsilon():.3f}"
+                f"| Epsilon: {agent.get_epsilon():.3f} | Avg Loss: {avg_loss:.5f}"
             )
 
             scores.append(score)
             total_score += score
-            mean_scores.append(total_score / agent.n_games)
+            mean_score = total_score / agent.n_games
+            mean_scores.append(mean_score)
             plot(scores, mean_scores)
+
+            # 매 에피소드마다 바로 기록 + flush -> 중간에 Ctrl+C로 꺼도 로그가 남는다.
+            log_writer.writerow([agent.n_games, score, round(mean_score, 6), round(avg_loss, 6)])
+            log_file.flush()
 
 
 if __name__ == "__main__":

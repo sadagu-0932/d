@@ -3,6 +3,11 @@ agent.py
 --------
 DQN 에이전트: 게임(game.py)이 반환한 state를 받아 행동을 선택하고,
 Experience Replay Buffer를 이용해 신경망(model.py)을 학습시킵니다.
+
+또한 매 학습 스텝(QTrainer.train_step)마다 나오는 loss를 누적해뒀다가
+에피소드 단위 평균으로 뽑아낼 수 있게 합니다 (pop_episode_avg_loss,
+train.py의 CSV 로깅용). 점수 진동과 loss 스파이크가 겹치는지 나중에
+확인하기 위한 용도입니다.
 """
 
 import random
@@ -49,6 +54,11 @@ class Agent:
         self.best_episode_score = -1
         self.set_history = []           # 완료된 세트들의 요약 [{"set_index","avg_score","best_score","is_champion"}]
 
+        # 이번 에피소드 동안 발생한 학습 loss를 누적해뒀다가, 에피소드가 끝나면
+        # pop_episode_avg_loss()로 평균을 꺼내 쓴다 (train.py의 CSV 로깅용).
+        self.episode_loss_sum = 0.0
+        self.episode_loss_count = 0
+
         self.model = Linear_QNet(STATE_SIZE, 256, 3)  # state(STATE_SIZE) -> hidden(256) -> action(3)
         self.trainer = QTrainer(self.model, lr=LR, gamma=self.gamma)
 
@@ -85,7 +95,8 @@ class Agent:
 
     def train_short_memory(self, state, action, reward, next_state, done):
         """방금 겪은 transition 하나로 즉시(단기) 학습 -> 최신 경험을 빠르게 반영."""
-        self.trainer.train_step(state, action, reward, next_state, done)
+        loss = self.trainer.train_step(state, action, reward, next_state, done)
+        self._record_loss(loss)
 
     def train_long_memory(self):
         """리플레이 버퍼에서 배치를 무작위로 샘플링해 학습 (경험 재사용 + 데이터 상관관계 완화)."""
@@ -95,7 +106,27 @@ class Agent:
             mini_sample = self.memory
 
         states, actions, rewards, next_states, dones = zip(*mini_sample)
-        self.trainer.train_step(states, actions, rewards, next_states, dones)
+        loss = self.trainer.train_step(states, actions, rewards, next_states, dones)
+        self._record_loss(loss)
+
+    # ----------------------------------------------------------------
+    # loss 로깅: 매 학습 스텝(train_step)마다 나오는 loss를 누적해뒀다가,
+    # 에피소드가 끝나면 평균을 뽑아 CSV에 기록한다 (train.py에서 사용).
+    # ----------------------------------------------------------------
+    def _record_loss(self, loss: float):
+        self.episode_loss_sum += loss
+        self.episode_loss_count += 1
+
+    def pop_episode_avg_loss(self) -> float:
+        """이번 에피소드 동안 기록된 loss들의 평균을 반환하고, 다음 에피소드를 위해 리셋."""
+        if self.episode_loss_count == 0:
+            avg_loss = 0.0
+        else:
+            avg_loss = self.episode_loss_sum / self.episode_loss_count
+
+        self.episode_loss_sum = 0.0
+        self.episode_loss_count = 0
+        return avg_loss
 
     # ----------------------------------------------------------------
     # "세트(SET_SIZE게임)별 평균 점수를 비교해 더 나은 세트의 플레이" 기반 추가 학습
@@ -156,4 +187,5 @@ class Agent:
         mini_sample = random.sample(self.best_episode, sample_size)
 
         states, actions, rewards, next_states, dones = zip(*mini_sample)
-        self.trainer.train_step(states, actions, rewards, next_states, dones)
+        loss = self.trainer.train_step(states, actions, rewards, next_states, dones)
+        self._record_loss(loss)

@@ -8,9 +8,9 @@ Pygame으로 만든 스네이크 게임을, PyTorch 기반 DQN(Deep Q-Network) �
 ```
 snake-ai/
 ├── game.py           # 20x20 grid 스네이크 게임 (Gym 스타일 reset/step 인터페이스)
-├── model.py           # Q-Network(신경망) + QTrainer(학습 로직, 타겟 네트워크 포함)
-├── agent.py           # DQN 에이전트 (Experience Replay, epsilon-greedy)
-├── train.py           # 학습 루프 + 실시간 학습 곡선(matplotlib) + 체크포인트 저장
+├── model.py           # Q-Network(신경망) + QTrainer(학습 로직, Double DQN + 타겟 네트워크)
+├── agent.py           # DQN 에이전트 (Experience Replay, epsilon-greedy, 에피소드별 loss 집계)
+├── train.py           # 학습 루프 + 실시간 학습 곡선(matplotlib) + 체크포인트/CSV 로그 저장
 ├── play.py            # 학습된 모델(best.pth)로 실제 플레이 화면 보여주기
 ├── requirements.txt   # 필요 패키지 목록
 ├── model/             # 학습 체크포인트 저장 위치 (best.pth)
@@ -42,9 +42,14 @@ python game.py
 python train.py
 ```
 
-- 매 에피소드(한 판)가 끝날 때마다 `Game N | Score | Record | Epsilon` 형태로 콘솔에 출력됩니다.
+- 매 에피소드(한 판)가 끝날 때마다 `Game N | Score | Record | Epsilon | Avg Loss` 형태로
+  콘솔에 출력됩니다.
 - matplotlib 창에 에피소드별 점수와 누적 평균 점수 그래프가 실시간으로 갱신됩니다.
 - 최고 점수를 갱신할 때마다 `model/best.pth`에 체크포인트가 저장됩니다.
+- 매 에피소드마다 `episode, score, mean_score, avg_loss` 네 컬럼을 `training_log.csv`
+  (실행할 때마다 새로 덮어씀)에 기록합니다. `avg_loss`는 그 에피소드 동안의 모든 학습
+  스텝(`QTrainer.train_step`) loss의 평균으로, 점수가 주기적으로 진동하는 구간과 loss가
+  튀는 구간이 겹치는지 나중에 분석하는 데 씁니다.
 - 학습을 더 빠르게 돌리고 싶다면 `train.py` 상단의 `RENDER_WHILE_TRAINING = False`로
   바꿔 게임 화면 렌더링을 끄세요 (matplotlib 학습 곡선은 계속 표시됩니다).
 - 대략 수십~수백 에피소드가 지나면 평균 점수가 눈에 띄게 오르는 것을 확인할 수 있습니다.
@@ -130,6 +135,11 @@ lookahead는 "바로 근처가 막혔는지"만 보는 국소적인 정보라, �
 - epsilon-greedy 탐험: 게임 수(`n_games`)가 늘수록 `epsilon`이 1.0 → 0.02로 선형 감소
 - 학습 안정화: 벨만 타겟 계산에 별도의 **타겟 네트워크**를 사용하고,
   일정 스텝(기본 100)마다 policy 네트워크의 가중치로 동기화(hard update)합니다.
+- **Double DQN**: 다음 상태(s')에서의 행동 선택은 online 네트워크(`argmax_a' Q_online(s', a')`)로,
+  그 행동의 가치 평가는 target 네트워크(`Q_target(s', a*)`)로 분리해서 계산합니다
+  (`model.py`의 `QTrainer.train_step`). vanilla DQN처럼 target 네트워크 하나로 선택과
+  평가를 모두 처리하면 Q-value가 과대추정(overestimation)되는 경향이 있는데, Double DQN은
+  이를 완화해 학습을 더 안정적으로 수렴시킵니다.
 - 매 스텝 즉시 학습(`train_short_memory`) + 매 에피소드 종료 시 리플레이 버퍼에서
   샘플링한 배치로 추가 학습(`train_long_memory`)을 병행합니다.
 - **챔피언 세트 기반 추가 학습**: `SET_SIZE`(기본 100)게임을 '1세트'로 묶습니다. 세트가

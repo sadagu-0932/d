@@ -1,13 +1,15 @@
 """
 model.py
 --------
-DQN에 사용되는 신경망(Q-Network)과 학습기(Trainer)를 정의합니다.
+Double DQN에 사용되는 신경망(Q-Network)과 학습기(Trainer)를 정의합니다.
 
 - Linear_QNet : state(game.py의 STATE_SIZE) -> hidden(256) -> action(3) 구조의 간단한 MLP.
 - QTrainer    : 리플레이 버퍼에서 뽑은 (s, a, r, s', done) 배치로
                 벨만 방정식(Bellman equation) 기반 손실을 계산하고 역전파합니다.
                 학습을 안정화하기 위해 일정 주기로 가중치를 복사해오는
-                '타겟 네트워크(target network)'를 사용합니다.
+                '타겟 네트워크(target network)'를 사용하고, 다음 상태의 행동
+                선택은 online 네트워크로 하는 Double DQN 방식으로 Q-value
+                과대추정을 완화합니다 (QTrainer.train_step 참고).
 """
 
 import copy
@@ -66,13 +68,22 @@ class Linear_QNet(nn.Module):
 
 class QTrainer:
     """
-    Q-Learning(DQN) 파라미터 업데이트를 담당하는 클래스.
+    Q-Learning(Double DQN) 파라미터 업데이트를 담당하는 클래스.
 
-    - self.model        : 실제로 행동을 선택하는 데 사용되며 계속 학습되는 네트워크(policy network)
+    - self.model        : 실제로 행동을 선택하는 데 사용되며 계속 학습되는 네트워크(online/policy network)
     - self.target_model : self.model의 가중치를 일정 주기로 복사해오는 '고정된' 네트워크
 
     타겟 Q값 계산에 target_model을 쓰면, 학습 도중 타겟 값 자체가 매 스텝
     흔들리는 현상(moving target problem)이 줄어들어 학습이 더 안정적으로 수렴합니다.
+
+    Double DQN: vanilla DQN은 다음 상태(s')에서의 '행동 선택'과 '그 행동의 가치 평가'를
+    모두 target_model 하나로 처리해서(max_a' Q_target(s', a')), 아직 잘 학습되지 않은
+    target_model이 우연히 높게 평가한 행동을 계속 과대평가(overestimation)하는 경향이
+    있습니다. Double DQN은 이 둘을 분리합니다:
+      1) 행동 선택은 계속 학습 중인 online 네트워크(self.model)로 한다: a* = argmax_a' Q_online(s', a')
+      2) 그 행동의 가치 평가만 target_model로 한다: Q_target(s', a*)
+    이렇게 하면 두 네트워크가 동시에 같은 행동을 과대평가할 가능성이 줄어들어
+    Q-value가 더 안정적으로 수렴합니다.
     """
 
     def __init__(self, model: nn.Module, lr: float, gamma: float,
@@ -118,19 +129,25 @@ class QTrainer:
             reward = torch.unsqueeze(reward, 0)
             done = (done,)
 
-        # 1) 현재 상태에서 policy 네트워크가 예측한 Q값
+        # 1) 현재 상태에서 policy(online) 네트워크가 예측한 Q값
         pred = self.model(state)
         target = pred.clone()
 
-        # 2) 벨만 방정식으로 타겟 Q값 계산: Q_new = r + gamma * max(Q_target(s'))
+        # 2) Double DQN 벨만 타겟 계산: Q_new = r + gamma * Q_target(s', argmax_a' Q_online(s', a'))
         #    (단, 게임이 끝났다면(done=True) 미래 보상 없이 r만 사용)
+        #    - next_q_online: 다음 상태에서 어떤 행동이 최선인지 '선택'하는 데만 사용 (online 네트워크)
+        #    - next_q_target: 그 선택된 행동의 Q값을 '평가'하는 데만 사용 (target 네트워크)
+        #    행동 선택과 가치 평가를 서로 다른 네트워크로 분리해서, vanilla DQN(둘 다
+        #    target_model로 처리)에서 발생하는 Q-value 과대추정(overestimation)을 완화한다.
         with torch.no_grad():
-            next_q = self.target_model(next_state)
+            next_q_online = self.model(next_state)
+            next_q_target = self.target_model(next_state)
 
         for idx in range(len(done)):
             q_new = reward[idx]
             if not done[idx]:
-                q_new = reward[idx] + self.gamma * torch.max(next_q[idx])
+                best_action = torch.argmax(next_q_online[idx])
+                q_new = reward[idx] + self.gamma * next_q_target[idx][best_action]
 
             action_idx = torch.argmax(action[idx]).item()
             target[idx][action_idx] = q_new

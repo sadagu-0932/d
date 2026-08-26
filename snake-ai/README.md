@@ -103,6 +103,11 @@ python play.py --model model/best.pth
   일정 스텝(기본 100)마다 policy 네트워크의 가중치로 동기화(hard update)합니다.
 - 매 스텝 즉시 학습(`train_short_memory`) + 매 에피소드 종료 시 리플레이 버퍼에서
   샘플링한 배치로 추가 학습(`train_long_memory`)을 병행합니다.
+- **최고 기록 에피소드 기반 추가 학습**: 매 에피소드가 끝나면 `train_long_memory()` 뒤에,
+  지금까지 가장 점수가 높았던 한 판의 transition만 따로 모아둔 버퍼(`Agent.best_episode`)에서
+  배치를 샘플링해 한 번 더 학습합니다(`train_from_best_episode`). 정책을 통째로 그 판으로
+  덮어쓰는 게 아니라, 평소와 같은 방식(경사하강)으로 잘 풀렸던 플레이 쪽을 조금씩 더
+  강화하는 형태입니다. 새 신기록이 나오면 이 버퍼가 그 에피소드로 교체됩니다.
 
 ## 진행 순서 (개발 시 권장)
 

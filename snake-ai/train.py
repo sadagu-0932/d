@@ -7,6 +7,10 @@ DQN 에이전트를 스네이크 게임 환경에서 반복 학습시키는 메�
 - 매 에피소드(한 판)가 끝날 때마다 점수 / 평균 점수를 콘솔에 출력하고,
   matplotlib 창에 학습 곡선을 실시간으로 갱신합니다.
 - 최고 점수를 갱신하면 model/best.pth 로 체크포인트를 저장합니다.
+- 매 에피소드가 끝나면, 리플레이 버퍼 전체에서 뽑은 배치로 학습(train_long_memory)한
+  뒤에 "지금까지 가장 점수가 높았던 한 판"의 transition들만 따로 다시 샘플링해서
+  한 번 더 학습(train_from_best_episode)합니다. 즉, 잘 풀렸던 플레이를 기반으로
+  조금씩(작은 학습률의 경사하강 스텝) 정책을 다듬어 나가는 효과를 냅니다.
 """
 
 import matplotlib.pyplot as plt
@@ -48,6 +52,7 @@ def train():
     agent = Agent()
     game = SnakeGameAI(render=RENDER_WHILE_TRAINING, speed=GAME_SPEED)
     state_old = game.reset()
+    episode_transitions = []  # 현재 진행 중인 한 판의 transition들을 순서대로 모아둠
 
     while True:
         # 1) 현재 state로부터 행동 선택 (epsilon-greedy)
@@ -59,8 +64,9 @@ def train():
         # 3) 방금 겪은 transition으로 즉시(단기) 학습
         agent.train_short_memory(state_old, action, reward, state_new, done)
 
-        # 4) 리플레이 버퍼에 transition 저장
+        # 4) 리플레이 버퍼에 transition 저장 + 이번 판의 transition 목록에도 기록
         agent.remember(state_old, action, reward, state_new, done)
+        episode_transitions.append((state_old, action, reward, state_new, done))
 
         state_old = state_new
 
@@ -69,6 +75,12 @@ def train():
             state_old = game.reset()
             agent.n_games += 1
             agent.train_long_memory()
+
+            # 이번 판이 신기록이면 최고 기록 에피소드로 저장해두고,
+            # 그 에피소드를 기반으로 조금 더 학습한다.
+            agent.update_best_episode(episode_transitions, score)
+            agent.train_from_best_episode()
+            episode_transitions = []
 
             if score > record:
                 record = score

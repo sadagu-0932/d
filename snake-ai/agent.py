@@ -29,6 +29,13 @@ class Agent:
         self.gamma = 0.9  # 미래 보상 할인율 (벨만 방정식에 사용)
         self.memory = deque(maxlen=MAX_MEMORY)  # Experience Replay Buffer
 
+        # 지금까지 본 것 중 "가장 점수가 높았던 한 판(에피소드)"의 transition들만 따로 보관.
+        # 매 에피소드마다 여기서 추가로 배치를 뽑아 학습시켜서, 잘한 플레이를 조금씩 더
+        # 강화하는 방향으로 학습이 흘러가게 한다 (정책을 통째로 덮어쓰는 게 아니라
+        # 평소처럼 작은 학습률의 경사하강 스텝을 몇 번 더 밟는 것뿐).
+        self.best_episode = []
+        self.best_episode_score = -1
+
         self.model = Linear_QNet(11, 256, 3)  # state(11) -> hidden(256) -> action(3)
         self.trainer = QTrainer(self.model, lr=LR, gamma=self.gamma)
 
@@ -73,6 +80,33 @@ class Agent:
             mini_sample = random.sample(self.memory, BATCH_SIZE)
         else:
             mini_sample = self.memory
+
+        states, actions, rewards, next_states, dones = zip(*mini_sample)
+        self.trainer.train_step(states, actions, rewards, next_states, dones)
+
+    # ----------------------------------------------------------------
+    # "가장 점수가 높았던 플레이" 기반 추가 학습
+    # ----------------------------------------------------------------
+    def update_best_episode(self, episode_transitions, score):
+        """방금 끝난 에피소드가 지금까지의 최고 기록이면, 그 판의 transition들을 통째로 저장."""
+        if score > self.best_episode_score:
+            self.best_episode_score = score
+            self.best_episode = list(episode_transitions)
+
+    def train_from_best_episode(self):
+        """
+        저장해 둔 '최고 기록 에피소드'에서 배치를 뽑아 추가로 학습.
+
+        train_long_memory()와 똑같은 방식(무작위 샘플 + 일반 배치 학습)이지만,
+        표본을 전체 리플레이 버퍼가 아니라 최고 점수 에피소드 하나로 한정한다.
+        매 에피소드마다 이 함수를 한 번 더 호출해주면, 신경망이 잘 풀렸던 판의
+        상태->행동 대응을 조금씩 더 강하게 기억하게 된다.
+        """
+        if not self.best_episode:
+            return
+
+        sample_size = min(len(self.best_episode), BATCH_SIZE)
+        mini_sample = random.sample(self.best_episode, sample_size)
 
         states, actions, rewards, next_states, dones = zip(*mini_sample)
         self.trainer.train_step(states, actions, rewards, next_states, dones)

@@ -53,6 +53,11 @@ INITIAL_SNAKE_LENGTH = 3  # 게임 시작 시 뱀의 길이
 # REWARD_COLLISION + MAX_LENGTH_BONUS == -5 가 항상 성립 (REWARD_COLLISION 값이 바뀌어도 동일).
 MAX_LENGTH_BONUS = REWARD_COLLISION * -1 - 5
 
+# 죽기 직전, 머리 기준 상하좌우 네 방향이 전부(벽이 아니라) 자기 몸통으로 막혀 있었다면
+# -> 어떤 행동을 했어도 피할 수 없었던 '완전 자기 감금' 죽음이므로 훨씬 크게 감점한다.
+# (length_bonus의 -5 하한과는 별개로 적용되어, 이 경우엔 reward가 -5보다 훨씬 낮아질 수 있다)
+REWARD_SELF_TRAP_PENALTY = -30
+
 # 먹이를 못 먹고 맴돌기만 할 때 게임을 강제 종료시키는 기준.
 # frame_iteration(누적 스텝 수)이 TIMEOUT_STEPS_PER_SEGMENT * len(snake)를 넘으면 종료.
 # (몸이 길어질수록 허용 스텝도 늘어나므로, 결과적으로 '최근 먹이를 못 먹은 시간'과 비슷하게 동작)
@@ -134,6 +139,9 @@ class SnakeGameAI:
                     quit()
 
         prev_distance = self._food_distance()
+        # 이동하기 '전' 시점 기준으로 완전 자기 감금 상태였는지 미리 확인해둔다.
+        # (이동/insert 이후에는 self.snake[0]이 새 머리로 바뀌어 버려서 판단할 수 없음)
+        was_boxed_in = self._is_boxed_in_by_own_body()
 
         # 1) 행동에 따라 이동
         self._move(action)
@@ -156,6 +164,13 @@ class SnakeGameAI:
             # 개수인 self.score를 사용한다 (score만큼만 몸이 늘어났으므로 동일한 값).
             length_bonus = min(REWARD_LENGTH_BONUS * self.score, MAX_LENGTH_BONUS)
             reward = REWARD_COLLISION + length_bonus
+
+            # 완전 자기 감금(사방이 전부 자기 몸통) 상태에서 죽은 것이라면, 어떤 행동을
+            # 했어도 피할 수 없었던 명백히 예측 가능한 실수였으므로 훨씬 크게 감점한다.
+            # (위의 -5 하한과는 별개로 적용되어 reward가 그보다 훨씬 낮아질 수 있다)
+            if was_boxed_in:
+                reward += REWARD_SELF_TRAP_PENALTY
+
             return self._get_state(), reward, game_over, self.score
 
         ate_food = self.head == self.food
@@ -203,6 +218,28 @@ class SnakeGameAI:
         if pt in self.snake[1:]:
             return True
         return False
+
+    def _is_boxed_in_by_own_body(self):
+        """
+        (이동하기 전) 머리 기준 상하좌우 네 칸이 전부 '벽이 아니라 자기 몸통'인지 확인.
+
+        네 칸 중 하나라도 벽(그리드 밖)이면 몸통으로 완전히 둘러싸인 게 아니므로 False.
+        이 조건이 True라면, 이번에 어떤 방향으로 움직였어도 피할 수 없었던
+        '완전 자기 감금' 상태였다는 뜻이다.
+        """
+        head = self.snake[0]
+        neighbors = [
+            Point(head.x, head.y - BLOCK_SIZE),
+            Point(head.x, head.y + BLOCK_SIZE),
+            Point(head.x - BLOCK_SIZE, head.y),
+            Point(head.x + BLOCK_SIZE, head.y),
+        ]
+        for pt in neighbors:
+            if pt.x < 0 or pt.x >= self.w or pt.y < 0 or pt.y >= self.h:
+                return False  # 벽 밖 -> 자기 몸통이 아니므로 완전 감금이 아님
+            if pt not in self.snake[1:]:
+                return False  # 몸통이 아닌 빈 칸(또는 머리 자신) -> 완전 감금이 아님
+        return True
 
     def _move(self, action):
         """

@@ -8,9 +8,11 @@ DQN 에이전트를 스네이크 게임 환경에서 반복 학습시키는 메�
   matplotlib 창에 학습 곡선을 실시간으로 갱신합니다.
 - 최고 점수를 갱신하면 model/best.pth 로 체크포인트를 저장합니다.
 - 매 에피소드가 끝나면, 리플레이 버퍼 전체에서 뽑은 배치로 학습(train_long_memory)한
-  뒤에 "지금까지 가장 점수가 높았던 한 판"의 transition들만 따로 다시 샘플링해서
-  한 번 더 학습(train_from_best_episode)합니다. 즉, 잘 풀렸던 플레이를 기반으로
-  조금씩(작은 학습률의 경사하강 스텝) 정책을 다듬어 나가는 효과를 냅니다.
+  뒤에 "100게임을 1세트로 묶었을 때, 현재 세트에서 가장 점수가 높았던 한 판"의
+  transition들만 따로 다시 샘플링해서 한 번 더 학습(train_from_best_episode)합니다.
+  즉, 최근 세트에서 잘 풀렸던 플레이를 기반으로 조금씩(작은 학습률의 경사하강 스텝)
+  정책을 다듬어 나가는 효과를 냅니다. 세트가 다 차면(SET_SIZE게임) 그 세트의
+  평균/최고 점수를 콘솔에 요약 출력하고 다음 세트를 새로 시작합니다.
 """
 
 import matplotlib.pyplot as plt
@@ -76,11 +78,22 @@ def train():
             agent.n_games += 1
             agent.train_long_memory()
 
-            # 이번 판이 신기록이면 최고 기록 에피소드로 저장해두고,
-            # 그 에피소드를 기반으로 조금 더 학습한다.
+            # 이번 판이 (현재 세트 안에서) 최고 기록이면 최고 기록 에피소드로
+            # 저장해두고, 그 에피소드를 기반으로 조금 더 학습한다.
+            sets_completed_before = len(agent.set_history)
             agent.update_best_episode(episode_transitions, score)
             agent.train_from_best_episode()
             episode_transitions = []
+
+            # 방금 이 호출로 한 세트(SET_SIZE게임)가 마감됐다면 요약을 출력
+            if len(agent.set_history) > sets_completed_before:
+                finished_set = agent.set_history[-1]
+                champion_note = "★ 새 챔피언 세트!" if finished_set["is_champion"] else "(기존 챔피언 유지)"
+                print(
+                    f"=== Set {finished_set['set_index']} 완료 (게임 {agent.n_games - 1}까지) "
+                    f"| 평균 {finished_set['avg_score']:.2f} | 세트 내 최고 {finished_set['best_score']} "
+                    f"| {champion_note} (챔피언 평균: {agent.champion_set_avg:.2f}) ==="
+                )
 
             if score > record:
                 record = score

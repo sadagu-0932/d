@@ -40,8 +40,27 @@ class Linear_QNet(nn.Module):
         torch.save(self.state_dict(), file_path)
 
     def load(self, file_path: str, device: str = "cpu"):
-        """저장된 가중치를 불러와 현재 모델에 적용하고 평가 모드로 전환."""
-        self.load_state_dict(torch.load(file_path, map_location=device))
+        """
+        저장된 가중치를 불러와 현재 모델에 적용하고 평가 모드로 전환.
+
+        state 설계(game.py의 STATE_SIZE)가 바뀌면 신경망 입력 크기도 함께 바뀌므로,
+        예전 STATE_SIZE로 학습된 체크포인트는 더 이상 그대로 불러올 수 없다.
+        PyTorch의 원본 에러(size mismatch ...)만으로는 원인이 뭔지 알기 어려우니,
+        여기서 잡아서 "체크포인트가 지금 state 설계와 안 맞으니 새로 학습해야 한다"는
+        걸 명확히 알려주는 메시지로 바꿔서 다시 던진다.
+        """
+        state_dict = torch.load(file_path, map_location=device)
+        try:
+            self.load_state_dict(state_dict)
+        except RuntimeError as e:
+            raise RuntimeError(
+                f"'{file_path}' 체크포인트를 불러오지 못했습니다: 신경망 입력 크기가 "
+                "지금 코드의 state 설계(game.py의 STATE_SIZE)와 맞지 않습니다. "
+                "state를 확장/변경한 뒤 예전 체크포인트를 그대로 불러오려는 경우일 "
+                "가능성이 높습니다 — 이 체크포인트는 더 이상 호환되지 않으니, "
+                "train.py를 다시 실행해서 처음부터 새로 학습시켜 주세요.\n"
+                f"(원본 에러: {e})"
+            ) from e
         self.eval()
 
 

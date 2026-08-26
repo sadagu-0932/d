@@ -59,15 +59,16 @@ python play.py --episodes 5          # 5판만 플레이하고 종료
 python play.py --model model/best.pth
 ```
 
-이 저장소에는 미리 학습된 `model/best.pth`가 포함되어 있어서, `train.py`를 직접
-돌리지 않아도 `python play.py`만으로 바로 플레이를 볼 수 있습니다. 총 2,500 에피소드
-학습 후 탐험 없이(순수 정책) 20판을 평가했을 때 평균 26.65점(최저 11 / 최고 47,
-0점으로 죽은 판 없음)을 기록한 체크포인트입니다. 직접 처음부터 학습시키고 싶다면
-`train.py`를 실행하면 이 파일이 새 신기록으로 덮어써집니다.
+⚠️ **`model/best.pth`는 현재 신경망 구조와 호환되지 않습니다.** 이 체크포인트는
+state가 15차원이던 시절(flood-fill 기반 reachability feature 추가 이전)에 학습된
+것이라, 지금의 21차원 입력 신경망과 shape이 맞지 않습니다. `python play.py`로 이
+파일을 불러오려 하면 (원인을 명확히 알려주는) `RuntimeError`가 발생합니다 —
+`train.py`를 실행해서 처음부터 새로 학습시켜 주세요. 새로 학습된 체크포인트가
+`model/best.pth`를 덮어씁니다.
 
 ## 설계 개요
 
-### State (15차원 벡터, `STATE_SIZE`)
+### State (21차원 벡터, `STATE_SIZE`)
 
 | 인덱스 | 의미 |
 |---|---|
@@ -76,12 +77,23 @@ python play.py --model model/best.pth
 | 5~6 | 좌회전 방향으로 1~2칸 앞의 위험 여부 (`SIDE_LOOKAHEAD=2`) |
 | 7~10 | 현재 이동 방향 one-hot (상/하/좌/우) |
 | 11~14 | 먹이의 머리 기준 상대 방향 (상/하/좌/우, boolean) |
+| 15~17 | 직진/우회전/좌회전 각 후보 방향의 정규화된 flood-fill 도달 가능 면적 (0~1) |
+| 18~20 | 직진/우회전/좌회전 각 후보 방향에서 꼬리 칸에 도달 가능한지 여부 (boolean) |
 
 원래는 직진/좌/우 모두 딱 1칸 앞의 위험만 봤는데, 그러면 코앞에 닥쳐야만 위험을
 인지할 수 있어 미리 대비하기 어려웠습니다. 그래서 직진 방향은 더 멀리(3칸), 좌우는
 그보다 조금 덜 멀리(2칸)까지 내다보도록 확장해서, 한발 앞서 판단할 수 있는 정보를
 줍니다. `FORWARD_LOOKAHEAD` / `SIDE_LOOKAHEAD`는 `game.py` 상단에서 조절할 수 있고,
 이 값을 바꾸면 `STATE_SIZE`(따라서 신경망 입력 크기)도 자동으로 함께 바뀝니다.
+
+lookahead는 "바로 근처가 막혔는지"만 보는 국소적인 정보라, 당장은 안 막혀 보여도
+사실 좁은 구석에 갇히는 길일 수 있습니다. 그래서 직진/우회전/좌회전 각 후보 행동에
+대해 BFS(flood-fill, `_flood_fill_from`)로 그 방향이 실제로 얼마나 넓은 공간으로
+이어지는지(`reachable_area`)와, 그 안에서 최소한의 순환/탈출 경로가 있는지를
+어림하는 `can_reach_tail`(꼬리 칸에 도달 가능한지)까지 함께 봅니다. BFS의 장애물
+판정에서 몸통은 막힌 칸으로 취급하되, 그 후보 행동이 먹이를 먹는 행동이 아니라면
+꼬리는 다음 스텝에 비워지므로 장애물에서 제외합니다(먹이를 먹는 행동이라면 꼬리도
+그대로 남으므로 포함).
 
 행동(action)은 절대 방향이 아니라 **머리 기준 상대 방향**([직진, 우회전, 좌회전])의
 3가지 one-hot으로 정의합니다. 사람 플레이(방향키, 절대 방향)는
@@ -113,7 +125,7 @@ python play.py --model model/best.pth
 
 ### 에이전트 / 신경망
 
-- 신경망: `state(15) → Linear(256) → ReLU → Linear(3)` (`model.py`의 `Linear_QNet`)
+- 신경망: `state(21) → Linear(256) → ReLU → Linear(3)` (`model.py`의 `Linear_QNet`)
 - Experience Replay Buffer: `deque(maxlen=100_000)`, 배치 크기 1,000
 - epsilon-greedy 탐험: 게임 수(`n_games`)가 늘수록 `epsilon`이 1.0 → 0.02로 선형 감소
 - 학습 안정화: 벨만 타겟 계산에 별도의 **타겟 네트워크**를 사용하고,

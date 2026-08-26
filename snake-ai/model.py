@@ -3,7 +3,7 @@ model.py
 --------
 DQN에 사용되는 신경망(Q-Network)과 학습기(Trainer)를 정의합니다.
 
-- Linear_QNet : state(11) -> hidden(256) -> action(3) 구조의 간단한 MLP.
+- Linear_QNet : state(game.py의 STATE_SIZE) -> hidden(256) -> action(3) 구조의 간단한 MLP.
 - QTrainer    : 리플레이 버퍼에서 뽑은 (s, a, r, s', done) 배치로
                 벨만 방정식(Bellman equation) 기반 손실을 계산하고 역전파합니다.
                 학습을 안정화하기 위해 일정 주기로 가중치를 복사해오는
@@ -21,7 +21,7 @@ import torch.optim as optim
 
 
 class Linear_QNet(nn.Module):
-    """state -> 각 action의 Q값을 예측하는 완전연결 신경망 (11 -> 256 -> 3)."""
+    """state -> 각 action의 Q값을 예측하는 완전연결 신경망 (입력 크기는 호출부에서 지정)."""
 
     def __init__(self, input_size: int, hidden_size: int, output_size: int):
         super().__init__()

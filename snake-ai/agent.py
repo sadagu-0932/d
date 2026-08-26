@@ -10,6 +10,7 @@ from collections import deque
 
 import torch
 
+from game import STATE_SIZE
 from model import Linear_QNet, QTrainer
 
 MAX_MEMORY = 100_000   # 리플레이 버퍼 최대 크기 (deque라서 꽉 차면 오래된 것부터 자동 삭제)
@@ -36,7 +37,7 @@ class Agent:
         self.best_episode = []
         self.best_episode_score = -1
 
-        self.model = Linear_QNet(11, 256, 3)  # state(11) -> hidden(256) -> action(3)
+        self.model = Linear_QNet(STATE_SIZE, 256, 3)  # state(STATE_SIZE) -> hidden(256) -> action(3)
         self.trainer = QTrainer(self.model, lr=LR, gamma=self.gamma)
 
     # ----------------------------------------------------------------

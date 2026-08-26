@@ -67,6 +67,16 @@ TIMEOUT_STEPS_PER_SEGMENT = 150
 # 왼쪽으로 90도 회전 = 이전 인덱스로 아주 간단하게 계산할 수 있음.
 CLOCK_WISE = [Direction.RIGHT, Direction.DOWN, Direction.LEFT, Direction.UP]
 
+# ---- state에서 미리 내다볼(lookahead) 위험 감지 범위 ----------------------
+# 기존에는 직진/좌/우 방향으로 딱 1칸 앞의 위험만 봤는데, 그러면 곧바로 옆이
+# 막혀야만 '위험'을 인지해서 미리 대비하기 어려웠다. 그래서 직진 방향은 더 멀리,
+# 좌우 방향은 그보다 조금 덜 멀리 내다보게 해서 한발 앞서 생각할 수 있게 한다.
+FORWARD_LOOKAHEAD = 3  # 직진 방향으로 몇 칸 앞까지 위험을 확인할지
+SIDE_LOOKAHEAD = 2     # 좌/우 방향으로 몇 칸 앞까지 위험을 확인할지
+
+# state 벡터 총 차원 = (직진 위험 3 + 좌 위험 2 + 우 위험 2) + 이동방향 one-hot 4 + 먹이방향 4
+STATE_SIZE = FORWARD_LOOKAHEAD + SIDE_LOOKAHEAD * 2 + 4 + 4
+
 
 class SnakeGameAI:
     """
@@ -269,62 +279,68 @@ class SnakeGameAI:
 
         self.head = Point(x, y)
 
+    def _relative_direction(self, turn):
+        """turn: 0=직진, +1=우회전, -1=좌회전 (CLOCK_WISE 기준) -> 절대 Direction 반환."""
+        idx = CLOCK_WISE.index(self.direction)
+        return CLOCK_WISE[(idx + turn) % 4]
+
+    def _lookahead_dangers(self, turn, steps):
+        """
+        현재 진행 방향 기준 turn(0=직진, +1=우회전, -1=좌회전) 쪽으로, 머리에서
+        1칸, 2칸, ..., steps칸 떨어진 지점이 각각 위험(벽 또는 몸통)한지 리스트로 반환.
+        """
+        direction = self._relative_direction(turn)
+        dx, dy = {
+            Direction.RIGHT: (1, 0),
+            Direction.LEFT: (-1, 0),
+            Direction.DOWN: (0, 1),
+            Direction.UP: (0, -1),
+        }[direction]
+
+        head = self.snake[0]
+        return [
+            self.is_collision(
+                Point(head.x + dx * BLOCK_SIZE * step, head.y + dy * BLOCK_SIZE * step)
+            )
+            for step in range(1, steps + 1)
+        ]
+
     def _get_state(self):
         """
-        11차원 state 벡터를 계산해서 반환.
+        STATE_SIZE(기본 15)차원 state 벡터를 계산해서 반환.
 
-        [0] 직진 방향 위험(충돌) 여부
-        [1] 우회전 방향 위험 여부
-        [2] 좌회전 방향 위험 여부
-        [3~6] 현재 이동 방향 one-hot (상, 하, 좌, 우)
-        [7~10] 먹이의 상대적 방향 (상, 하, 좌, 우) - boolean
+        [0:3]   직진 방향으로 1~3칸 앞의 위험(충돌) 여부 (FORWARD_LOOKAHEAD)
+        [3:5]   우회전 방향으로 1~2칸 앞의 위험 여부 (SIDE_LOOKAHEAD)
+        [5:7]   좌회전 방향으로 1~2칸 앞의 위험 여부 (SIDE_LOOKAHEAD)
+        [7:11]  현재 이동 방향 one-hot (상, 하, 좌, 우)
+        [11:15] 먹이의 상대적 방향 (상, 하, 좌, 우) - boolean
+
+        기존에는 직진/좌/우 모두 딱 1칸 앞만 봤는데, 그러면 코앞에 닥쳐야만
+        위험을 인지할 수 있었다. 지금은 직진은 3칸, 좌우는 2칸까지 미리
+        내다봐서 한발 앞서 판단할 수 있는 정보를 준다.
         """
-        head = self.snake[0]
-        point_l = Point(head.x - BLOCK_SIZE, head.y)
-        point_r = Point(head.x + BLOCK_SIZE, head.y)
-        point_u = Point(head.x, head.y - BLOCK_SIZE)
-        point_d = Point(head.x, head.y + BLOCK_SIZE)
+        danger_straight = self._lookahead_dangers(0, FORWARD_LOOKAHEAD)
+        danger_right = self._lookahead_dangers(1, SIDE_LOOKAHEAD)
+        danger_left = self._lookahead_dangers(-1, SIDE_LOOKAHEAD)
 
+        head = self.snake[0]
         dir_l = self.direction == Direction.LEFT
         dir_r = self.direction == Direction.RIGHT
         dir_u = self.direction == Direction.UP
         dir_d = self.direction == Direction.DOWN
 
-        # 현재 진행 방향을 기준으로 '직진/우회전/좌회전'했을 때 부딪히는지 확인
-        danger_straight = (
-            (dir_r and self.is_collision(point_r))
-            or (dir_l and self.is_collision(point_l))
-            or (dir_u and self.is_collision(point_u))
-            or (dir_d and self.is_collision(point_d))
+        state = (
+            danger_straight
+            + danger_right
+            + danger_left
+            + [dir_u, dir_d, dir_l, dir_r]
+            + [
+                self.food.y < head.y,  # 먹이가 위쪽
+                self.food.y > head.y,  # 먹이가 아래쪽
+                self.food.x < head.x,  # 먹이가 왼쪽
+                self.food.x > head.x,  # 먹이가 오른쪽
+            ]
         )
-        danger_right = (
-            (dir_u and self.is_collision(point_r))
-            or (dir_d and self.is_collision(point_l))
-            or (dir_l and self.is_collision(point_u))
-            or (dir_r and self.is_collision(point_d))
-        )
-        danger_left = (
-            (dir_d and self.is_collision(point_r))
-            or (dir_u and self.is_collision(point_l))
-            or (dir_r and self.is_collision(point_u))
-            or (dir_l and self.is_collision(point_d))
-        )
-
-        state = [
-            danger_straight,
-            danger_right,
-            danger_left,
-
-            dir_u,
-            dir_d,
-            dir_l,
-            dir_r,
-
-            self.food.y < head.y,  # 먹이가 위쪽
-            self.food.y > head.y,  # 먹이가 아래쪽
-            self.food.x < head.x,  # 먹이가 왼쪽
-            self.food.x > head.x,  # 먹이가 오른쪽
-        ]
         return np.array(state, dtype=int)
 
     def _update_ui(self):

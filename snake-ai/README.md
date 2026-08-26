@@ -61,15 +61,21 @@ python play.py --model model/best.pth
 
 ## 설계 개요
 
-### State (11차원 벡터)
+### State (15차원 벡터, `STATE_SIZE`)
 
 | 인덱스 | 의미 |
 |---|---|
-| 0 | 직진 시 충돌(위험) 여부 |
-| 1 | 우회전 시 충돌(위험) 여부 |
-| 2 | 좌회전 시 충돌(위험) 여부 |
-| 3~6 | 현재 이동 방향 one-hot (상/하/좌/우) |
-| 7~10 | 먹이의 머리 기준 상대 방향 (상/하/좌/우, boolean) |
+| 0~2 | 직진 방향으로 1~3칸 앞의 충돌(위험) 여부 (`FORWARD_LOOKAHEAD=3`) |
+| 3~4 | 우회전 방향으로 1~2칸 앞의 위험 여부 (`SIDE_LOOKAHEAD=2`) |
+| 5~6 | 좌회전 방향으로 1~2칸 앞의 위험 여부 (`SIDE_LOOKAHEAD=2`) |
+| 7~10 | 현재 이동 방향 one-hot (상/하/좌/우) |
+| 11~14 | 먹이의 머리 기준 상대 방향 (상/하/좌/우, boolean) |
+
+원래는 직진/좌/우 모두 딱 1칸 앞의 위험만 봤는데, 그러면 코앞에 닥쳐야만 위험을
+인지할 수 있어 미리 대비하기 어려웠습니다. 그래서 직진 방향은 더 멀리(3칸), 좌우는
+그보다 조금 덜 멀리(2칸)까지 내다보도록 확장해서, 한발 앞서 판단할 수 있는 정보를
+줍니다. `FORWARD_LOOKAHEAD` / `SIDE_LOOKAHEAD`는 `game.py` 상단에서 조절할 수 있고,
+이 값을 바꾸면 `STATE_SIZE`(따라서 신경망 입력 크기)도 자동으로 함께 바뀝니다.
 
 행동(action)은 절대 방향이 아니라 **머리 기준 상대 방향**([직진, 우회전, 좌회전])의
 3가지 one-hot으로 정의합니다. 사람 플레이(방향키, 절대 방향)는
@@ -101,7 +107,7 @@ python play.py --model model/best.pth
 
 ### 에이전트 / 신경망
 
-- 신경망: `state(11) → Linear(256) → ReLU → Linear(3)` (`model.py`의 `Linear_QNet`)
+- 신경망: `state(15) → Linear(256) → ReLU → Linear(3)` (`model.py`의 `Linear_QNet`)
 - Experience Replay Buffer: `deque(maxlen=100_000)`, 배치 크기 1,000
 - epsilon-greedy 탐험: 게임 수(`n_games`)가 늘수록 `epsilon`이 1.0 → 0.02로 선형 감소
 - 학습 안정화: 벨만 타겟 계산에 별도의 **타겟 네트워크**를 사용하고,

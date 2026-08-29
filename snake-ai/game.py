@@ -42,34 +42,22 @@ BLUE1 = (0, 0, 255)
 BLUE2 = (0, 100, 255)
 BLACK = (0, 0, 0)
 
-# ---- 보상 설계 -----------------------------------------------------------
-REWARD_FOOD = 10          # 먹이 섭취
-REWARD_COLLISION = -20    # 충돌/게임오버 (죽는 것에 대한 페널티를 크게)
-REWARD_MOVE = 0.1         # 그냥 이동(생존)했을 때 주는 소량의 보상
-REWARD_LENGTH_BONUS = 1   # 사망 시, 시작 길이를 초과한 몸길이 1칸당 얹어주는 보너스
+# ---- 보상 설계 (최대한 단순화된 버전) --------------------------------------
+# 이전에는 사망 시 길이 보너스, self-trap 전용 페널티, 매 스텝 기본 이동 보상,
+# 회전 페널티 등 여러 겹의 보상이 쌓여 있어서, 점수 진동 같은 현상이 생겼을 때
+# 정확히 어느 요소가 원인인지 구분하기 어려웠다. 그래서 아래 4가지로만 완전히
+# 다시 구성한다 — 매 스텝의 reward는 항상 이 넷의 조합이다.
+REWARD_FOOD = 10           # (1) 먹이 섭취
+REWARD_DEATH = -10         # (2) 사망 — 원인(벽/몸통 충돌, 타임아웃)과 현재 길이에 상관없이 항상 이 고정값
+LENGTH_BONUS_COEF = 0.01   # (3) 매 생존 스텝마다: +LENGTH_BONUS_COEF * len(snake)
+EMPTY_PENALTY_COEF = 0.01  # (4) 매 생존 스텝마다: -EMPTY_PENALTY_COEF * (빈칸 수 / 전체 칸 수)
+
 INITIAL_SNAKE_LENGTH = 3  # 게임 시작 시 뱀의 길이
-
-# 방향을 꺾을 때(직진이 아닌 우회전/좌회전)마다 주는 소량의 페널티.
-# 많이 꺾을수록(지그재그로 움직일수록) 누적 감점이 커지도록 해서, 불필요하게
-# 자주 방향을 트는 경로를 억제한다. 특히 좁은 공간에서 계속 꺾으며 이동하면
-# 자기 몸통으로 'ㄷ'자(U자) 모양을 만들다가 그 안에 스스로 갇히는 경우가 많은데,
-# 꺾는 행동 자체에 비용을 매겨 이런 경로를 덜 선호하게 만드는 것이 목적이다.
-# (먹이를 먹거나 죽음을 피하기 위해 꼭 필요한 회전은 그 보상/페널티가 훨씬 크므로
-# 여전히 선택된다 — 이 페널티는 '불필요한' 지그재그만 줄이는 정도의 크기로 잡는다)
-REWARD_TURN_PENALTY = -0.2
-
-# length_bonus가 아무리 커져도 사망 시 reward가 -5보다 좋아지지(0에 가까워지지) 않도록 하는 상한.
-# REWARD_COLLISION + MAX_LENGTH_BONUS == -5 가 항상 성립 (REWARD_COLLISION 값이 바뀌어도 동일).
-MAX_LENGTH_BONUS = REWARD_COLLISION * -1 - 5
-
-# 죽기 직전, 머리 기준 상하좌우 네 방향이 전부(벽이 아니라) 자기 몸통으로 막혀 있었다면
-# -> 어떤 행동을 했어도 피할 수 없었던 '완전 자기 감금' 죽음이므로 훨씬 크게 감점한다.
-# (length_bonus의 -5 하한과는 별개로 적용되어, 이 경우엔 reward가 -5보다 훨씬 낮아질 수 있다)
-REWARD_SELF_TRAP_PENALTY = -30
 
 # 먹이를 못 먹고 맴돌기만 할 때 게임을 강제 종료시키는 기준.
 # frame_iteration(누적 스텝 수)이 TIMEOUT_STEPS_PER_SEGMENT * len(snake)를 넘으면 종료.
 # (몸이 길어질수록 허용 스텝도 늘어나므로, 결과적으로 '최근 먹이를 못 먹은 시간'과 비슷하게 동작)
+# 타임아웃으로 죽든 충돌로 죽든 reward는 동일하게 REWARD_DEATH.
 TIMEOUT_STEPS_PER_SEGMENT = 150
 
 # 시계 방향으로 방향을 나열해두면, 오른쪽으로 90도 회전 = 다음 인덱스,
@@ -114,17 +102,13 @@ class SnakeGameAI:
     w, h : 게임 화면 크기(px). 기본값은 20x20 grid에 맞춘 400x400.
     render : True면 pygame 창을 띄워 화면을 그림. 학습 속도를 높이고 싶다면 False.
     speed : 초당 프레임 수(FPS). render=True일 때만 의미가 있음.
-    use_distance_reward : True면 먹이와의 거리 변화에 따른 소량의 +/-1 보상을
-        (먹이 섭취/충돌 보상과 겹치지 않을 때) 추가로 부여.
     """
 
-    def __init__(self, w=WIDTH, h=HEIGHT, render=True, speed=40,
-                 use_distance_reward=False):
+    def __init__(self, w=WIDTH, h=HEIGHT, render=True, speed=40):
         self.w = w
         self.h = h
         self.render_enabled = render
         self.speed = speed
-        self.use_distance_reward = use_distance_reward
 
         if self.render_enabled:
             self.display = pygame.display.set_mode((self.w, self.h))
@@ -161,10 +145,15 @@ class SnakeGameAI:
 
         Returns
         -------
-        state : np.ndarray, shape (11,)
+        state : np.ndarray, shape (STATE_SIZE,)
         reward : float
         done : bool
         score : int
+
+        reward는 항상 아래 4가지 요소로만 구성된다 (원인을 구분하기 쉽도록 최대한 단순화):
+          (1) 먹이 섭취: REWARD_FOOD(고정)
+          (2) 사망(충돌/타임아웃 불문): REWARD_DEATH(고정, 길이와 무관)
+          (3)+(4) 생존한 스텝마다: 길이 가산점 - 빈칸 비율 페널티
         """
         self.frame_iteration += 1
 
@@ -175,41 +164,19 @@ class SnakeGameAI:
                     pygame.quit()
                     quit()
 
-        prev_distance = self._food_distance()
-        # 이동하기 '전' 시점 기준으로 완전 자기 감금 상태였는지 미리 확인해둔다.
-        # (이동/insert 이후에는 self.snake[0]이 새 머리로 바뀌어 버려서 판단할 수 없음)
-        was_boxed_in = self._is_boxed_in_by_own_body()
-
         # 1) 행동에 따라 이동
         self._move(action)
         self.snake.insert(0, self.head)
 
-        # 2) 보상 / 종료 판정
-        reward = 0
+        # 2) 종료 판정 — 충돌하거나, 너무 오랫동안 먹이를 못 먹으면(맴돌기 방지) 게임 종료.
+        # 원인(충돌/타임아웃)이나 현재 길이와 상관없이 reward는 항상 REWARD_DEATH로 고정.
         game_over = False
-
-        # 충돌하거나, 너무 오랫동안 먹이를 못 먹으면(맴돌기 방지) 게임 종료
-        # -> 맴돌기로 REWARD_MOVE를 계속 챙기는 꼼수도 결국 이 페널티로 막힘
         if self.is_collision() or self.frame_iteration > TIMEOUT_STEPS_PER_SEGMENT * len(self.snake):
             game_over = True
-            # 시작 길이를 초과한 몸길이(= 지금까지 먹은 먹이 개수 = score)만큼 보너스를
-            # 더해, 오래 살아남아 몸을 키운 뒤 죽는 것이 초반에 바로 죽는 것보다
-            # 덜 아프도록 함. 단, 보너스가 아무리 커져도 사망 reward는 항상 최소
-            # -5는 남도록(= 죽는 것 자체는 절대 이득이 되지 않도록) MAX_LENGTH_BONUS로 캡을 씌운다.
-            # 주의: 이 시점의 self.snake는 방금 insert()로 새 머리가 추가된 직후라
-            # len(self.snake)를 그대로 쓰면 1칸 더 많게 계산되므로, 대신 먹은 먹이
-            # 개수인 self.score를 사용한다 (score만큼만 몸이 늘어났으므로 동일한 값).
-            length_bonus = min(REWARD_LENGTH_BONUS * self.score, MAX_LENGTH_BONUS)
-            reward = REWARD_COLLISION + length_bonus
-
-            # 완전 자기 감금(사방이 전부 자기 몸통) 상태에서 죽은 것이라면, 어떤 행동을
-            # 했어도 피할 수 없었던 명백히 예측 가능한 실수였으므로 훨씬 크게 감점한다.
-            # (위의 -5 하한과는 별개로 적용되어 reward가 그보다 훨씬 낮아질 수 있다)
-            if was_boxed_in:
-                reward += REWARD_SELF_TRAP_PENALTY
-
+            reward = REWARD_DEATH
             return self._get_state(), reward, game_over, self.score
 
+        # 3) 먹이 섭취 여부에 따른 기본 보상
         ate_food = self.head == self.food
         if ate_food:
             self.score += 1
@@ -217,21 +184,17 @@ class SnakeGameAI:
             self._place_food()
         else:
             self.snake.pop()  # 먹이를 못 먹었으면 꼬리를 잘라 길이를 유지
-            reward = REWARD_MOVE  # 죽지 않고 이동한 것 자체에 소량의 보상
+            reward = 0
 
-        # 2.5) 이번 행동이 (직진이 아니라) 방향을 꺾은 것이었다면 소량의 페널티를 추가.
-        # 먹이를 먹었어도 예외 없이 적용 — REWARD_FOOD(10)에 비하면 무시할 수준이라
-        # 필요한 회전(먹이 쪽으로 꺾기)을 막지는 않으면서, 불필요하게 자주 꺾는
-        # 지그재그 경로만 누적 페널티로 억제한다.
-        if not np.array_equal(action, [1, 0, 0]):
-            reward += REWARD_TURN_PENALTY
+        # 4) 살아남은 모든 스텝(먹이를 먹었든 아니든)에 매번 합산되는 길이 가산점 / 빈칸 페널티.
+        #    빈칸 개수는 flood-fill 없이 "전체 칸 수 - 현재 몸길이"로 단순 계산한다
+        #    (_get_state()의 flood-fill reachability feature와는 별개).
+        total_cells = GRID_SIZE * GRID_SIZE
+        empty_cells = total_cells - len(self.snake)
+        reward += LENGTH_BONUS_COEF * len(self.snake)
+        reward -= EMPTY_PENALTY_COEF * (empty_cells / total_cells)
 
-        # 3) (옵션) 거리 기반 보조 보상 - 먹이를 먹은 스텝이 아닐 때만 추가로 적용
-        if self.use_distance_reward and not ate_food:
-            new_distance = self._food_distance()
-            reward += 1 if new_distance < prev_distance else -1
-
-        # 4) 렌더링
+        # 5) 렌더링
         if self.render_enabled:
             self._update_ui()
             self.clock.tick(self.speed)
@@ -248,10 +211,6 @@ class SnakeGameAI:
         if self.food in self.snake:  # 뱀 몸통 위에 놓였다면 다시 뽑기
             self._place_food()
 
-    def _food_distance(self):
-        """머리와 먹이 사이의 맨해튼 거리."""
-        return abs(self.head.x - self.food.x) + abs(self.head.y - self.food.y)
-
     def is_collision(self, pt=None):
         if pt is None:
             pt = self.head
@@ -262,28 +221,6 @@ class SnakeGameAI:
         if pt in self.snake[1:]:
             return True
         return False
-
-    def _is_boxed_in_by_own_body(self):
-        """
-        (이동하기 전) 머리 기준 상하좌우 네 칸이 전부 '벽이 아니라 자기 몸통'인지 확인.
-
-        네 칸 중 하나라도 벽(그리드 밖)이면 몸통으로 완전히 둘러싸인 게 아니므로 False.
-        이 조건이 True라면, 이번에 어떤 방향으로 움직였어도 피할 수 없었던
-        '완전 자기 감금' 상태였다는 뜻이다.
-        """
-        head = self.snake[0]
-        neighbors = [
-            Point(head.x, head.y - BLOCK_SIZE),
-            Point(head.x, head.y + BLOCK_SIZE),
-            Point(head.x - BLOCK_SIZE, head.y),
-            Point(head.x + BLOCK_SIZE, head.y),
-        ]
-        for pt in neighbors:
-            if pt.x < 0 or pt.x >= self.w or pt.y < 0 or pt.y >= self.h:
-                return False  # 벽 밖 -> 자기 몸통이 아니므로 완전 감금이 아님
-            if pt not in self.snake[1:]:
-                return False  # 몸통이 아닌 빈 칸(또는 머리 자신) -> 완전 감금이 아님
-        return True
 
     def _move(self, action):
         """

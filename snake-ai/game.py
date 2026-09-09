@@ -42,20 +42,14 @@ BLUE1 = (0, 0, 255)
 BLUE2 = (0, 100, 255)
 BLACK = (0, 0, 0)
 
-# ---- 보상 설계 (먹이/사망 기본 보상 + 길이 보너스 두 가지) -------------------
-# 기본은 두 가지 사건에만 반응한다: 먹이(사과)를 먹으면 점수를 얻고, 죽으면 점수를
-# 잃는다. 그 위에 "몸이 길수록 더 유리하다"는 신호를 주기 위한 길이 보너스를
-# 두 군데에 얹는다 — (1) 매 생존 스텝마다 현재 길이에 비례한 소량의 가산점,
-# (2) 사망 시 그동안 먹은 먹이 개수(score)에 비례한 보너스(단, 죽는 것 자체가
-# 이득이 되지 않도록 상한을 둠).
+# ---- 보상 설계 (먹이/사망 기본 보상 + 길이 보너스 하나) ----------------------
+# 두 가지 사건에만 반응한다: 먹이(사과)를 먹으면 점수를 얻고, 죽으면 점수를 잃는다.
+# 그 위에 "몸이 길수록 더 유리하다"는 신호를 주기 위해, 사망이 아닌 모든 생존
+# 스텝마다 현재 길이에 비례한 소량의 가산점 하나만 얹는다. 그 외 조건(회전 페널티,
+# 빈칸 페널티, self-trap 전용 페널티, 사망 시 별도 보너스 등)은 없다.
 REWARD_FOOD = 10    # 먹이(사과) 섭취
-REWARD_DEATH = -10  # 사망 — 원인(벽/몸통 충돌, 타임아웃)과 무관하게 항상 이 고정값이 기본으로 깔림
+REWARD_DEATH = -10  # 사망 — 원인(벽/몸통 충돌, 타임아웃)과 현재 길이에 상관없이 항상 이 고정값
 LENGTH_BONUS_COEF = 0.01  # 매 생존 스텝마다: +LENGTH_BONUS_COEF * len(snake)
-
-DEATH_LENGTH_BONUS_COEF = 1  # 사망 시, 지금까지 먹은 먹이 개수(score) 1개당 얹어주는 보너스
-# 위 사망 보너스가 아무리 커져도 사망 reward가 -5보다 좋아지지(0에 가까워지지) 않도록 하는 상한.
-# REWARD_DEATH + MAX_DEATH_LENGTH_BONUS == -5 가 항상 성립 (REWARD_DEATH 값이 바뀌어도 동일).
-MAX_DEATH_LENGTH_BONUS = REWARD_DEATH * -1 - 5
 
 INITIAL_SNAKE_LENGTH = 3  # 게임 시작 시 뱀의 길이
 
@@ -157,7 +151,7 @@ class SnakeGameAI:
 
         reward 구성:
           - 먹이(사과) 섭취: REWARD_FOOD
-          - 사망(충돌/타임아웃 불문): REWARD_DEATH + min(score * DEATH_LENGTH_BONUS_COEF, 상한)
+          - 사망(충돌/타임아웃 불문): REWARD_DEATH(고정, 길이/score와 무관)
           - 그 외 그냥 이동한 스텝: 0
           - (사망이 아닌) 모든 생존 스텝에는 위 값에 +LENGTH_BONUS_COEF * len(snake)가 추가로 더해짐
         """
@@ -175,16 +169,11 @@ class SnakeGameAI:
         self.snake.insert(0, self.head)
 
         # 2) 종료 판정 — 충돌하거나, 너무 오랫동안 먹이를 못 먹으면(맴돌기 방지) 게임 종료.
-        # 기본 페널티(REWARD_DEATH)는 원인(충돌/타임아웃)과 무관하게 고정이지만, 그동안
-        # 먹은 먹이 개수(score)만큼 소량의 보너스를 더해 오래 살아남아 몸을 키운 뒤
-        # 죽는 것이 초반에 바로 죽는 것보다 덜 아프도록 한다. 단, 보너스가 아무리 커져도
-        # 사망 reward는 항상 최소 -5는 남도록(= 죽는 것 자체는 절대 이득이 되지 않도록)
-        # MAX_DEATH_LENGTH_BONUS로 캡을 씌운다.
+        # 원인(충돌/타임아웃)이나 현재 길이와 상관없이 reward는 항상 REWARD_DEATH로 고정.
         game_over = False
         if self.is_collision() or self.frame_iteration > TIMEOUT_STEPS_PER_SEGMENT * len(self.snake):
             game_over = True
-            death_length_bonus = min(DEATH_LENGTH_BONUS_COEF * self.score, MAX_DEATH_LENGTH_BONUS)
-            reward = REWARD_DEATH + death_length_bonus
+            reward = REWARD_DEATH
             return self._get_state(), reward, game_over, self.score
 
         # 3) 먹이 섭취 여부에 따른 보상

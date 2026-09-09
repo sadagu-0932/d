@@ -127,7 +127,11 @@ reward는 동일하게 `REWARD_DEATH`입니다.
 
 - 신경망: `state(21) → Linear(256) → ReLU → Linear(3)` (`model.py`의 `Linear_QNet`)
 - Experience Replay Buffer: `deque(maxlen=100_000)`, 배치 크기 1,000
-- epsilon-greedy 탐험: 게임 수(`n_games`)가 늘수록 `epsilon`이 1.0 → 0.02로 선형 감소
+- epsilon-greedy 탐험: 게임 수(`n_games`)가 늘수록 `epsilon`이 300게임에 걸쳐 1.0 → 0.05로
+  선형 감소 (`agent.py`의 `EPS_DECAY_GAMES`/`EPS_END`). 예전 값(150게임, 0.02)에서는 평균
+  점수가 오르기 시작하는 시점(100~200게임)에 탐험이 사실상 끝나버려서, 그 이후 수백~수천
+  게임 동안 점수가 정체(plateau)되는 현상이 실측 학습 로그에서 확인됨 — 탐험을 더 오래
+  유지해 정체 시점을 늦추도록 조정
 - 학습 안정화: 벨만 타겟 계산에 별도의 **타겟 네트워크**를 사용하고,
   일정 스텝(기본 100)마다 policy 네트워크의 가중치로 동기화(hard update)합니다.
 - **Double DQN**: 다음 상태(s')에서의 행동 선택은 online 네트워크(`argmax_a' Q_online(s', a')`)로,

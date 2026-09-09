@@ -127,11 +127,14 @@ reward는 동일하게 `REWARD_DEATH`입니다.
 
 - 신경망: `state(21) → Linear(256) → ReLU → Linear(3)` (`model.py`의 `Linear_QNet`)
 - Experience Replay Buffer: `deque(maxlen=100_000)`, 배치 크기 1,000
-- epsilon-greedy 탐험: 게임 수(`n_games`)가 늘수록 `epsilon`이 300게임에 걸쳐 1.0 → 0.05로
-  선형 감소 (`agent.py`의 `EPS_DECAY_GAMES`/`EPS_END`). 예전 값(150게임, 0.02)에서는 평균
-  점수가 오르기 시작하는 시점(100~200게임)에 탐험이 사실상 끝나버려서, 그 이후 수백~수천
-  게임 동안 점수가 정체(plateau)되는 현상이 실측 학습 로그에서 확인됨 — 탐험을 더 오래
-  유지해 정체 시점을 늦추도록 조정
+- epsilon-greedy 탐험: 게임 수(`n_games`)가 늘수록 `epsilon`이 300게임에 걸쳐 1.0 → 0.02로
+  선형 감소 (`agent.py`의 `EPS_DECAY_GAMES`/`EPS_END`). 예전 값(150게임)에서는 평균 점수가
+  오르기 시작하는 시점(100~200게임)에 탐험이 사실상 끝나버려서, 그 이후 수백~수천 게임
+  동안 점수가 정체(plateau)되는 현상이 실측 학습 로그에서 확인됨 — 탐험 기간(`EPS_DECAY_GAMES`)만
+  150→300으로 늘려 정체 시점을 늦춤. (한때 탐험 바닥값 `EPS_END`도 0.02→0.05로 같이 올려봤지만,
+  head-to-head 비교 실험 결과 학습이 끝난 뒤에도 남는 5% 무작위 행동이 뱀이 길어질수록
+  치명적이라 최종 도달 점수 자체가 더 낮은 수준에서 다시 정체되는 역효과가 확인되어
+  `EPS_END`는 원래 값 0.02로 되돌림)
 - 학습 안정화: 벨만 타겟 계산에 별도의 **타겟 네트워크**를 사용하고,
   일정 스텝(기본 100)마다 policy 네트워크의 가중치로 동기화(hard update)합니다.
 - **Double DQN**: 다음 상태(s')에서의 행동 선택은 online 네트워크(`argmax_a' Q_online(s', a')`)로,

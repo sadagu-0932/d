@@ -42,15 +42,12 @@ BLUE1 = (0, 0, 255)
 BLUE2 = (0, 100, 255)
 BLACK = (0, 0, 0)
 
-# ---- 보상 설계 (최대한 단순화된 버전) --------------------------------------
-# 이전에는 사망 시 길이 보너스, self-trap 전용 페널티, 매 스텝 기본 이동 보상,
-# 회전 페널티 등 여러 겹의 보상이 쌓여 있어서, 점수 진동 같은 현상이 생겼을 때
-# 정확히 어느 요소가 원인인지 구분하기 어려웠다. 그래서 아래 4가지로만 완전히
-# 다시 구성한다 — 매 스텝의 reward는 항상 이 넷의 조합이다.
-REWARD_FOOD = 10           # (1) 먹이 섭취
-REWARD_DEATH = -10         # (2) 사망 — 원인(벽/몸통 충돌, 타임아웃)과 현재 길이에 상관없이 항상 이 고정값
-LENGTH_BONUS_COEF = 0.01   # (3) 매 생존 스텝마다: +LENGTH_BONUS_COEF * len(snake)
-EMPTY_PENALTY_COEF = 0.01  # (4) 매 생존 스텝마다: -EMPTY_PENALTY_COEF * (빈칸 수 / 전체 칸 수)
+# ---- 보상 설계 (조건 전부 제거, 최대한 단순한 버전) --------------------------
+# 오직 두 가지 사건에만 반응한다: 먹이(사과)를 먹으면 점수를 얻고, 죽으면 점수를
+# 잃는다. 그 외 모든 스텝(그냥 이동)의 reward는 0 — 길이 가산점, 빈칸 페널티,
+# 이동 보상, 회전 페널티, self-trap 페널티 등 그 어떤 조건도 없다.
+REWARD_FOOD = 10    # 먹이(사과) 섭취
+REWARD_DEATH = -10  # 사망 — 원인(벽/몸통 충돌, 타임아웃)과 현재 길이에 상관없이 항상 이 고정값
 
 INITIAL_SNAKE_LENGTH = 3  # 게임 시작 시 뱀의 길이
 
@@ -150,10 +147,10 @@ class SnakeGameAI:
         done : bool
         score : int
 
-        reward는 항상 아래 4가지 요소로만 구성된다 (원인을 구분하기 쉽도록 최대한 단순화):
-          (1) 먹이 섭취: REWARD_FOOD(고정)
-          (2) 사망(충돌/타임아웃 불문): REWARD_DEATH(고정, 길이와 무관)
-          (3)+(4) 생존한 스텝마다: 길이 가산점 - 빈칸 비율 페널티
+        reward는 오직 두 가지 사건에만 반응한다 (그 외 조건은 전부 제거):
+          - 먹이(사과) 섭취: REWARD_FOOD(고정)
+          - 사망(충돌/타임아웃 불문): REWARD_DEATH(고정, 길이와 무관)
+          - 그 외 그냥 이동한 스텝: 0
         """
         self.frame_iteration += 1
 
@@ -176,7 +173,7 @@ class SnakeGameAI:
             reward = REWARD_DEATH
             return self._get_state(), reward, game_over, self.score
 
-        # 3) 먹이 섭취 여부에 따른 기본 보상
+        # 3) 먹이 섭취 여부에 따른 보상 — 이게 전부다. 못 먹은 스텝은 reward 0.
         ate_food = self.head == self.food
         if ate_food:
             self.score += 1
@@ -186,15 +183,7 @@ class SnakeGameAI:
             self.snake.pop()  # 먹이를 못 먹었으면 꼬리를 잘라 길이를 유지
             reward = 0
 
-        # 4) 살아남은 모든 스텝(먹이를 먹었든 아니든)에 매번 합산되는 길이 가산점 / 빈칸 페널티.
-        #    빈칸 개수는 flood-fill 없이 "전체 칸 수 - 현재 몸길이"로 단순 계산한다
-        #    (_get_state()의 flood-fill reachability feature와는 별개).
-        total_cells = GRID_SIZE * GRID_SIZE
-        empty_cells = total_cells - len(self.snake)
-        reward += LENGTH_BONUS_COEF * len(self.snake)
-        reward -= EMPTY_PENALTY_COEF * (empty_cells / total_cells)
-
-        # 5) 렌더링
+        # 4) 렌더링
         if self.render_enabled:
             self._update_ui()
             self.clock.tick(self.speed)

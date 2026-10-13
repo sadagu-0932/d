@@ -11,9 +11,10 @@ f(2)=16-8-6=2,\quad f'(x)=4x^3-4x-3\Rightarrow f'(2)=21
 \to-f'(2)-f'(2)=-2f'(2)
 f'(x)=-3x^2+4\Rightarrow f'(2)=-8\Rightarrow16
 @ 52 | ⑤\ 57
-f(3)=3\Rightarrow3f(3)-9=0
-\frac{xf(x)-x^2}{x-3}\to\{xf(x)\}'_{x=3}-6=f(3)+3f'(3)-6
-f'(3)=20\Rightarrow3+60-6=57
+f(3)=27-21-3=3,\quad f'(x)=3x^2-7,\ f'(3)=20
+xf(x)-x^2=x\{f(x)-3\}-x(x-3)=x\{f(x)-f(3)\}-x(x-3)
+\lim_{x\to3}\frac{xf(x)-x^2}{x-3}=\lim_{x\to3}\left\{x\cdot\frac{f(x)-f(3)}{x-3}-x\right\}=3f'(3)-3
+=3\cdot20-3=57
 @ 53 | ③\ 0
 f(1)=2\Rightarrow f(1)+f(1)-4=0
 \frac{f(x^2)-f(1)}{x^2-1}(x+1)+\frac{f(x)-f(1)}{x-1}\to2f'(1)+f'(1)=3f'(1)

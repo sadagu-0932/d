@@ -1,0 +1,26 @@
+section: 유형 13 증가·감소 조건 · 유형 14 주어진 구간에서 증가 또는 감소하기 위한 조건
+@ 49 | ②\ 2
+\text{역함수 존재}\Rightarrow\text{실수 전체에서 증가}:\ f'(x)=x^2-2x+a-1\ge0
+\frac D4=1-(a-1)\le0\Rightarrow a\ge2
+@ 50 | ④\ 4
+\text{모든 }t\text{ 에 대해 교점 1개}\Rightarrow\text{실수 전체에서 증가 또는 감소}
+f'(x)=3kx^2+2(k+2)x+3:\ \frac D4=(k+2)^2-9k\le0
+k^2-5k+4\le0\Rightarrow1\le k\le4\Rightarrow k=1,2,3,4
+@ 51 | ⑤\ \frac73
+f'(x)=x^2-2(a+1)x+a^2+2a=(x-a)(x-a-2)\Rightarrow[a,\ a+2]\text{ 에서 감소}
+x<1:\ f(x)\text{ 증가}\Rightarrow a\ge1,\qquad x\ge1:\ f(x+2)\ (x+2\ge3)\text{ 증가}\Rightarrow a+2\le3
+a=1,\ f(x)=\frac13x^3-2x^2+3x
+\text{연속}:\ f(1)=f(3)+b\Rightarrow\frac43=0+b
+a+b=1+\frac43=\frac73
+@ 52 | ③\ 3
+f'(x)=3x^2-6x+a=3(x-1)^2+a-3\ge0\ (0\le x\le3)
+\text{최솟값 }f'(1)=a-3\ge0\Rightarrow a\ge3
+@ 53 | ⑤\ \frac92
+f'(x)=-x^2+2ax-4\le0\iff2ax\le x^2+4\ (-1\le x\le2)
+0<x\le2:\ a\le\frac x2+\frac2x\ (\text{최솟값 }x=2\text{ 에서 }2)\Rightarrow a\le2
+-1\le x<0:\ a\ge\frac x2+\frac2x\ (\text{최댓값 }x=-1\text{ 에서 }-\frac52)\Rightarrow a\ge-\frac52
+M-m=2+\frac52=\frac92
+@ 54 | ③\ -3
+f'(x)=3x^2+2ax+b,\ [0,2]\text{ 감소},\ [2,\infty)\text{ 증가}\Rightarrow f'(x)=3(x-2)(x-r),\ r\le0
+2a=-3(2+r),\ b=6r
+a+b=-3-\frac32r+6r=-3+\frac92r\le-3\Rightarrow\text{최댓값 }-3\ (r=0)

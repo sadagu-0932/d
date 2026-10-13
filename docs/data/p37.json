@@ -1,0 +1,221 @@
+{
+ "section": "03 미분계수와 도함수 (개념 확인 문제)",
+ "problems": [
+  {
+   "no": "01",
+   "answer": "-2",
+   "steps": [
+    {
+     "tex": "\\frac{f(2)-f(0)}{2-0}=\\frac{-4-0}{2}=-2"
+    }
+   ]
+  },
+  {
+   "no": "02",
+   "answer": "-4",
+   "steps": [
+    {
+     "tex": "\\frac{f(3)-f(1)}{3-1}=\\frac{-9-(-1)}{2}=-4"
+    }
+   ]
+  },
+  {
+   "no": "03",
+   "answer": "-2-\\Delta x",
+   "steps": [
+    {
+     "tex": "\\frac{f(1+\\Delta x)-f(1)}{\\Delta x}=\\frac{-(1+\\Delta x)^2+1}{\\Delta x}=\\frac{-2\\Delta x-(\\Delta x)^2}{\\Delta x}=-2-\\Delta x"
+    }
+   ]
+  },
+  {
+   "no": "04",
+   "answer": "-2a-\\Delta x",
+   "steps": [
+    {
+     "tex": "\\frac{-(a+\\Delta x)^2+a^2}{\\Delta x}=\\frac{-2a\\Delta x-(\\Delta x)^2}{\\Delta x}=-2a-\\Delta x"
+    }
+   ]
+  },
+  {
+   "no": "05",
+   "answer": "3",
+   "steps": [
+    {
+     "tex": "\\frac{f(2)-f(1)}{2-1}=5-2=3"
+    }
+   ]
+  },
+  {
+   "no": "06",
+   "answer": "5",
+   "steps": [
+    {
+     "tex": "f(2)-f(1)=8-3=5"
+    }
+   ]
+  },
+  {
+   "no": "07",
+   "answer": "7",
+   "steps": [
+    {
+     "tex": "f(2)-f(1)=8-1=7"
+    }
+   ]
+  },
+  {
+   "no": "08",
+   "answer": "-6",
+   "steps": [
+    {
+     "tex": "f(2)-f(1)=(-8+2)-(-1+1)=-6"
+    }
+   ]
+  },
+  {
+   "no": "09",
+   "answer": "1",
+   "steps": [
+    {
+     "tex": "\\frac{(a+1)^2-a^2}{1}=2a+1=3\\Rightarrow a=1"
+    }
+   ]
+  },
+  {
+   "no": "10",
+   "answer": "1",
+   "steps": [
+    {
+     "tex": "\\{(a+1)^2-1\\}-(a^2-1)=2a+1=3\\Rightarrow a=1"
+    }
+   ]
+  },
+  {
+   "no": "11",
+   "answer": "\\frac12",
+   "steps": [
+    {
+     "tex": "\\{(a+1)^2+(a+1)\\}-(a^2+a)=2a+2=3\\Rightarrow a=\\frac12"
+    }
+   ]
+  },
+  {
+   "no": "12",
+   "answer": "-1",
+   "steps": [
+    {
+     "tex": "\\{-(a+1)^2+2(a+1)\\}-(-a^2+2a)=-2a+1=3\\Rightarrow a=-1"
+    }
+   ]
+  },
+  {
+   "no": "13",
+   "answer": "0",
+   "steps": [
+    {
+     "tex": "f'(0)=\\lim_{h\\to0}\\frac{f(h)-f(0)}{h}=\\lim_{h\\to0}\\frac{h^2}{h}=\\lim_{h\\to0}h=0"
+    }
+   ]
+  },
+  {
+   "no": "14",
+   "answer": "2",
+   "steps": [
+    {
+     "tex": "f'(1)=\\lim_{h\\to0}\\frac{(1+h)^2-1}{h}=\\lim_{h\\to0}(2+h)=2"
+    }
+   ]
+  },
+  {
+   "no": "15",
+   "answer": "4",
+   "steps": [
+    {
+     "tex": "f'(2)=\\lim_{h\\to0}\\frac{(2+h)^2-4}{h}=\\lim_{h\\to0}(4+h)=4"
+    }
+   ]
+  },
+  {
+   "no": "16",
+   "answer": "-6",
+   "steps": [
+    {
+     "tex": "f'(-3)=\\lim_{h\\to0}\\frac{(-3+h)^2-9}{h}=\\lim_{h\\to0}(-6+h)=-6"
+    }
+   ]
+  },
+  {
+   "no": "17",
+   "answer": "-1",
+   "steps": [
+    {
+     "tex": "f'(x)=-1\\Rightarrow f'(1)=-1"
+    }
+   ]
+  },
+  {
+   "no": "18",
+   "answer": "2",
+   "steps": [
+    {
+     "tex": "f'(x)=2x\\Rightarrow f'(1)=2"
+    }
+   ]
+  },
+  {
+   "no": "19",
+   "answer": "7",
+   "steps": [
+    {
+     "tex": "f'(x)=6x+1\\Rightarrow f'(1)=7"
+    }
+   ]
+  },
+  {
+   "no": "20",
+   "answer": "-1",
+   "steps": [
+    {
+     "tex": "f'(x)=-4x+3\\Rightarrow f'(1)=-1"
+    }
+   ]
+  },
+  {
+   "no": "21",
+   "answer": "2",
+   "steps": [
+    {
+     "tex": "y'=2x\\Rightarrow x=1:\\ 2"
+    }
+   ]
+  },
+  {
+   "no": "22",
+   "answer": "-3",
+   "steps": [
+    {
+     "tex": "y'=4x+1\\Rightarrow x=-1:\\ -3"
+    }
+   ]
+  },
+  {
+   "no": "23",
+   "answer": "0",
+   "steps": [
+    {
+     "tex": "y'=-2x+4\\Rightarrow x=2:\\ 0"
+    }
+   ]
+  },
+  {
+   "no": "24",
+   "answer": "2",
+   "steps": [
+    {
+     "tex": "y'=-6x+2\\Rightarrow x=0:\\ 2"
+    }
+   ]
+  }
+ ]
+}

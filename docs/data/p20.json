@@ -27,7 +27,10 @@
      "tex": "\\lim_{x\\to\\infty}\\frac{ax-2}{x+b}=a=2"
     },
     {
-     "tex": "\\lim_{x\\to0-}f(x)=\\infty\\Rightarrow\\text{점근선 }x=0\\Rightarrow b=0"
+     "tex": "b\\ne0\\text{ 이면 }\\lim_{x\\to0-}f(x)=-\\frac2b\\text{ (유한)}\\Rightarrow b=0"
+    },
+    {
+     "tex": "b=0:\\ x\\to0-\\text{ 일 때 }\\frac{2x-2}{x}\\to\\frac{-2}{0-}=\\infty\\ (\\text{성립})"
     },
     {
      "tex": "f(x)=\\frac{2x-2}{x},\\quad f(-2)=\\frac{-6}{-2}=3"

@@ -1,0 +1,110 @@
+{
+ "section": "유형 14 다항식의 나눗셈에서의 활용 · 유형 15 항등식에서의 활용",
+ "problems": [
+  {
+   "no": "67",
+   "answer": "④\\ -3",
+   "steps": [
+    {
+     "tex": "f(x)=2x^3+ax^2+b:\\ f(1)=0,\\ f'(1)=0"
+    },
+    {
+     "tex": "2+a+b=0,\\quad6+2a=0\\Rightarrow a=-3,\\ b=1"
+    },
+    {
+     "tex": "ab=-3"
+    }
+   ]
+  },
+  {
+   "no": "68",
+   "answer": "23",
+   "steps": [
+    {
+     "tex": "f(x)=x^4+5x^2+ax=(x+1)^2Q(x)+x+b"
+    },
+    {
+     "tex": "f(-1)=6-a=-1+b,\\quad f'(x)=4x^3+10x+a\\Rightarrow f'(-1)=-14+a=1"
+    },
+    {
+     "tex": "a=15,\\ b=-8\\Rightarrow a-b=23"
+    }
+   ]
+  },
+  {
+   "no": "69",
+   "answer": "②\\ -51",
+   "steps": [
+    {
+     "tex": "P(x)=(x^2-1)(x^2+ax)-6=(x-2)^2Q(x)+R(x),\\ R(x)=P'(2)(x-2)+P(2)"
+    },
+    {
+     "tex": "R(2)=P(2)=0:\\ 3(4+2a)-6=0\\Rightarrow a=-1"
+    },
+    {
+     "tex": "P'(x)=2x(x^2-x)+(x^2-1)(2x-1)\\Rightarrow P'(2)=8+9=17"
+    },
+    {
+     "tex": "R(x)=17(x-2)\\Rightarrow R(-1)=-51"
+    }
+   ]
+  },
+  {
+   "no": "70",
+   "answer": "②\\ -4",
+   "steps": [
+    {
+     "tex": "f(x)=px^2+qx+r,\\ f'(x)=2px+q"
+    },
+    {
+     "tex": "(x+2)(2px+q)=2px^2+(4p+q)x+2q"
+    },
+    {
+     "tex": "-3x^2+x-f(x)=(-3-p)x^2+(1-q)x-r"
+    },
+    {
+     "tex": "2p=-3-p,\\ 4p+q=1-q,\\ 2q=-r\\Rightarrow p=-1,\\ q=\\frac52,\\ r=-5"
+    },
+    {
+     "tex": "f(2)=-4+5-5=-4"
+    }
+   ]
+  },
+  {
+   "no": "71",
+   "answer": "①\\ 1",
+   "steps": [
+    {
+     "tex": "f'(x)=2x-1,\\ f(1)=a"
+    },
+    {
+     "tex": "x(2x-1)=ax+b+c(x^2-x+a)"
+    },
+    {
+     "tex": "2x^2-x=cx^2+(a-c)x+(b+ac)\\Rightarrow c=2,\\ a=1,\\ b=-2"
+    },
+    {
+     "tex": "f(b+c)=f(0)=a=1"
+    }
+   ]
+  },
+  {
+   "no": "72",
+   "answer": "⑤\\ 5",
+   "steps": [
+    {
+     "tex": "f\\text{ 가 }n\\text{ 차이면 }3f-xf'\\text{ 의 }x^n\\text{ 계수는 }3-n"
+    },
+    {
+     "tex": "n=2\\text{ 이면 }x^2\\text{ 계수 }1\\ne2,\\ n\\ge4\\text{ 이면 }n\\text{ 차항이 남음}\\Rightarrow n=3"
+    },
+    {
+     "tex": "f(x)=x^3+ax^2+bx+c:\\ 3f-xf'=ax^2+2bx+3c=2x^2+6"
+    },
+    {
+     "tex": "a=2,\\ b=0,\\ c=2\\Rightarrow f(1)=1+2+0+2=5"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,30 @@
+section: 유형 14 다항식의 나눗셈에서의 활용 · 유형 15 항등식에서의 활용
+@ 67 | ④\ -3
+f(x)=2x^3+ax^2+b:\ f(1)=0,\ f'(1)=0
+2+a+b=0,\quad6+2a=0\Rightarrow a=-3,\ b=1
+ab=-3
+@ 68 | 23
+f(x)=x^4+5x^2+ax=(x+1)^2Q(x)+x+b
+f(-1)=6-a=-1+b,\quad f'(x)=4x^3+10x+a\Rightarrow f'(-1)=-14+a=1
+a=15,\ b=-8\Rightarrow a-b=23
+@ 69 | ②\ -51
+P(x)=(x^2-1)(x^2+ax)-6=(x-2)^2Q(x)+R(x),\ R(x)=P'(2)(x-2)+P(2)
+R(2)=P(2)=0:\ 3(4+2a)-6=0\Rightarrow a=-1
+P'(x)=2x(x^2-x)+(x^2-1)(2x-1)\Rightarrow P'(2)=8+9=17
+R(x)=17(x-2)\Rightarrow R(-1)=-51
+@ 70 | ②\ -4
+f(x)=px^2+qx+r,\ f'(x)=2px+q
+(x+2)(2px+q)=2px^2+(4p+q)x+2q
+-3x^2+x-f(x)=(-3-p)x^2+(1-q)x-r
+2p=-3-p,\ 4p+q=1-q,\ 2q=-r\Rightarrow p=-1,\ q=\frac52,\ r=-5
+f(2)=-4+5-5=-4
+@ 71 | ①\ 1
+f'(x)=2x-1,\ f(1)=a
+x(2x-1)=ax+b+c(x^2-x+a)
+2x^2-x=cx^2+(a-c)x+(b+ac)\Rightarrow c=2,\ a=1,\ b=-2
+f(b+c)=f(0)=a=1
+@ 72 | ⑤\ 5
+f\text{ 가 }n\text{ 차이면 }3f-xf'\text{ 의 }x^n\text{ 계수는 }3-n
+n=2\text{ 이면 }x^2\text{ 계수 }1\ne2,\ n\ge4\text{ 이면 }n\text{ 차항이 남음}\Rightarrow n=3
+f(x)=x^3+ax^2+bx+c:\ 3f-xf'=ax^2+2bx+3c=2x^2+6
+a=2,\ b=0,\ c=2\Rightarrow f(1)=1+2+0+2=5

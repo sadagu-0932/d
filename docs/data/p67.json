@@ -1,0 +1,89 @@
+{
+ "section": "유형 12 함수의 증가와 감소 · 유형 13 증가 또는 감소하기 위한 조건",
+ "problems": [
+  {
+   "no": "43",
+   "answer": "②\\ 2",
+   "steps": [
+    {
+     "tex": "f'(x)=3x^2+12x+9=3(x+1)(x+3)\\le0\\Rightarrow-3\\le x\\le-1"
+    },
+    {
+     "tex": "[a,b]\\subset[-3,-1]\\Rightarrow b-a\\text{ 의 최댓값 }2"
+    }
+   ]
+  },
+  {
+   "no": "44",
+   "answer": "⑤\\ 7",
+   "steps": [
+    {
+     "tex": "f'(x)=-x^2+10x=-x(x-10)\\ge0\\Rightarrow0\\le x\\le10"
+    },
+    {
+     "tex": "[a,\\ a+3]\\subset[0,10]\\Rightarrow0\\le a\\le7"
+    },
+    {
+     "tex": "M+m=7+0=7"
+    }
+   ]
+  },
+  {
+   "no": "45",
+   "answer": "①\\ -9",
+   "steps": [
+    {
+     "tex": "f'(x)=3x^2+2ax+b\\le0\\iff-5\\le x\\le1\\Rightarrow f'(x)=3(x+5)(x-1)"
+    },
+    {
+     "tex": "3x^2+12x-15\\Rightarrow a=6,\\ b=-15"
+    },
+    {
+     "tex": "a+b=-9"
+    }
+   ]
+  },
+  {
+   "no": "46",
+   "answer": "④\\ \\frac43",
+   "steps": [
+    {
+     "tex": "f'(x)=3x^2-4x+a\\ge0\\ (\\text{모든 }x)"
+    },
+    {
+     "tex": "\\frac D4=4-3a\\le0\\Rightarrow a\\ge\\frac43"
+    }
+   ]
+  },
+  {
+   "no": "47",
+   "answer": "3",
+   "steps": [
+    {
+     "tex": "x_1<x_2\\Rightarrow f(x_1)>f(x_2):\\ \\text{실수 전체에서 감소}"
+    },
+    {
+     "tex": "f'(x)=-3x^2+2ax-3\\le0\\Rightarrow\\frac D4=a^2-9\\le0\\Rightarrow-3\\le a\\le3"
+    },
+    {
+     "tex": "\\text{최댓값 }3"
+    }
+   ]
+  },
+  {
+   "no": "48",
+   "answer": "②\\ \\frac13",
+   "steps": [
+    {
+     "tex": "f'(x)=3ax^2+2x+a+\\frac23\\ge0\\ (a>0)"
+    },
+    {
+     "tex": "\\frac D4=1-3a\\left(a+\\frac23\\right)\\le0\\Rightarrow3a^2+2a-1\\ge0\\Rightarrow(3a-1)(a+1)\\ge0"
+    },
+    {
+     "tex": "a>0\\Rightarrow a\\ge\\frac13"
+    }
+   ]
+  }
+ ]
+}

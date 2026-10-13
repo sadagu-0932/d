@@ -1,0 +1,101 @@
+{
+ "section": "유형 05 기울기가 주어진 접선 · 유형 06 곡선과 직선이 접할 때 미정계수",
+ "problems": [
+  {
+   "no": "19",
+   "answer": "①\\ -\\frac52",
+   "steps": [
+    {
+     "tex": "y'=3x^2-8x+2=-2\\Rightarrow3x^2-8x+4=0\\Rightarrow x=2,\\ \\frac23"
+    },
+    {
+     "tex": "x=2:\\ y=-4\\Rightarrow y=-2x\\ (y\\text{절편 }0)"
+    },
+    {
+     "tex": "x=\\frac23:\\ y=-\\frac4{27}\\Rightarrow y=-2x+\\frac{32}{27}"
+    },
+    {
+     "tex": "l:\\ y=-2x,\\quad\\text{평행이동}:\\ y-1=-2(x-k)+4\\Rightarrow y=-2x+2k+5"
+    },
+    {
+     "tex": "2k+5=0\\Rightarrow k=-\\frac52"
+    }
+   ]
+  },
+  {
+   "no": "20",
+   "answer": "6",
+   "steps": [
+    {
+     "tex": "y'=x^2-2x+k=5\\Rightarrow x^2-2x+k-5=0\\text{ 이 중근}"
+    },
+    {
+     "tex": "\\frac D4=1-(k-5)=0\\Rightarrow k=6"
+    }
+   ]
+  },
+  {
+   "no": "21",
+   "answer": "①\\ \\frac{\\sqrt{26}}{26}",
+   "steps": [
+    {
+     "tex": "2x^2+x=5x-3\\Rightarrow2x^2-4x+3=0,\\ D<0\\ (\\text{만나지 않음})"
+    },
+    {
+     "tex": "\\text{기울기 5인 접선의 접점}:\\ 4x+1=5\\Rightarrow(1,3)"
+    },
+    {
+     "tex": "\\text{거리}=\\frac{|5\\cdot1-3-3|}{\\sqrt{25+1}}=\\frac1{\\sqrt{26}}=\\frac{\\sqrt{26}}{26}"
+    }
+   ]
+  },
+  {
+   "no": "22",
+   "answer": "⑤\\ 5",
+   "steps": [
+    {
+     "tex": "\\text{접점 }x=t:\\ 3t^2+k=8,\\quad t^3+kt-6=8t-8"
+    },
+    {
+     "tex": "k=8-3t^2\\text{ 대입}:\\ -2t^3-6=-8\\Rightarrow t=1"
+    },
+    {
+     "tex": "k=5"
+    }
+   ]
+  },
+  {
+   "no": "23",
+   "answer": "①\\ -5",
+   "steps": [
+    {
+     "tex": "y=-x^2+5x+3,\\ y'(1)=3\\Rightarrow\\text{접선 }y=3x+4"
+    },
+    {
+     "tex": "\\text{접점 }x=t:\\ 3t^2+2t+k=3,\\quad t^3+t^2+kt-8=3t+4"
+    },
+    {
+     "tex": "k=3-3t^2-2t\\text{ 대입}:\\ 2t^3+t^2+12=0\\Rightarrow t=-2"
+    },
+    {
+     "tex": "k=3-12+4=-5"
+    }
+   ]
+  },
+  {
+   "no": "24",
+   "answer": "①\\ -13",
+   "steps": [
+    {
+     "tex": "1+a-10=-6\\Rightarrow a=3,\\quad y'=3x^2+6x,\\ y'(1)=9"
+    },
+    {
+     "tex": "3x^2+6x=9\\Rightarrow x=1,\\ -3\\Rightarrow m=-3"
+    },
+    {
+     "tex": "n=-27+27-10=-10\\Rightarrow m+n=-13"
+    }
+   ]
+  }
+ ]
+}

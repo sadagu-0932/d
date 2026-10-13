@@ -6,7 +6,8 @@ t^2+4<9\ (|t|<\sqrt5):\ f=0,\quad |t|=\sqrt5:\ f=1,\quad |t|>\sqrt5:\ f=2
 \text{ㄴ. }\lim_{t\to\sqrt5-}f(t)=0\ne\lim_{t\to\sqrt5+}f(t)=2\ (\text{거짓})
 \text{ㄷ. }t\to\sqrt5-\text{ 이면 }t^2\to5-,\ 5>\sqrt5\Rightarrow f(t^2)=2\ (\text{참})
 @ 02 | ②\ 1
-P=\{f(x)\}:\ x\ne0,\pm1\text{ 에서 }||x|-1|\text{ 는 0을 제외한 모든 양수}\ (|x|=2\text{ 이면 }1)
+||x|-1|=0\text{ 은 }x=\pm1\text{ 에서만 나오는데 }f(\pm1)=4\Rightarrow0\notin P
+x=0\text{ 에서 빠진 값 1은 }x=\pm2\text{ 에서 나옴}\Rightarrow\text{양수는 모두 }P\text{ 에 포함}
 P=\{y\mid y>0\}
 Q=\left\{\lim_{t\to x}f(t)\right\}=\{||x|-1|\}=\{y\mid y\ge0\}
 Q-P=\{0\}\ \Rightarrow\ 1\text{개}

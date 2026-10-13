@@ -35,6 +35,10 @@ main { max-width: 760px; margin: 0 auto; padding: 16px; }
 body.hiding .ans { filter: blur(6px); cursor: pointer; }
 body.hiding .ans.shown { filter: none; }
 .steps { margin: 0; padding: 0; list-style: none; overflow-x: auto; }
-.steps li { padding: 3px 0; }
+.steps li { padding: 3px 0; overflow-x: auto; overflow-y: hidden; }
+.steps .katex-display { margin: 0; text-align: left; }
+.steps .katex-display > .katex { text-align: left; }
+.steps .katex { font-size: 1.05em; }
+@media (max-width: 480px) { .steps .katex { font-size: .95em; } }
 .steps li.t { color: var(--muted); font-size: .92rem; }
 .foot { text-align: center; color: var(--muted); font-size: .8rem; padding: 24px 16px; }

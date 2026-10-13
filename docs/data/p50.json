@@ -1,0 +1,89 @@
+{
+ "section": "유형 12 함수 구하기 · 유형 13 치환을 이용한 극한값의 계산",
+ "problems": [
+  {
+   "no": "61",
+   "answer": "③\\ -12",
+   "steps": [
+    {
+     "tex": "(\\text{가})\\Rightarrow\\text{축 }x=1:\\ f(x)=k(x-1)^2+c\\ (k>0)"
+    },
+    {
+     "tex": "f'(x)=2k(x-1),\\ f'(3)=4k=8\\Rightarrow k=2"
+    },
+    {
+     "tex": "f'(-2)=4\\cdot(-3)=-12"
+    }
+   ]
+  },
+  {
+   "no": "62",
+   "answer": "③\\ 0",
+   "steps": [
+    {
+     "tex": "(\\text{가})\\Rightarrow f(x)=(x-p)^2,\\quad f'(x)=2(x-p)"
+    },
+    {
+     "tex": "(\\text{나})\\Rightarrow f'(4)=4:\\ 2(4-p)=4\\Rightarrow p=2"
+    },
+    {
+     "tex": "f(2)=0"
+    }
+   ]
+  },
+  {
+   "no": "63",
+   "answer": "①\\ -7",
+   "steps": [
+    {
+     "tex": "(\\text{가})\\Rightarrow f(x)=ax^3+bx\\ (a>0)"
+    },
+    {
+     "tex": "f(2)=8a+2b=-8,\\quad f'(2)=12a+b=4"
+    },
+    {
+     "tex": "a=1,\\ b=-8\\Rightarrow f(1)=-7"
+    }
+   ]
+  },
+  {
+   "no": "64",
+   "answer": "①\\ 11",
+   "steps": [
+    {
+     "tex": "f(x)=x^8+3x\\text{ 로 놓으면 }f(1)=4"
+    },
+    {
+     "tex": "\\lim_{x\\to1}\\frac{f(x)-f(1)}{x-1}=f'(1)=8+3=11"
+    }
+   ]
+  },
+  {
+   "no": "65",
+   "answer": "⑤\\ 5",
+   "steps": [
+    {
+     "tex": "f(x)=x^9-x^7+x^5-x^3+x\\text{ 로 놓으면 }f(-1)=-1"
+    },
+    {
+     "tex": "\\lim_{x\\to-1}\\frac{f(x)-f(-1)}{x-(-1)}=f'(-1)"
+    },
+    {
+     "tex": "f'(x)=9x^8-7x^6+5x^4-3x^2+1\\Rightarrow f'(-1)=5"
+    }
+   ]
+  },
+  {
+   "no": "66",
+   "answer": "10",
+   "steps": [
+    {
+     "tex": "f(x)=x^n-3x^2\\text{ 로 놓으면 }f(1)=-2"
+    },
+    {
+     "tex": "\\lim_{x\\to1}\\frac{f(x)-f(1)}{x-1}=f'(1)=n-6=4\\Rightarrow n=10"
+    }
+   ]
+  }
+ ]
+}

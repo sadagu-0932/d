@@ -1,0 +1,203 @@
+{
+ "section": "07 방정식 · 08 부등식 · 09 속도와 가속도 (개념 확인 문제)",
+ "problems": [
+  {
+   "no": "39",
+   "answer": "3",
+   "steps": [
+    {
+     "tex": "f'(x)=3x^2-3=0\\Rightarrow x=\\pm1"
+    },
+    {
+     "tex": "f(-1)=2\\ (\\text{극대}),\\ f(1)=-2\\ (\\text{극소}),\\quad2\\cdot(-2)<0\\Rightarrow3\\text{개}"
+    }
+   ]
+  },
+  {
+   "no": "40",
+   "answer": "2",
+   "steps": [
+    {
+     "tex": "f'(x)=9x^2-18x=9x(x-2)"
+    },
+    {
+     "tex": "f(0)=0\\ (\\text{극대}),\\ f(2)=-12\\ (\\text{극소}),\\quad0\\cdot(-12)=0\\Rightarrow2\\text{개}"
+    }
+   ]
+  },
+  {
+   "no": "41",
+   "answer": "1",
+   "steps": [
+    {
+     "tex": "f'(x)=-3x^2+12x=-3x(x-4)"
+    },
+    {
+     "tex": "f(0)=6\\ (\\text{극소}),\\ f(4)=38\\ (\\text{극대}),\\quad6\\cdot38>0\\Rightarrow1\\text{개}"
+    }
+   ]
+  },
+  {
+   "no": "42",
+   "answer": "2",
+   "steps": [
+    {
+     "tex": "f'(x)=4x^3-12x+8=4(x-1)^2(x+2)"
+    },
+    {
+     "tex": "f(-2)=-27\\ (\\text{극소}),\\ f(1)=0"
+    },
+    {
+     "tex": "f(x)=(x-1)^3(x+3)\\Rightarrow x=1,\\ -3\\Rightarrow2\\text{개}"
+    }
+   ]
+  },
+  {
+   "no": "43",
+   "answer": "0<k<4",
+   "steps": [
+    {
+     "tex": "g(x)=x^3+6x^2+9x\\text{ 와 }y=-k\\text{ 의 교점}"
+    },
+    {
+     "tex": "g'(x)=3(x+1)(x+3):\\ g(-3)=0\\ (\\text{극대}),\\ g(-1)=-4\\ (\\text{극소})"
+    },
+    {
+     "tex": "-4<-k<0\\Rightarrow0<k<4"
+    }
+   ]
+  },
+  {
+   "no": "44",
+   "answer": "k=0\\ \\text{또는}\\ k=4",
+   "steps": [
+    {
+     "tex": "-k=0\\ \\text{또는}\\ -k=-4\\ (\\text{접할 때})"
+    }
+   ]
+  },
+  {
+   "no": "45",
+   "answer": "k<0\\ \\text{또는}\\ k>4",
+   "steps": [
+    {
+     "tex": "-k>0\\ \\text{또는}\\ -k<-4"
+    }
+   ]
+  },
+  {
+   "no": "46",
+   "answer": "2",
+   "steps": [
+    {
+     "tex": "f'(x)=3x(x+2):\\ f(-2)=4,\\ f(0)=0\\Rightarrow4\\cdot0=0\\Rightarrow2\\text{개}"
+    }
+   ]
+  },
+  {
+   "no": "47",
+   "answer": "1",
+   "steps": [
+    {
+     "tex": "f'(x)=-3(x+1)(x-1):\\ f(-1)=3,\\ f(1)=7\\Rightarrow3\\cdot7>0\\Rightarrow1\\text{개}"
+    }
+   ]
+  },
+  {
+   "no": "48",
+   "answer": "3",
+   "steps": [
+    {
+     "tex": "f'(x)=3(x+1)(x+5):\\ f(-5)=26,\\ f(-1)=-6\\Rightarrow26\\cdot(-6)<0\\Rightarrow3\\text{개}"
+    }
+   ]
+  },
+  {
+   "no": "49",
+   "answer": "\\text{풀이 참조}",
+   "steps": [
+    {
+     "tex": "f(x)=x^3-x^2-x+1,\\ f'(x)=3x^2-2x-1=(3x+1)(x-1)"
+    },
+    {
+     "tex": "x\\ge0\\text{ 에서 }x=1\\text{ 일 때 최솟값 }f(1)=0"
+    },
+    {
+     "tex": "\\Rightarrow f(x)\\ge0\\ (x\\ge0)"
+    }
+   ]
+  },
+  {
+   "no": "50",
+   "answer": "\\text{풀이 참조}",
+   "steps": [
+    {
+     "tex": "f(x)=-3x^4+4x^3-2,\\ f'(x)=-12x^3+12x^2=-12x^2(x-1)"
+    },
+    {
+     "tex": "x=1\\text{ 에서 최댓값 }f(1)=-3+4-2=-1<0"
+    },
+    {
+     "tex": "\\Rightarrow\\text{모든 실수 }x\\text{ 에 대하여 }f(x)<0"
+    }
+   ]
+  },
+  {
+   "no": "51",
+   "answer": "-\\frac23",
+   "steps": [
+    {
+     "tex": "g(x)=-\\frac13x^3+x+k,\\ g'(x)=-x^2+1=0\\Rightarrow x=1\\ (x\\ge0)"
+    },
+    {
+     "tex": "x\\ge0\\text{ 에서 최댓값 }g(1)=\\frac23+k\\le0\\Rightarrow k\\le-\\frac23"
+    }
+   ]
+  },
+  {
+   "no": "52",
+   "answer": "v=11,\\ a=2",
+   "steps": [
+    {
+     "tex": "v=2t+1\\Rightarrow v(5)=11,\\quad a=2"
+    }
+   ]
+  },
+  {
+   "no": "53",
+   "answer": "v=20,\\ a=26",
+   "steps": [
+    {
+     "tex": "v=9t^2-10t+4\\Rightarrow v(2)=20,\\quad a=18t-10\\Rightarrow a(2)=26"
+    }
+   ]
+  },
+  {
+   "no": "54",
+   "answer": "v=0,\\ a=2",
+   "steps": [
+    {
+     "tex": "v=4t^3-6t^2+2t\\Rightarrow v(1)=0,\\quad a=12t^2-12t+2\\Rightarrow a(1)=2"
+    }
+   ]
+  },
+  {
+   "no": "55",
+   "answer": "t=2",
+   "steps": [
+    {
+     "tex": "v=3t^2+12t-36=3(t+6)(t-2)=0\\Rightarrow t=2\\ (\\text{부호 바뀜})"
+    }
+   ]
+  },
+  {
+   "no": "56",
+   "answer": "t=2",
+   "steps": [
+    {
+     "tex": "v=4t^3-32=4(t-2)(t^2+2t+4)=0\\Rightarrow t=2\\ (\\text{부호 바뀜})"
+    }
+   ]
+  }
+ ]
+}

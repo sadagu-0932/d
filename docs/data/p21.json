@@ -27,7 +27,10 @@
    "answer": "②\\ 1",
    "steps": [
     {
-     "tex": "P=\\{f(x)\\}:\\ x\\ne0,\\pm1\\text{ 에서 }||x|-1|\\text{ 는 0을 제외한 모든 양수}\\ (|x|=2\\text{ 이면 }1)"
+     "tex": "||x|-1|=0\\text{ 은 }x=\\pm1\\text{ 에서만 나오는데 }f(\\pm1)=4\\Rightarrow0\\notin P"
+    },
+    {
+     "tex": "x=0\\text{ 에서 빠진 값 1은 }x=\\pm2\\text{ 에서 나옴}\\Rightarrow\\text{양수는 모두 }P\\text{ 에 포함}"
     },
     {
      "tex": "P=\\{y\\mid y>0\\}"

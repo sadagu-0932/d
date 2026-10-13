@@ -1,0 +1,98 @@
+{
+ "section": "유형 06 연속함수의 성질 (3) — 식이 주어진 경우",
+ "problems": [
+  {
+   "no": "25",
+   "answer": "④\\ 4",
+   "steps": [
+    {
+     "tex": "x=-1\\text{ 에서 연속}:\\ \\lim_{x\\to-1-}f(x)g(x)=(-3)(a-1),\\quad f(-1)g(-1)=1\\cdot(a-1)"
+    },
+    {
+     "tex": "-3(a-1)=a-1\\Rightarrow a=1"
+    },
+    {
+     "tex": "g(3)=3+1=4"
+    }
+   ]
+  },
+  {
+   "no": "26",
+   "answer": "③\\ 4",
+   "steps": [
+    {
+     "tex": "\\lim_{x\\to1-}f(x)g(x)=1\\cdot(2+a),\\quad f(1)g(1)=2(2+a)"
+    },
+    {
+     "tex": "2+a=2(2+a)\\Rightarrow a=-2"
+    },
+    {
+     "tex": "f(1)g(2)=2\\cdot(4-2)=4"
+    }
+   ]
+  },
+  {
+   "no": "27",
+   "answer": "④\\ 7",
+   "steps": [
+    {
+     "tex": "\\lim_{x\\to a-}f(x)g(x)=(a^2+a)\\cdot3a,\\quad f(a)g(a)=-1\\cdot3a"
+    },
+    {
+     "tex": "3a(a^2+a)=-3a\\Rightarrow3a(a^2+a+1)=0\\Rightarrow a=0\\ (a^2+a+1>0)"
+    },
+    {
+     "tex": "f(5)+g(4)=-1+8=7"
+    }
+   ]
+  },
+  {
+   "no": "28",
+   "answer": "③\\ 4",
+   "steps": [
+    {
+     "tex": "x=1:\\ \\lim_{x\\to1-}f(x)g(x)=(1+a)(b-2),\\quad f(1)g(1)=2\\cdot(-1)=-2"
+    },
+    {
+     "tex": "(1+a)(b-2)=-2"
+    },
+    {
+     "tex": "(1+a,\\ b-2)=(1,-2),(-1,2),(2,-1),(-2,1)\\Rightarrow4\\text{개}"
+    }
+   ]
+  },
+  {
+   "no": "29",
+   "answer": "②\\ 3",
+   "steps": [
+    {
+     "tex": "x=0:\\ \\lim_{x\\to0-}f(x)g(x)=-2f(0),\\ f(0)g(0)=f(0)\\Rightarrow f(0)=0\\Rightarrow b=0"
+    },
+    {
+     "tex": "x=2:\\ \\lim_{x\\to2-}f(x)g(x)=f(2),\\ f(2)g(2)=-f(2)\\Rightarrow f(2)=0\\Rightarrow4+2a=0,\\ a=-2"
+    },
+    {
+     "tex": "f(x)=x^2-2x,\\quad f(3)=3"
+    }
+   ]
+  },
+  {
+   "no": "30",
+   "answer": "12",
+   "steps": [
+    {
+     "tex": "x=2:\\ f(2)g(2)=4\\cdot1=4"
+    },
+    {
+     "tex": "\\lim_{x\\to2-}\\frac{x^2+a}{x-2}=4\\Rightarrow(\\text{분자})\\to0:\\ 4+a=0,\\ a=-4"
+    },
+    {
+     "tex": "\\lim_{x\\to2-}\\frac{(x-2)(x+2)}{x-2}=4\\ (\\text{성립})"
+    },
+    {
+     "tex": "g(a)=g(-4)=16-4=12"
+    }
+   ]
+  }
+ ]
+}

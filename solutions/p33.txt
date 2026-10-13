@@ -1,0 +1,17 @@
+section: 내신+수능 고난도 도전 (02 함수의 연속)
+@ 01 | ④\ ㄱ,\ ㄷ
+x^2-2x=2x+t\Rightarrow x^2-4x-t=0,\quad\frac D4=4+t
+f(t)=\begin{cases}0&(t<-4)\\1&(t=-4)\\2&(t>-4)\end{cases}
+\text{ㄱ. }f(0)=2\ (\text{참})
+\text{ㄴ. 불연속인 }t\text{ 는 }-4\text{ 하나뿐 (거짓)}
+\text{ㄷ. }t=-4:\ \lim_{t\to-4}(t+4)f(t)=0=(t+4)f(t)\big|_{t=-4}\ (\text{참})
+@ 02 | ①\ -\frac{16}3
+x^2+(y-2)^2=4:\ \text{중심 }(0,2),\ r=2,\quad d=\frac{|6+t|}{5}
+f(t)=2\ (-16<t<4),\quad f(t)=1\ (t=-16,\ 4),\quad f(t)=0\ (t<-16,\ t>4)
+f\text{ 는 }x=-16,\ 4\text{ 에서 불연속}\Rightarrow f(x)g(x)\text{ 연속이려면 }g(-16)=g(4)=0
+g(x)=(x+16)(x-4)=x^2+12x-64\Rightarrow a=12,\ b=-64
+\frac ba=-\frac{64}{12}=-\frac{16}3
+@ 03 | ③\ \frac{13}{12}
+x=n+1\text{ 에서 연속}:\ \lim_{x\to(n+1)-}(a_nx+n)=f(n+1)
+a_n(n+1)+n=a_{n+1}(n+1)+(n+1)\Rightarrow a_{n+1}=a_n-\frac1{n+1}
+a_1-a_4=\frac12+\frac13+\frac14=\frac{13}{12}

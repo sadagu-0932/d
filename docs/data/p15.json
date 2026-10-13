@@ -1,0 +1,74 @@
+{
+ "section": "유형 09 극한값의 계산 (4)",
+ "problems": [
+  {
+   "no": "29",
+   "answer": "②\\ 2",
+   "steps": [
+    {
+     "tex": "\\sqrt{x^2+4x}-x=\\frac{4x}{\\sqrt{x^2+4x}+x}=\\frac{4}{\\sqrt{1+\\frac4x}+1}\\to\\frac42=2"
+    }
+   ]
+  },
+  {
+   "no": "30",
+   "answer": "③\\ 6",
+   "steps": [
+    {
+     "tex": "\\sqrt{3x^2+ax}-\\sqrt{3x^2}=\\frac{ax}{\\sqrt{3x^2+ax}+\\sqrt3x}=\\frac{a}{\\sqrt{3+\\frac ax}+\\sqrt3}\\to\\frac{a}{2\\sqrt3}"
+    },
+    {
+     "tex": "\\frac{a}{2\\sqrt3}=\\sqrt3\\ \\Rightarrow\\ a=6"
+    }
+   ]
+  },
+  {
+   "no": "31",
+   "answer": "④\\ -\\frac92",
+   "steps": [
+    {
+     "tex": "x=-t\\ (t\\to\\infty):\\ \\sqrt{t^2-9t}-t=\\frac{-9t}{\\sqrt{t^2-9t}+t}=\\frac{-9}{\\sqrt{1-\\frac9t}+1}\\to-\\frac92"
+    }
+   ]
+  },
+  {
+   "no": "32",
+   "answer": "④\\ 2",
+   "steps": [
+    {
+     "tex": "\\sqrt{x^2+2x}-\\sqrt{x^2+x}=\\frac{x}{\\sqrt{x^2+2x}+\\sqrt{x^2+x}}\\to\\frac12"
+    },
+    {
+     "tex": "\\lim_{x\\to\\infty}\\frac{1}{\\sqrt{x^2+2x}-\\sqrt{x^2+x}}=\\frac{1}{\\frac12}=2"
+    }
+   ]
+  },
+  {
+   "no": "33",
+   "answer": "③\\ 3",
+   "steps": [
+    {
+     "tex": "\\sqrt{x^2+ax}-\\sqrt{x^2-ax}=\\frac{2ax}{\\sqrt{x^2+ax}+\\sqrt{x^2-ax}}\\to\\frac{2a}{2}=a"
+    },
+    {
+     "tex": "\\frac1a=\\frac13\\ \\Rightarrow\\ a=3"
+    }
+   ]
+  },
+  {
+   "no": "34",
+   "answer": "②\\ \\frac{2\\sqrt2}{3}",
+   "steps": [
+    {
+     "tex": "\\text{분자}=\\frac{4x}{\\sqrt{x^2+2x}+\\sqrt{x^2-2x}}\\to\\frac42=2"
+    },
+    {
+     "tex": "\\text{분모}=\\frac{6x}{\\sqrt{2x^2+3x}+\\sqrt{2x^2-3x}}\\to\\frac{6}{2\\sqrt2}=\\frac{3}{\\sqrt2}"
+    },
+    {
+     "tex": "2\\div\\frac3{\\sqrt2}=\\frac{2\\sqrt2}{3}"
+    }
+   ]
+  }
+ ]
+}

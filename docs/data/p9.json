@@ -1,0 +1,179 @@
+{
+ "section": "03 함수의 극한의 성질 · 04 극한값의 계산 · 05 함수의 극한에 관련된 성질",
+ "problems": [
+  {
+   "no": "23",
+   "answer": "5",
+   "steps": [
+    {
+     "tex": "\\lim_{x\\to1}\\{2f(x)-g(x)\\}=2\\cdot2-(-1)=5"
+    }
+   ]
+  },
+  {
+   "no": "24",
+   "answer": "-4",
+   "steps": [
+    {
+     "tex": "\\lim_{x\\to1}2f(x)g(x)=2\\cdot2\\cdot(-1)=-4"
+    }
+   ]
+  },
+  {
+   "no": "25",
+   "answer": "-\\frac12",
+   "steps": [
+    {
+     "tex": "\\lim_{x\\to1}\\left\\{\\frac1{f(x)}+\\frac1{g(x)}\\right\\}=\\frac12+\\frac1{-1}=-\\frac12"
+    }
+   ]
+  },
+  {
+   "no": "26",
+   "answer": "\\frac23",
+   "steps": [
+    {
+     "tex": "\\lim_{x\\to-1}\\frac{2(x+1)}{3(x+1)}=\\frac23"
+    }
+   ]
+  },
+  {
+   "no": "27",
+   "answer": "\\frac12",
+   "steps": [
+    {
+     "tex": "\\lim_{x\\to1}\\frac{x-1}{(x-1)(x+1)}=\\lim_{x\\to1}\\frac1{x+1}=\\frac12"
+    }
+   ]
+  },
+  {
+   "no": "28",
+   "answer": "\\frac43",
+   "steps": [
+    {
+     "tex": "\\lim_{x\\to2}\\frac{(x-2)(x+2)}{(x-2)(x+1)}=\\lim_{x\\to2}\\frac{x+2}{x+1}=\\frac43"
+    }
+   ]
+  },
+  {
+   "no": "29",
+   "answer": "2",
+   "steps": [
+    {
+     "tex": "\\lim_{x\\to1}\\frac{(\\sqrt x-1)(\\sqrt x+1)}{\\sqrt x-1}=\\lim_{x\\to1}(\\sqrt x+1)=2"
+    }
+   ]
+  },
+  {
+   "no": "30",
+   "answer": "\\frac12",
+   "steps": [
+    {
+     "tex": "\\lim_{x\\to0}\\frac{(\\sqrt{x+1}-1)(\\sqrt{x+1}+1)}{x(\\sqrt{x+1}+1)}=\\lim_{x\\to0}\\frac{1}{\\sqrt{x+1}+1}=\\frac12"
+    }
+   ]
+  },
+  {
+   "no": "31",
+   "answer": "\\frac12",
+   "steps": [
+    {
+     "tex": "\\frac{\\sqrt{x+2}-2}{\\sqrt{2x}-2}=\\frac{(x-2)(\\sqrt{2x}+2)}{(2x-4)(\\sqrt{x+2}+2)}=\\frac{\\sqrt{2x}+2}{2(\\sqrt{x+2}+2)}"
+    },
+    {
+     "tex": "\\lim_{x\\to2}\\frac{\\sqrt{2x}+2}{2(\\sqrt{x+2}+2)}=\\frac{4}{2\\cdot4}=\\frac12"
+    }
+   ]
+  },
+  {
+   "no": "32",
+   "answer": "0",
+   "steps": [
+    {
+     "tex": "\\lim_{x\\to\\infty}\\frac{x-2}{x^2+1}=\\lim_{x\\to\\infty}\\frac{\\frac1x-\\frac2{x^2}}{1+\\frac1{x^2}}=0"
+    }
+   ]
+  },
+  {
+   "no": "33",
+   "answer": "\\infty\\ (\\text{발산})",
+   "steps": [
+    {
+     "tex": "\\frac{x^2+2x}{x+1}=\\frac{x+2}{1+\\frac1x}\\to\\infty\\quad(x\\to\\infty)"
+    }
+   ]
+  },
+  {
+   "no": "34",
+   "answer": "2",
+   "steps": [
+    {
+     "tex": "\\lim_{x\\to\\infty}\\frac{2+\\frac1x-\\frac1{x^2}}{1+\\frac1x+\\frac1{x^2}}=2"
+    }
+   ]
+  },
+  {
+   "no": "35",
+   "answer": "0",
+   "steps": [
+    {
+     "tex": "\\sqrt{x^2+1}-x=\\frac{(x^2+1)-x^2}{\\sqrt{x^2+1}+x}=\\frac{1}{\\sqrt{x^2+1}+x}\\to0"
+    }
+   ]
+  },
+  {
+   "no": "36",
+   "answer": "\\frac12",
+   "steps": [
+    {
+     "tex": "\\sqrt{4x^2+2x}-2x=\\frac{2x}{\\sqrt{4x^2+2x}+2x}=\\frac{2}{\\sqrt{4+\\frac2x}+2}"
+    },
+    {
+     "tex": "\\lim_{x\\to\\infty}\\frac{2}{\\sqrt{4+\\frac2x}+2}=\\frac{2}{4}=\\frac12"
+    }
+   ]
+  },
+  {
+   "no": "37",
+   "answer": "1",
+   "steps": [
+    {
+     "tex": "\\lim_{x\\to1}(2x-1)=1,\\quad\\lim_{x\\to1}x^2=1"
+    },
+    {
+     "text": "함수의 극한의 대소 관계에 의해"
+    },
+    {
+     "tex": "\\lim_{x\\to1}f(x)=1"
+    }
+   ]
+  },
+  {
+   "no": "38",
+   "answer": "a=2,\\ b=2",
+   "steps": [
+    {
+     "tex": "x\\to-1\\text{ 일 때 (분모)}\\to0\\text{ 이므로 (분자)}\\to0:\\ -a+b=0\\Rightarrow b=a"
+    },
+    {
+     "tex": "\\lim_{x\\to-1}\\frac{a(x+1)}{x+1}=a=2\\Rightarrow a=2,\\ b=2"
+    }
+   ]
+  },
+  {
+   "no": "39",
+   "answer": "a=0,\\ b=-1",
+   "steps": [
+    {
+     "tex": "x\\to1\\text{ 일 때 (분자)}\\to0\\text{, 극한값}\\ne0\\text{ 이므로 (분모)}\\to0:\\ 1+a+b=0"
+    },
+    {
+     "tex": "x^2+ax+b=x^2+ax-1-a=(x-1)(x+1+a)"
+    },
+    {
+     "tex": "\\lim_{x\\to1}\\frac{x-1}{(x-1)(x+1+a)}=\\frac1{2+a}=\\frac12\\Rightarrow a=0,\\ b=-1"
+    }
+   ]
+  }
+ ]
+}

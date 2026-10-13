@@ -1,0 +1,71 @@
+{
+ "section": "유형 01 함수의 수렴과 발산 · 유형 02 좌극한, 우극한 (1)",
+ "problems": [
+  {
+   "no": "01",
+   "answer": "③\\ 0",
+   "steps": [
+    {
+     "tex": "\\lim_{x\\to-1}f(x)=-1,\\quad \\lim_{x\\to2}f(x)=1"
+    },
+    {
+     "tex": "-1+1=0"
+    }
+   ]
+  },
+  {
+   "no": "02",
+   "answer": "2",
+   "steps": [
+    {
+     "tex": "f(x)=ax+b:\\ \\lim_{x\\to2}f(x)=2a+b=0,\\ \\lim_{x\\to0}f(x)=b=1"
+    },
+    {
+     "tex": "a=-\\frac12,\\ b=1\\ \\Rightarrow\\ f(x)=-\\frac12x+1"
+    },
+    {
+     "tex": "f(-2)=1+1=2"
+    }
+   ]
+  },
+  {
+   "no": "03",
+   "answer": "0",
+   "steps": [
+    {
+     "tex": "\\lim_{x\\to2}|f(x)|=|-1|=1"
+    },
+    {
+     "tex": "-x=t\\text{ 로 놓으면 }x\\to2\\text{ 일 때 }t\\to-2:\\ \\lim_{x\\to2}f(-x)=\\lim_{t\\to-2}f(t)=-1"
+    },
+    {
+     "tex": "1+(-1)=0"
+    }
+   ]
+  },
+  {
+   "no": "04",
+   "answer": "③\\ -1",
+   "steps": [
+    {
+     "tex": "\\lim_{x\\to-2-}f(x)=1,\\quad \\lim_{x\\to1+}f(x)=-2"
+    },
+    {
+     "tex": "1+(-2)=-1"
+    }
+   ]
+  },
+  {
+   "no": "05",
+   "answer": "⑤\\ 5",
+   "steps": [
+    {
+     "tex": "\\lim_{x\\to1+}f(x)=1,\\quad f(1)=2"
+    },
+    {
+     "tex": "1+2\\cdot2=5"
+    }
+   ]
+  }
+ ]
+}

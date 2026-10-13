@@ -1,0 +1,47 @@
+section: 01 함수의 극한 · 02 좌극한과 우극한
+@ 01 | 2
+\lim_{x\to0}(x+2)=0+2=2
+@ 02 | 7
+\lim_{x\to-2}(-2x+3)=-2\cdot(-2)+3=7
+@ 03 | 1
+\lim_{x\to1}\frac1x=\frac11=1
+@ 04 | 2
+\lim_{x\to2}\sqrt{x+2}=\sqrt4=2
+@ 05 | \text{발산(극한 없음)}
+\lim_{x\to1-}\frac1{x-1}=-\infty,\quad \lim_{x\to1+}\frac1{x-1}=\infty
+" 좌극한 ≠ 우극한 → 극한은 존재하지 않는다
+@ 06 | 1
+\lim_{x\to2}|x-1|=|2-1|=1
+@ 07 | \infty\ (\text{양의 무한대로 발산})
+x\to0\ \Rightarrow\ x^2\to0+\ \Rightarrow\ \frac1{x^2}\to\infty
+@ 08 | \infty\ (\text{발산})
+x\to\infty\ \Rightarrow\ x^2+1\to\infty
+@ 09 | -\infty\ (\text{발산})
+-x^2-2x-3=-x^2\left(1+\frac2x+\frac3{x^2}\right)\to-\infty\quad(x\to-\infty)
+@ 10 | 1
+\lim_{x\to\infty}\left(\frac1x+1\right)=0+1=1
+@ 11 | 2
+\lim_{x\to\infty}\frac{2x+1}{x+1}=\lim_{x\to\infty}\frac{2+\frac1x}{1+\frac1x}=\frac{2}{1}=2
+@ 12 | -\frac12
+\lim_{x\to-\infty}\frac{-x+1}{2x+4}=\lim_{x\to-\infty}\frac{-1+\frac1x}{2+\frac4x}=-\frac12
+@ 13 | 2
+\lim_{x\to1-}f(x)=\lim_{x\to1-}(x+1)=2
+@ 14 | 1
+\lim_{x\to1+}f(x)=\lim_{x\to1+}(2x-1)=1
+@ 15 | 1
+x<-2\text{ 에서 }f(x)=1\ \Rightarrow\ \lim_{x\to-2-}f(x)=1
+@ 16 | 2
+\lim_{x\to-2+}f(x)=2\quad(\text{점 }(-2,2)\text{에서 내려오는 선분})
+@ 17 | 0
+\lim_{x\to-1-}f(x)=0
+@ 18 | 0
+\lim_{x\to-1+}f(x)=0
+@ 19 | 0
+\lim_{x\to-1-}f(x)=\lim_{x\to-1+}f(x)=0\ \Rightarrow\ \lim_{x\to-1}f(x)=0
+" f(-1)=1 이지만 극한값과는 무관
+@ 20 | -1
+\lim_{x\to2-}f(x)=-1
+@ 21 | 0
+\lim_{x\to2+}f(x)=0
+@ 22 | 2
+\lim_{x\to3-}f(x)=2

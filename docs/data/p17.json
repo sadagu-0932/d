@@ -1,0 +1,104 @@
+{
+ "section": "유형 11 미정계수의 결정 (1) · 유형 12 미정계수의 결정 (2)",
+ "problems": [
+  {
+   "no": "41",
+   "answer": "⑤\\ -30",
+   "steps": [
+    {
+     "tex": "x\\to3\\text{ 일 때 (분모)}\\to0\\text{ 이므로 (분자)}\\to0:\\ 9+3a+b=0"
+    },
+    {
+     "tex": "x^2+ax+b=(x-3)(x+3+a)\\ \\Rightarrow\\ \\lim_{x\\to3}(x+3+a)=6+a=1"
+    },
+    {
+     "tex": "a=-5,\\ b=6,\\quad ab=-30"
+    }
+   ]
+  },
+  {
+   "no": "42",
+   "answer": "③\\ 0",
+   "steps": [
+    {
+     "tex": "x\\to-1\\text{ 일 때 (분모)}\\to0\\Rightarrow\\text{(분자)}\\to0:\\ -1+a=0,\\ a=1"
+    },
+    {
+     "tex": "\\lim_{x\\to-1}\\frac{x+1}{x(x+1)}=\\lim_{x\\to-1}\\frac1x=-1=b"
+    },
+    {
+     "tex": "a+b=0"
+    }
+   ]
+  },
+  {
+   "no": "43",
+   "answer": "①\\ 2",
+   "steps": [
+    {
+     "tex": "x\\to2:\\ \\sqrt{2+a}+b=0\\ \\Rightarrow\\ b=-\\sqrt{2+a}"
+    },
+    {
+     "tex": "\\frac{\\sqrt{x+a}-\\sqrt{2+a}}{x-2}=\\frac{1}{\\sqrt{x+a}+\\sqrt{2+a}}\\to\\frac{1}{2\\sqrt{2+a}}=\\frac12"
+    },
+    {
+     "tex": "\\sqrt{2+a}=1\\ \\Rightarrow\\ a=-1,\\ b=-1,\\quad a^2+b^2=2"
+    }
+   ]
+  },
+  {
+   "no": "44",
+   "answer": "⑤\\ 2",
+   "steps": [
+    {
+     "tex": "x\\to-2:\\ (\\text{분자})\\to0,\\ \\text{극한값}\\ne0\\Rightarrow(\\text{분모})\\to0:\\ 4-2a+b=0"
+    },
+    {
+     "tex": "x^2+ax+2a-4=(x+2)(x+a-2)"
+    },
+    {
+     "tex": "\\lim_{x\\to-2}\\frac{x-2}{x+a-2}=\\frac{-4}{a-4}=2\\ \\Rightarrow\\ a=2,\\ b=0"
+    },
+    {
+     "tex": "a-b=2"
+    }
+   ]
+  },
+  {
+   "no": "45",
+   "answer": "③\\ \\frac32",
+   "steps": [
+    {
+     "tex": "x\\to1:\\ (\\text{분자})\\to0,\\ b\\ne0\\Rightarrow(\\text{분모})\\to0:\\ 1+2a=0,\\ a=-\\frac12"
+    },
+    {
+     "tex": "x^2-\\frac12x-\\frac12=(x-1)\\left(x+\\frac12\\right)"
+    },
+    {
+     "tex": "\\lim_{x\\to1}\\frac{x^2+x+1}{x+\\frac12}=\\frac{3}{\\frac32}=2=b"
+    },
+    {
+     "tex": "a+b=-\\frac12+2=\\frac32"
+    }
+   ]
+  },
+  {
+   "no": "46",
+   "answer": "③\\ 8",
+   "steps": [
+    {
+     "tex": "x\\to-4:\\ (\\text{분자})\\to0\\Rightarrow\\sqrt{-4a+b}-2=0,\\ b=4a+4"
+    },
+    {
+     "tex": "\\sqrt{ax+4a+4}-2=\\frac{a(x+4)}{\\sqrt{ax+4a+4}+2}"
+    },
+    {
+     "tex": "\\lim_{x\\to-4}\\frac{\\sqrt{ax+4a+4}+2}{a}=\\frac4a=4\\ \\Rightarrow\\ a=1,\\ b=8"
+    },
+    {
+     "tex": "ab=8"
+    }
+   ]
+  }
+ ]
+}

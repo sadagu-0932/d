@@ -1,0 +1,27 @@
+section: 유형 13 미정계수의 결정 (3)
+@ 47 | 40
+(\text{가})\Rightarrow f(x)\text{ 는 최고차항의 계수가 2인 이차함수}
+(\text{나})\ x\to-1:\ (\text{분모})\to0\Rightarrow f(-1)=0,\ f(x)=(x+1)(2x+m)
+\lim_{x\to-1}\frac{(x+1)(2x+m)}{(x+1)(x-1)}=\frac{-2+m}{-2}=-1\Rightarrow m=4
+f(x)=2(x+1)(x+2),\quad f(3)=2\cdot4\cdot5=40
+@ 48 | ⑤\ 5
+(\text{나})\Rightarrow f(x)=-2x+c
+f(2)=-4+c=3\Rightarrow c=7
+f(1)=-2+7=5
+@ 49 | 33
+(\text{가})\Rightarrow f(x)\text{ 는 최고차항의 계수가 3인 이차함수}
+(\text{나})\Rightarrow f(1)=0,\ f(x)=(x-1)(3x+m),\ 3+m=2\Rightarrow m=-1
+f(x)=(x-1)(3x-1),\quad f(4)=3\cdot11=33
+@ 50 | ③\ 0
+(\text{가})\Rightarrow f(x)-x^2=-2x^2+\cdots\Rightarrow f(x)=-x^2+bx+c
+(\text{나})\Rightarrow f(2)=0,\ f(x)=(x-2)(-x+m),\ \lim_{x\to2}(-x+m)=-2+m=0
+f(x)=-(x-2)^2\le0\ \Rightarrow\ \text{최댓값 }0
+@ 51 | ①\ -2
+(\text{가})\Rightarrow f(x)+x^3+x=2x+d\Rightarrow f(x)=-x^3+x+d
+(\text{나})\Rightarrow f(1)=0:\ -1+1+d=0,\ d=0
+f(x)=-x(x-1)(x+1)\ \Rightarrow\ k=\lim_{x\to1}\{-x(x+1)\}=-2
+@ 52 | ③\ 9
+f(x)\text{ 의 차수가 3 이상이면 극한값 }-1,\ f(x)=ax^2+\cdots\text{ 이면 }\frac{a+1}{1-a}=1\Rightarrow a=0
+\Rightarrow f(x)\text{ 는 일차 이하}
+(\text{나})\Rightarrow f(-1)=0,\ f(x)=c(x+1),\ c=3
+f(x)=3(x+1),\quad f(2)=9

@@ -1,0 +1,77 @@
+{
+ "section": "유형 02 함수의 연속 (2)",
+ "problems": [
+  {
+   "no": "07",
+   "answer": "③\\ 3",
+   "steps": [
+    {
+     "tex": "\\lim_{x\\to1}\\frac{(x-1)(x+2)}{x-1}=\\lim_{x\\to1}(x+2)=3=f(1)=a"
+    }
+   ]
+  },
+  {
+   "no": "08",
+   "answer": "③\\ 0",
+   "steps": [
+    {
+     "tex": "\\lim_{x\\to-1}(x+a)=-1+a=f(-1)=2a-1\\Rightarrow a=0"
+    }
+   ]
+  },
+  {
+   "no": "09",
+   "answer": "①\\ -2",
+   "steps": [
+    {
+     "tex": "x\\to2:\\ (\\text{분모})\\to0\\Rightarrow(\\text{분자})\\to0:\\ 4+4+a=0,\\ a=-8"
+    },
+    {
+     "tex": "\\lim_{x\\to2}\\frac{(x-2)(x+4)}{x-2}=6=b"
+    },
+    {
+     "tex": "a+b=-2"
+    }
+   ]
+  },
+  {
+   "no": "10",
+   "answer": "①\\ -1",
+   "steps": [
+    {
+     "tex": "\\lim_{x\\to a}(x^2+x+a)=a^2+2a=f(a)=a+3"
+    },
+    {
+     "tex": "a^2+a-3=0\\ (D>0)\\Rightarrow\\text{근과 계수의 관계에서 합}=-1"
+    }
+   ]
+  },
+  {
+   "no": "11",
+   "answer": "④\\ -\\frac92",
+   "steps": [
+    {
+     "tex": "x\\to-2:\\ (\\text{분모})\\to0\\Rightarrow\\sqrt4+a=0,\\ a=-2"
+    },
+    {
+     "tex": "\\lim_{x\\to-2}\\frac{\\sqrt{x+6}-2}{x+2}=\\lim_{x\\to-2}\\frac{1}{\\sqrt{x+6}+2}=\\frac14"
+    },
+    {
+     "tex": "f(-2)=-2+b=\\frac14\\Rightarrow b=\\frac94,\\quad ab=-\\frac92"
+    }
+   ]
+  },
+  {
+   "no": "12",
+   "answer": "④\\ -2",
+   "steps": [
+    {
+     "tex": "x\\ne0:\\ \\frac{x^2-4|x|}{2|x|}=\\frac{|x|^2-4|x|}{2|x|}=\\frac{|x|}{2}-2"
+    },
+    {
+     "tex": "\\lim_{x\\to0}f(x)=-2=f(0)=0+a\\Rightarrow a=-2"
+    }
+   ]
+  }
+ ]
+}

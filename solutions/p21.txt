@@ -1,0 +1,17 @@
+section: 내신+수능 고난도 도전 (01 함수의 극한)
+@ 01 | ④\ ㄱ,\ ㄷ
+x^2+(y-2)^2=9:\ \text{중심 }(0,2),\ r=3,\quad d^2=t^2+4
+t^2+4<9\ (|t|<\sqrt5):\ f=0,\quad |t|=\sqrt5:\ f=1,\quad |t|>\sqrt5:\ f=2
+\text{ㄱ. }f(0)=0\ (\text{참})
+\text{ㄴ. }\lim_{t\to\sqrt5-}f(t)=0\ne\lim_{t\to\sqrt5+}f(t)=2\ (\text{거짓})
+\text{ㄷ. }t\to\sqrt5-\text{ 이면 }t^2\to5-,\ 5>\sqrt5\Rightarrow f(t^2)=2\ (\text{참})
+@ 02 | ②\ 1
+P=\{f(x)\}:\ x\ne0,\pm1\text{ 에서 }||x|-1|\text{ 는 0을 제외한 모든 양수}\ (|x|=2\text{ 이면 }1)
+P=\{y\mid y>0\}
+Q=\left\{\lim_{t\to x}f(t)\right\}=\{||x|-1|\}=\{y\mid y\ge0\}
+Q-P=\{0\}\ \Rightarrow\ 1\text{개}
+@ 03 | ①\ -\frac1{16}
+A(t,\sqrt{1-t^2}),\ C(-1,0):\ \overline{AC}^2=(t+1)^2+1-t^2=2t+2
+\overline{AB}^2=\{2\sqrt{1-t^2}\}^2=4(1-t)(1+t)
+\frac{\sqrt{2t+2}-2}{4(1-t)(1+t)}=\frac{2(t-1)}{(\sqrt{2t+2}+2)\cdot4(1-t)(1+t)}=\frac{-2}{4(1+t)(\sqrt{2t+2}+2)}
+\lim_{t\to1-}(\cdots)=\frac{-2}{4\cdot2\cdot4}=-\frac1{16}

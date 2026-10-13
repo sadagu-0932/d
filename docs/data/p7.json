@@ -1,0 +1,209 @@
+{
+ "section": "01 함수의 극한 · 02 좌극한과 우극한",
+ "problems": [
+  {
+   "no": "01",
+   "answer": "2",
+   "steps": [
+    {
+     "tex": "\\lim_{x\\to0}(x+2)=0+2=2"
+    }
+   ]
+  },
+  {
+   "no": "02",
+   "answer": "7",
+   "steps": [
+    {
+     "tex": "\\lim_{x\\to-2}(-2x+3)=-2\\cdot(-2)+3=7"
+    }
+   ]
+  },
+  {
+   "no": "03",
+   "answer": "1",
+   "steps": [
+    {
+     "tex": "\\lim_{x\\to1}\\frac1x=\\frac11=1"
+    }
+   ]
+  },
+  {
+   "no": "04",
+   "answer": "2",
+   "steps": [
+    {
+     "tex": "\\lim_{x\\to2}\\sqrt{x+2}=\\sqrt4=2"
+    }
+   ]
+  },
+  {
+   "no": "05",
+   "answer": "\\text{발산(극한 없음)}",
+   "steps": [
+    {
+     "tex": "\\lim_{x\\to1-}\\frac1{x-1}=-\\infty,\\quad \\lim_{x\\to1+}\\frac1{x-1}=\\infty"
+    },
+    {
+     "text": "좌극한 ≠ 우극한 → 극한은 존재하지 않는다"
+    }
+   ]
+  },
+  {
+   "no": "06",
+   "answer": "1",
+   "steps": [
+    {
+     "tex": "\\lim_{x\\to2}|x-1|=|2-1|=1"
+    }
+   ]
+  },
+  {
+   "no": "07",
+   "answer": "\\infty\\ (\\text{양의 무한대로 발산})",
+   "steps": [
+    {
+     "tex": "x\\to0\\ \\Rightarrow\\ x^2\\to0+\\ \\Rightarrow\\ \\frac1{x^2}\\to\\infty"
+    }
+   ]
+  },
+  {
+   "no": "08",
+   "answer": "\\infty\\ (\\text{발산})",
+   "steps": [
+    {
+     "tex": "x\\to\\infty\\ \\Rightarrow\\ x^2+1\\to\\infty"
+    }
+   ]
+  },
+  {
+   "no": "09",
+   "answer": "-\\infty\\ (\\text{발산})",
+   "steps": [
+    {
+     "tex": "-x^2-2x-3=-x^2\\left(1+\\frac2x+\\frac3{x^2}\\right)\\to-\\infty\\quad(x\\to-\\infty)"
+    }
+   ]
+  },
+  {
+   "no": "10",
+   "answer": "1",
+   "steps": [
+    {
+     "tex": "\\lim_{x\\to\\infty}\\left(\\frac1x+1\\right)=0+1=1"
+    }
+   ]
+  },
+  {
+   "no": "11",
+   "answer": "2",
+   "steps": [
+    {
+     "tex": "\\lim_{x\\to\\infty}\\frac{2x+1}{x+1}=\\lim_{x\\to\\infty}\\frac{2+\\frac1x}{1+\\frac1x}=\\frac{2}{1}=2"
+    }
+   ]
+  },
+  {
+   "no": "12",
+   "answer": "-\\frac12",
+   "steps": [
+    {
+     "tex": "\\lim_{x\\to-\\infty}\\frac{-x+1}{2x+4}=\\lim_{x\\to-\\infty}\\frac{-1+\\frac1x}{2+\\frac4x}=-\\frac12"
+    }
+   ]
+  },
+  {
+   "no": "13",
+   "answer": "2",
+   "steps": [
+    {
+     "tex": "\\lim_{x\\to1-}f(x)=\\lim_{x\\to1-}(x+1)=2"
+    }
+   ]
+  },
+  {
+   "no": "14",
+   "answer": "1",
+   "steps": [
+    {
+     "tex": "\\lim_{x\\to1+}f(x)=\\lim_{x\\to1+}(2x-1)=1"
+    }
+   ]
+  },
+  {
+   "no": "15",
+   "answer": "1",
+   "steps": [
+    {
+     "tex": "x<-2\\text{ 에서 }f(x)=1\\ \\Rightarrow\\ \\lim_{x\\to-2-}f(x)=1"
+    }
+   ]
+  },
+  {
+   "no": "16",
+   "answer": "2",
+   "steps": [
+    {
+     "tex": "\\lim_{x\\to-2+}f(x)=2\\quad(\\text{점 }(-2,2)\\text{에서 내려오는 선분})"
+    }
+   ]
+  },
+  {
+   "no": "17",
+   "answer": "0",
+   "steps": [
+    {
+     "tex": "\\lim_{x\\to-1-}f(x)=0"
+    }
+   ]
+  },
+  {
+   "no": "18",
+   "answer": "0",
+   "steps": [
+    {
+     "tex": "\\lim_{x\\to-1+}f(x)=0"
+    }
+   ]
+  },
+  {
+   "no": "19",
+   "answer": "0",
+   "steps": [
+    {
+     "tex": "\\lim_{x\\to-1-}f(x)=\\lim_{x\\to-1+}f(x)=0\\ \\Rightarrow\\ \\lim_{x\\to-1}f(x)=0"
+    },
+    {
+     "text": "f(-1)=1 이지만 극한값과는 무관"
+    }
+   ]
+  },
+  {
+   "no": "20",
+   "answer": "-1",
+   "steps": [
+    {
+     "tex": "\\lim_{x\\to2-}f(x)=-1"
+    }
+   ]
+  },
+  {
+   "no": "21",
+   "answer": "0",
+   "steps": [
+    {
+     "tex": "\\lim_{x\\to2+}f(x)=0"
+    }
+   ]
+  },
+  {
+   "no": "22",
+   "answer": "2",
+   "steps": [
+    {
+     "tex": "\\lim_{x\\to3-}f(x)=2"
+    }
+   ]
+  }
+ ]
+}

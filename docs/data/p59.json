@@ -6,10 +6,7 @@
    "answer": "3",
    "steps": [
     {
-     "tex": "f'(x)=3x^2-3=0\\Rightarrow x=\\pm1"
-    },
-    {
-     "tex": "f(-1)=2\\ (\\text{극대}),\\ f(1)=-2\\ (\\text{극소}),\\quad2\\cdot(-2)<0\\Rightarrow3\\text{개}"
+     "tex": "\\text{극대 }2\\times\\text{극소 }(-2)<0"
     }
    ]
   },
@@ -18,10 +15,7 @@
    "answer": "2",
    "steps": [
     {
-     "tex": "f'(x)=9x^2-18x=9x(x-2)"
-    },
-    {
-     "tex": "f(0)=0\\ (\\text{극대}),\\ f(2)=-12\\ (\\text{극소}),\\quad0\\cdot(-12)=0\\Rightarrow2\\text{개}"
+     "tex": "\\text{극대 }0\\times\\text{극소 }(-12)=0"
     }
    ]
   },
@@ -30,10 +24,7 @@
    "answer": "1",
    "steps": [
     {
-     "tex": "f'(x)=-3x^2+12x=-3x(x-4)"
-    },
-    {
-     "tex": "f(0)=6\\ (\\text{극소}),\\ f(4)=38\\ (\\text{극대}),\\quad6\\cdot38>0\\Rightarrow1\\text{개}"
+     "tex": "\\text{극소 }6\\times\\text{극대 }38>0"
     }
    ]
   },
@@ -42,13 +33,7 @@
    "answer": "2",
    "steps": [
     {
-     "tex": "f'(x)=4x^3-12x+8=4(x-1)^2(x+2)"
-    },
-    {
-     "tex": "f(-2)=-27\\ (\\text{극소}),\\ f(1)=0"
-    },
-    {
-     "tex": "f(x)=(x-1)^3(x+3)\\Rightarrow x=1,\\ -3\\Rightarrow2\\text{개}"
+     "tex": "f=(x-1)^3(x+3)"
     }
    ]
   },
@@ -57,13 +42,7 @@
    "answer": "0<k<4",
    "steps": [
     {
-     "tex": "g(x)=x^3+6x^2+9x\\text{ 와 }y=-k\\text{ 의 교점}"
-    },
-    {
-     "tex": "g'(x)=3(x+1)(x+3):\\ g(-3)=0\\ (\\text{극대}),\\ g(-1)=-4\\ (\\text{극소})"
-    },
-    {
-     "tex": "-4<-k<0\\Rightarrow0<k<4"
+     "tex": "g=x^3+6x^2+9x:\\ \\text{극대 }0,\\ \\text{극소 }-4\\Rightarrow-4<-k<0"
     }
    ]
   },
@@ -117,13 +96,7 @@
    "answer": "\\text{풀이 참조}",
    "steps": [
     {
-     "tex": "f(x)=x^3-x^2-x+1,\\ f'(x)=3x^2-2x-1=(3x+1)(x-1)"
-    },
-    {
-     "tex": "x\\ge0\\text{ 에서 }x=1\\text{ 일 때 최솟값 }f(1)=0"
-    },
-    {
-     "tex": "\\Rightarrow f(x)\\ge0\\ (x\\ge0)"
+     "tex": "f=(x-1)^2(x+1)\\ge0\\ (x\\ge0)"
     }
    ]
   },
@@ -132,13 +105,7 @@
    "answer": "\\text{풀이 참조}",
    "steps": [
     {
-     "tex": "f(x)=-3x^4+4x^3-2,\\ f'(x)=-12x^3+12x^2=-12x^2(x-1)"
-    },
-    {
-     "tex": "x=1\\text{ 에서 최댓값 }f(1)=-3+4-2=-1<0"
-    },
-    {
-     "tex": "\\Rightarrow\\text{모든 실수 }x\\text{ 에 대하여 }f(x)<0"
+     "tex": "\\text{최댓값 }f(1)=-1<0"
     }
    ]
   },
@@ -147,10 +114,7 @@
    "answer": "-\\frac23",
    "steps": [
     {
-     "tex": "g(x)=-\\frac13x^3+x+k,\\ g'(x)=-x^2+1=0\\Rightarrow x=1\\ (x\\ge0)"
-    },
-    {
-     "tex": "x\\ge0\\text{ 에서 최댓값 }g(1)=\\frac23+k\\le0\\Rightarrow k\\le-\\frac23"
+     "tex": "\\text{최댓값 }g(1)=\\frac23+k\\le0"
     }
    ]
   },

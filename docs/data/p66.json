@@ -66,13 +66,7 @@
    "answer": "4",
    "steps": [
     {
-     "tex": "\\text{평균값 정리}:\\ \\frac{f(5)-f(1)}{5-1}=f'(c)\\ (1<c<5)"
-    },
-    {
-     "tex": "f(5)=f(1)+4f'(c)\\ge0+4\\cdot1=4"
-    },
-    {
-     "tex": "f(x)=x-1\\text{ 일 때 등호}\\Rightarrow\\text{최솟값 }4"
+     "tex": "f(5)=f(1)+4f'(c)\\ge4"
     }
    ]
   }

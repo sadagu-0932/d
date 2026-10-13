@@ -43,9 +43,6 @@
    "steps": [
     {
      "tex": "\\lim_{x\\to1-}\\frac1{x-1}=-\\infty,\\quad \\lim_{x\\to1+}\\frac1{x-1}=\\infty"
-    },
-    {
-     "text": "좌극한 ≠ 우극한 → 극한은 존재하지 않는다"
     }
    ]
   },
@@ -172,9 +169,6 @@
    "steps": [
     {
      "tex": "\\lim_{x\\to-1-}f(x)=\\lim_{x\\to-1+}f(x)=0\\ \\Rightarrow\\ \\lim_{x\\to-1}f(x)=0"
-    },
-    {
-     "text": "f(-1)=1 이지만 극한값과는 무관"
     }
    ]
   },

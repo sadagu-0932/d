@@ -1,21 +1,13 @@
 section: 유형 04 좌극한, 우극한 (3) · 유형 05 함수의 극한의 성질
 @ 11 | ③\ 6
-\lim_{x\to1-}f(x)=1+2=3,\quad \lim_{x\to1+}f(x)=1+a
-3=1+a\ \Rightarrow\ a=2
-f(2)=2^2+2=6
+3=1+a\Rightarrow a=2,\ f(2)=6
 @ 12 | ⑤\ -\frac{15}{2}
-\lim_{x\to-2-}f(x)=-2a+2,\quad \lim_{x\to-2+}f(x)=2+3=5
--2a+2=5=b\ \Rightarrow\ a=-\frac32,\ b=5
-ab=-\frac{15}{2}
+-2a+2=5=b\Rightarrow a=-\frac32,\ ab=-\frac{15}2
 @ 13 | 3
-g(x)=\frac{x^k}{x|x|}
-x>0:\ g(x)=x^{k-2},\qquad x<0:\ g(x)=-x^{k-2}
-k=1:\ \pm\frac1x\ \text{발산},\quad k=2:\ \lim_{x\to0+}g=1\ne\lim_{x\to0-}g=-1
-k=3:\ \lim_{x\to0+}x=0=\lim_{x\to0-}(-x)\ \Rightarrow\ \text{최솟값 }3
+x>0:\ x^{k-2},\ x<0:\ -x^{k-2}\Rightarrow k-2\ge1\Rightarrow k=3
 @ 14 | ④\ \frac43
 \lim_{x\to1}\frac{f(x)-2}{x^2-4}=\frac{-2-2}{1-4}=\frac43
 @ 15 | 5
 2\cdot2+3\cdot1-2\cdot1=5
 @ 16 | ④\ 14
-\{f(x)\}^2+\{g(x)\}^2=\{f(x)+g(x)\}^2-2f(x)g(x)
-\lim_{x\to\infty}(\cdots)=4^2-2\cdot1=14
+(f+g)^2-2fg\to16-2=14

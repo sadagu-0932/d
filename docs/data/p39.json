@@ -6,13 +6,7 @@
    "answer": "\\text{풀이 참조}",
    "steps": [
     {
-     "tex": "\\lim_{x\\to0}|x|=0=f(0)\\Rightarrow\\text{연속}"
-    },
-    {
-     "tex": "\\lim_{h\\to0+}\\frac{|h|-0}{h}=1,\\quad\\lim_{h\\to0-}\\frac{|h|-0}{h}=-1"
-    },
-    {
-     "text": "좌·우극한이 달라 f′(0) 이 존재하지 않음 → 미분가능하지 않음"
+     "tex": "\\lim|x|=0=f(0),\\ \\lim_{h\\to0\\pm}\\frac{|h|}h=\\pm1\\Rightarrow\\text{미분 불가}"
     }
    ]
   },
@@ -21,13 +15,7 @@
    "answer": "\\text{풀이 참조}",
    "steps": [
     {
-     "tex": "\\lim_{x\\to-1}|x+1|=0=f(-1)\\Rightarrow\\text{연속}"
-    },
-    {
-     "tex": "\\lim_{h\\to0+}\\frac{|h|}{h}=1\\ne\\lim_{h\\to0-}\\frac{|h|}{h}=-1"
-    },
-    {
-     "text": "f′(−1) 이 존재하지 않음 → 미분가능하지 않음"
+     "tex": "\\lim|x+1|=0=f(-1),\\ \\lim_{h\\to0\\pm}\\frac{|h|}h=\\pm1\\Rightarrow\\text{미분 불가}"
     }
    ]
   },

@@ -1,12 +1,8 @@
 section: 03 미분가능성과 연속성 · 04 도함수 · 05 미분법 (개념 확인 문제)
 @ 25 | \text{풀이 참조}
-\lim_{x\to0}|x|=0=f(0)\Rightarrow\text{연속}
-\lim_{h\to0+}\frac{|h|-0}{h}=1,\quad\lim_{h\to0-}\frac{|h|-0}{h}=-1
-" 좌·우극한이 달라 f′(0) 이 존재하지 않음 → 미분가능하지 않음
+\lim|x|=0=f(0),\ \lim_{h\to0\pm}\frac{|h|}h=\pm1\Rightarrow\text{미분 불가}
 @ 26 | \text{풀이 참조}
-\lim_{x\to-1}|x+1|=0=f(-1)\Rightarrow\text{연속}
-\lim_{h\to0+}\frac{|h|}{h}=1\ne\lim_{h\to0-}\frac{|h|}{h}=-1
-" f′(−1) 이 존재하지 않음 → 미분가능하지 않음
+\lim|x+1|=0=f(-1),\ \lim_{h\to0\pm}\frac{|h|}h=\pm1\Rightarrow\text{미분 불가}
 @ 27 | f'(x)=1
 f'(x)=\lim_{h\to0}\frac{(x+h+2)-(x+2)}{h}=\lim_{h\to0}\frac hh=1
 @ 28 | f'(x)=2x-2

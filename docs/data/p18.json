@@ -6,16 +6,7 @@
    "answer": "40",
    "steps": [
     {
-     "tex": "(\\text{가})\\Rightarrow f(x)\\text{ 는 최고차항의 계수가 2인 이차함수}"
-    },
-    {
-     "tex": "(\\text{나})\\ x\\to-1:\\ (\\text{분모})\\to0\\Rightarrow f(-1)=0,\\ f(x)=(x+1)(2x+m)"
-    },
-    {
-     "tex": "\\lim_{x\\to-1}\\frac{(x+1)(2x+m)}{(x+1)(x-1)}=\\frac{-2+m}{-2}=-1\\Rightarrow m=4"
-    },
-    {
-     "tex": "f(x)=2(x+1)(x+2),\\quad f(3)=2\\cdot4\\cdot5=40"
+     "tex": "f=(x+1)(2x+m),\\ \\frac{m-2}{-2}=-1\\Rightarrow m=4,\\ f(3)=2\\cdot4\\cdot5=40"
     }
    ]
   },
@@ -24,13 +15,7 @@
    "answer": "⑤\\ 5",
    "steps": [
     {
-     "tex": "(\\text{나})\\Rightarrow f(x)=-2x+c"
-    },
-    {
-     "tex": "f(2)=-4+c=3\\Rightarrow c=7"
-    },
-    {
-     "tex": "f(1)=-2+7=5"
+     "tex": "f=-2x+c,\\ f(2)=3\\Rightarrow c=7,\\ f(1)=5"
     }
    ]
   },
@@ -39,13 +24,7 @@
    "answer": "33",
    "steps": [
     {
-     "tex": "(\\text{가})\\Rightarrow f(x)\\text{ 는 최고차항의 계수가 3인 이차함수}"
-    },
-    {
-     "tex": "(\\text{나})\\Rightarrow f(1)=0,\\ f(x)=(x-1)(3x+m),\\ 3+m=2\\Rightarrow m=-1"
-    },
-    {
-     "tex": "f(x)=(x-1)(3x-1),\\quad f(4)=3\\cdot11=33"
+     "tex": "f=(x-1)(3x+m),\\ 3+m=2\\Rightarrow f(4)=3\\cdot11=33"
     }
    ]
   },
@@ -54,13 +33,7 @@
    "answer": "③\\ 0",
    "steps": [
     {
-     "tex": "(\\text{가})\\Rightarrow f(x)-x^2=-2x^2+\\cdots\\Rightarrow f(x)=-x^2+bx+c"
-    },
-    {
-     "tex": "(\\text{나})\\Rightarrow f(2)=0,\\ f(x)=(x-2)(-x+m),\\ \\lim_{x\\to2}(-x+m)=-2+m=0"
-    },
-    {
-     "tex": "f(x)=-(x-2)^2\\le0\\ \\Rightarrow\\ \\text{최댓값 }0"
+     "tex": "f=-x^2+\\cdots,\\ (x-2)^2\\text{ 인수}\\Rightarrow f=-(x-2)^2,\\ \\text{최댓값 }0"
     }
    ]
   },
@@ -69,13 +42,7 @@
    "answer": "①\\ -2",
    "steps": [
     {
-     "tex": "(\\text{가})\\Rightarrow f(x)+x^3+x=2x+d\\Rightarrow f(x)=-x^3+x+d"
-    },
-    {
-     "tex": "(\\text{나})\\Rightarrow f(1)=0:\\ -1+1+d=0,\\ d=0"
-    },
-    {
-     "tex": "f(x)=-x(x-1)(x+1)\\ \\Rightarrow\\ k=\\lim_{x\\to1}\\{-x(x+1)\\}=-2"
+     "tex": "f=-x^3+x+d,\\ f(1)=0\\Rightarrow d=0,\\ k=\\lim\\{-x(x+1)\\}=-2"
     }
    ]
   },
@@ -84,16 +51,7 @@
    "answer": "③\\ 9",
    "steps": [
     {
-     "tex": "f(x)\\text{ 의 차수가 3 이상이면 극한값 }-1,\\ f(x)=ax^2+\\cdots\\text{ 이면 }\\frac{a+1}{1-a}=1\\Rightarrow a=0"
-    },
-    {
-     "tex": "\\Rightarrow f(x)\\text{ 는 일차 이하}"
-    },
-    {
-     "tex": "(\\text{나})\\Rightarrow f(-1)=0,\\ f(x)=c(x+1),\\ c=3"
-    },
-    {
-     "tex": "f(x)=3(x+1),\\quad f(2)=9"
+     "tex": "f\\text{ 일차 이하 }(\\text{이차면 }\\tfrac{a+1}{1-a}=1\\Rightarrow a=0),\\ f=3(x+1),\\ f(2)=9"
     }
    ]
   }

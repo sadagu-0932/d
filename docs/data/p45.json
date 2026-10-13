@@ -6,13 +6,7 @@
    "answer": "ㄱ,\\ ㄷ",
    "steps": [
     {
-     "tex": "\\text{ㄱ. }\\lim_{h\\to0+}\\frac{|h|}{h}=1\\ne\\lim_{h\\to0-}\\frac{|h|}{h}=-1\\ (\\text{연속, 미분 불가})"
-    },
-    {
-     "tex": "\\text{ㄴ. }f'(1)=\\lim_{h\\to0}\\frac{|h(2+h)|\\cdot h}{h}=\\lim_{h\\to0}|h||2+h|=0\\ (\\text{미분가능})"
-    },
-    {
-     "tex": "\\text{ㄷ. }\\lim_{x\\to1-}f=0=f(1)\\ (\\text{연속}),\\quad\\text{좌미분 }2x-2\\to0,\\ \\text{우미분 }2x-3\\to-1\\ (\\text{미분 불가})"
+     "tex": "\\text{ㄱ 꺾임},\\ \\text{ㄴ }f'(1)=0,\\ \\text{ㄷ 좌미분 }0\\ne\\text{우미분 }-1"
     }
    ]
   },
@@ -21,10 +15,7 @@
    "answer": "③\\ \\frac32",
    "steps": [
     {
-     "tex": "f\\text{ 는 }x=2\\text{ 에서 미분가능}\\Rightarrow\\text{연속}"
-    },
-    {
-     "tex": "\\lim_{x\\to3}(x+1)f(x-1)=4f(2)=6\\Rightarrow f(2)=\\frac32"
+     "tex": "\\text{연속}:\\ 4f(2)=6\\Rightarrow f(2)=\\frac32"
     }
    ]
   },
@@ -33,13 +24,7 @@
    "answer": "ㄱ",
    "steps": [
     {
-     "tex": "\\text{ㄱ. }f'(0)=\\lim_{h\\to0}\\frac{h^2}{h}=0\\ (\\text{미분가능})"
-    },
-    {
-     "tex": "\\text{ㄴ. }\\lim_{x\\to0-}f(x)=-1\\ne f(0)=0\\ (\\text{불연속}\\Rightarrow\\text{미분 불가})"
-    },
-    {
-     "tex": "\\text{ㄷ. }\\lim_{x\\to0}f(x)=1\\ne f(0)=0\\ (\\text{불연속}\\Rightarrow\\text{미분 불가})"
+     "tex": "\\text{ㄴ·ㄷ 은 }x=0\\text{ 에서 불연속}"
     }
    ]
   },
@@ -48,13 +33,7 @@
    "answer": "②\\ -8",
    "steps": [
     {
-     "tex": "\\text{연속}:\\ 1+a+b=2-3=-1"
-    },
-    {
-     "tex": "\\text{미분계수}:\\ (2x+a)_{x=1}=(4x)_{x=1}\\Rightarrow2+a=4"
-    },
-    {
-     "tex": "a=2,\\ b=-4\\Rightarrow ab=-8"
+     "tex": "1+a+b=-1,\\ 2+a=4\\Rightarrow a=2,\\ b=-4"
     }
    ]
   },
@@ -63,16 +42,7 @@
    "answer": "⑤\\ 18",
    "steps": [
     {
-     "tex": "f'(c)=b+2\\text{ 존재}\\Rightarrow x=c\\text{ 에서 미분가능}"
-    },
-    {
-     "tex": "4c=2c+b=b+2\\Rightarrow c=1,\\ b=2"
-    },
-    {
-     "tex": "\\text{연속}:\\ 2c^2+a=c^2+bc\\Rightarrow2+a=3\\Rightarrow a=1"
-    },
-    {
-     "tex": "f(-1)=2+1=3,\\quad f(3)=9+6=15\\Rightarrow18"
+     "tex": "4c=2c+b=b+2\\Rightarrow c=1,\\ b=2,\\ a=1\\Rightarrow3+15=18"
     }
    ]
   },
@@ -81,16 +51,7 @@
    "answer": "③\\ 0",
    "steps": [
     {
-     "tex": "\\text{연속}:\\ a-4-b(a+1)=-2-2-a^2\\Rightarrow(a+1)(a-b)=0"
-    },
-    {
-     "tex": "\\text{좌미분 }(2ax+4)_{x=-1}=-2a+4,\\quad\\text{우미분 }(-4x+2)_{x=-1}=6"
-    },
-    {
-     "tex": "\\text{미분 불가}\\Rightarrow-2a+4\\ne6\\Rightarrow a\\ne-1"
-    },
-    {
-     "tex": "\\therefore a-b=0"
+     "tex": "(a+1)(a-b)=0,\\ -2a+4\\ne6\\ (a\\ne-1)\\Rightarrow a=b"
     }
    ]
   }

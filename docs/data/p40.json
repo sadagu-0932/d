@@ -27,10 +27,7 @@
    "answer": "⑤\\ 80",
    "steps": [
     {
-     "tex": "\\frac{f(a)-f(0)}{a}=a^2+2a\\Rightarrow f(a)=a^3+2a^2+f(0)"
-    },
-    {
-     "tex": "f(4)-f(2)=(64+32)-(8+8)=80"
+     "tex": "f(a)=a^3+2a^2+f(0)\\Rightarrow f(4)-f(2)=96-16=80"
     }
    ]
   },
@@ -39,16 +36,7 @@
    "answer": "③\\ -1",
    "steps": [
     {
-     "tex": "f:\\ \\frac{f(a+2)-f(a)}{2}=\\frac{(4a+4)-4a}{2}=2"
-    },
-    {
-     "tex": "g:\\ \\frac{g(a+2)-g(a)}{2}=\\frac{a(4a+4)-4}{2}=2a^2+2a-2"
-    },
-    {
-     "tex": "2a^2+2a-2=2\\Rightarrow a^2+a-2=0\\Rightarrow a=1,\\ -2"
-    },
-    {
-     "tex": "1+(-2)=-1"
+     "tex": "2=2a^2+2a-2\\Rightarrow a=1,-2"
     }
    ]
   },
@@ -57,16 +45,7 @@
    "answer": "⑤\\ \\frac{25}8",
    "steps": [
     {
-     "tex": "f(x)=x^2-2x+2\\text{ 의 }p\\to q\\text{ 평균변화율}=p+q-2"
-    },
-    {
-     "tex": "(-1+a-2)+(a+b-2)=0\\Rightarrow b=5-2a"
-    },
-    {
-     "tex": "-1<a<b\\Rightarrow-1<a<\\frac53"
-    },
-    {
-     "tex": "ab=a(5-2a)=-2\\left(a-\\frac54\\right)^2+\\frac{25}8\\Rightarrow a=\\frac54\\text{ 일 때 최댓값 }\\frac{25}8"
+     "tex": "(a-3)+(a+b-2)=0\\Rightarrow b=5-2a,\\ ab\\le\\frac{25}8\\ (a=\\tfrac54)"
     }
    ]
   },
@@ -75,22 +54,7 @@
    "answer": "③\\ 3",
    "steps": [
     {
-     "tex": "g(x)=(x+1)(x-2)(x-a+1)(x-a-2),\\ g(-1)=0"
-    },
-    {
-     "tex": "\\text{평균변화율}=\\frac{g(k)-g(-1)}{k+1}=0\\iff g(k)=0"
-    },
-    {
-     "tex": "g(k)=0\\text{ 인 자연수 }k\\text{ 후보}:\\ 2,\\ a-1,\\ a+2"
-    },
-    {
-     "tex": "a=3:\\ \\{2,5\\},\\quad a=1:\\ \\{2,3\\},\\quad a=-1:\\ \\{1,2\\}\\ (\\text{각 2개})"
-    },
-    {
-     "text": "a ≥ 2, a ≠ 3 이면 3개, a = 0 또는 a ≤ −2 이면 1개"
-    },
-    {
-     "tex": "-1+1+3=3"
+     "tex": "g(k)=0\\text{ 인 자연수 }k\\in\\{2,a-1,a+2\\}\\text{ 가 2개}\\Rightarrow a=-1,1,3"
     }
    ]
   }

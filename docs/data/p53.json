@@ -6,16 +6,7 @@
    "answer": "①\\ 0",
    "steps": [
     {
-     "tex": "(\\text{나})\\Rightarrow f(1)=f(-1),\\ f'(1)=f'(-1)\\ (\\text{주기 2, 미분가능})"
-    },
-    {
-     "tex": "\\text{연속}:\\ 1+a+b=-1+a-b\\Rightarrow b=-1"
-    },
-    {
-     "tex": "\\text{미분}:\\ 3+2a+b=3-2a+b\\Rightarrow a=0"
-    },
-    {
-     "tex": "f(3)=f(1)=f(-1)=-1+0+1=0"
+     "tex": "f(1)=f(-1),\\ f'(1)=f'(-1)\\Rightarrow a=0,\\ b=-1,\\ f(3)=f(1)=0"
     }
    ]
   },
@@ -24,22 +15,7 @@
    "answer": "③\\ 17",
    "steps": [
     {
-     "tex": "g(x)=f(x)-x^2-x\\ (\\text{삼차}):\\ \\lim_{x\\to t}\\frac{g(x)}{x-t}\\text{ 존재}\\iff g(t)=0,\\ \\text{그 값은 }g'(t)"
-    },
-    {
-     "tex": "g(1)=g(3)=0,\\ g'(1)=-4,\\ g'(3)=8"
-    },
-    {
-     "tex": "g(x)=k(x-1)(x-3)(x-r):\\ -2k(1-r)=-4,\\ 2k(3-r)=8\\Rightarrow r=-1,\\ k=1"
-    },
-    {
-     "text": "확인: t = −1 이면 g′(−1) = 8 ≠ 6(−1) − 10 이므로 집합은 {1, 3}"
-    },
-    {
-     "tex": "f(x)=(x^2-1)(x-3)+x^2+x=x^3-2x^2+3"
-    },
-    {
-     "tex": "f'(x)=3x^2-4x:\\ f'(1)+f(2)+f'(3)=-1+3+15=17"
+     "tex": "g=f-x^2-x=(x-1)(x-3)(x+1)\\Rightarrow f=x^3-2x^2+3:\\ -1+3+15=17"
     }
    ]
   },
@@ -48,22 +24,7 @@
    "answer": "②\\ 3",
    "steps": [
     {
-     "tex": "f\\text{ 가 }n\\text{ 차}:\\ \\text{좌변 }2n-2\\text{ 차, 우변 }n+1\\text{ 차}\\Rightarrow n=3"
-    },
-    {
-     "tex": "f(x)=ax^3+\\cdots:\\ x^4\\text{ 계수 }9a^2=9a\\Rightarrow a=1"
-    },
-    {
-     "tex": "f(x)=x^3+bx^2+cx+d\\text{ 대입 후 계수 비교}"
-    },
-    {
-     "tex": "x^3:\\ 12b+6=9b+9,\\quad x^2:\\ 6c+4b^2+4b=9c+9b-4,\\quad x:\\ 4bc+2c=9c+9d-3"
-    },
-    {
-     "tex": "b=1,\\ c=1,\\ d=0\\Rightarrow f(x)=x^3+x^2+x\\ (f'(-1)=2>0)"
-    },
-    {
-     "tex": "f(1)=3"
+     "tex": "n=3,\\ \\text{계수비교}\\Rightarrow f=x^3+x^2+x,\\ f(1)=3"
     }
    ]
   },
@@ -72,25 +33,7 @@
    "answer": "③\\ -3",
    "steps": [
     {
-     "tex": "p(x)=x^2+ax+b:\\ g\\pm f=\\{p(x)\\pm1\\}f(x)"
-    },
-    {
-     "tex": "(\\text{나})\\Rightarrow\\{p(x)+1\\}f(x)=(x-1)^3(x-s),\\ \\frac1{1-s}=\\frac13"
-    },
-    {
-     "tex": "(\\text{가})\\Rightarrow\\{p(x)-1\\}f(x)\\text{ 는 }(x-1)^2\\text{ 을 인수로 가짐}"
-    },
-    {
-     "tex": "f=(x-1)(x-r),\\ r\\ne1\\text{ 이면 }p+1=(x-1)^2,\\ p(1)-1=-2\\ne0\\ (\\text{모순})\\Rightarrow f(x)=(x-1)^2"
-    },
-    {
-     "tex": "p(x)+1=(x-1)(x+2)\\Rightarrow p(x)=x^2+x-3"
-    },
-    {
-     "tex": "g(x)=(x^2+x-3)(x-1)^2,\\ g'(1)=0"
-    },
-    {
-     "tex": "g(g'(1))=g(0)=-3"
+     "tex": "f=(x-1)^2,\\ x^2+ax+b+1=(x-1)(x+2)\\Rightarrow g(0)=-3"
     }
    ]
   }

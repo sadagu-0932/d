@@ -3,24 +3,12 @@ section: 유형 10 미분계수를 이용한 극한값의 계산
 f'(x)=6x^2-2x-3\Rightarrow f'(1)=1
 \lim_{h\to0}\frac{f(1+3h)-f(1)}{3h}\cdot\frac34=\frac34f'(1)=\frac34
 @ 50 | 84
-\frac{\{f(x)\}^2-\{f(2)\}^2}{x-2}=\frac{f(x)-f(2)}{x-2}\{f(x)+f(2)\}\to f'(2)\cdot2f(2)
-f(2)=16-8-6=2,\quad f'(x)=4x^3-4x-3\Rightarrow f'(2)=21
-2\cdot2\cdot21=84
+2f(2)f'(2)=2\cdot2\cdot21=84
 @ 51 | ④\ 16
-\frac{f(1-x)-f(3+x)}{x+1}=\frac{f(2-(x+1))-f(2)}{-(x+1)}\cdot(-1)-\frac{f(2+(x+1))-f(2)}{x+1}
-\to-f'(2)-f'(2)=-2f'(2)
-f'(x)=-3x^2+4\Rightarrow f'(2)=-8\Rightarrow16
+-2f'(2)=-2\cdot(-8)=16
 @ 52 | ⑤\ 57
-f(3)=27-21-3=3\Rightarrow3f(3)-9=0
-\frac{xf(x)-x^2}{x-3}=\frac{xf(x)-3f(3)}{x-3}-\frac{x^2-9}{x-3}
-\to\{xf(x)\}'_{x=3}-6=f(3)+3f'(3)-6
-f'(x)=3x^2-7\Rightarrow f'(3)=20\Rightarrow3+60-6=57
+\{xf(x)-x^2\}'_{x=3}=f(3)+3f'(3)-6=3+60-6=57
 @ 53 | ③\ 0
-f(1)=2\Rightarrow f(1)+f(1)-4=0
-\frac{f(x^2)-f(1)}{x^2-1}(x+1)+\frac{f(x)-f(1)}{x-1}\to2f'(1)+f'(1)=3f'(1)
-f'(x)=6x-6\Rightarrow f'(1)=0\Rightarrow0
+3f'(1)=0
 @ 54 | ④\ \frac{11}4
-f(2)=1\cdot3=3,\quad g(2)=8-12+8=4
-\frac{f(x)-3}{x^2-g(x)}=\frac{\frac{f(x)-f(2)}{x-2}}{\frac{x^2-4}{x-2}-\frac{g(x)-g(2)}{x-2}}\to\frac{f'(2)}{4-g'(2)}
-f'(x)=(2x^2-5)+4x(x-1)\Rightarrow f'(2)=11,\quad g'(x)=3x^2-6x\Rightarrow g'(2)=0
-\frac{11}{4}
+\frac{f'(2)}{4-g'(2)}=\frac{11}{4}

@@ -6,13 +6,7 @@
    "answer": "④\\ 2",
    "steps": [
     {
-     "tex": "x>0\\text{ 일 때 각 변에 }x\\text{ 를 곱하면 }\\frac{2x^2}{x^2+1}\\le xf(x)\\le\\frac{2x^2+x}{x^2+1}"
-    },
-    {
-     "tex": "\\lim_{x\\to\\infty}\\frac{2x^2}{x^2+1}=2,\\quad\\lim_{x\\to\\infty}\\frac{2x^2+x}{x^2+1}=2"
-    },
-    {
-     "tex": "\\lim_{x\\to\\infty}xf(x)=2"
+     "tex": "\\frac{2x^2}{x^2+1}\\le xf(x)\\le\\frac{2x^2+x}{x^2+1},\\ \\text{양쪽}\\to2"
     }
    ]
   },
@@ -21,10 +15,7 @@
    "answer": "9",
    "steps": [
     {
-     "tex": "\\lim_{x\\to3}(6x-9)=9,\\quad\\lim_{x\\to3}x^2=9"
-    },
-    {
-     "tex": "\\lim_{x\\to3}f(x)=9"
+     "tex": "6x-9\\to9,\\ x^2\\to9\\Rightarrow9"
     }
    ]
   },
@@ -33,13 +24,7 @@
    "answer": "②\\ 2",
    "steps": [
     {
-     "tex": "2(x-1)\\le f(x)\\le(x-1)(x+1)"
-    },
-    {
-     "tex": "x>1:\\ 2\\le\\frac{f(x)}{x-1}\\le x+1,\\qquad x<1:\\ x+1\\le\\frac{f(x)}{x-1}\\le2"
-    },
-    {
-     "tex": "\\lim_{x\\to1}(x+1)=2\\ \\Rightarrow\\ \\lim_{x\\to1}\\frac{f(x)}{x-1}=2"
+     "tex": "\\frac{f(x)}{x-1}\\text{ 는 }2\\text{ 와 }x+1\\text{ 사이}\\Rightarrow\\to2"
     }
    ]
   },
@@ -48,10 +33,7 @@
    "answer": "④\\ 4",
    "steps": [
     {
-     "tex": "x\\text{ 대신 }2x:\\ 4x^2+1\\le f(2x)\\le4x^2+2"
-    },
-    {
-     "tex": "4+\\frac1{x^2}\\le\\frac{f(2x)}{x^2}\\le4+\\frac2{x^2}\\ \\Rightarrow\\ \\lim_{x\\to\\infty}\\frac{f(2x)}{x^2}=4"
+     "tex": "4+\\frac1{x^2}\\le\\frac{f(2x)}{x^2}\\le4+\\frac2{x^2}\\Rightarrow4"
     }
    ]
   },
@@ -60,13 +42,7 @@
    "answer": "③\\ \\frac14",
    "steps": [
     {
-     "tex": "x^2-4x+4\\le f(x)\\le x^2-4x+5"
-    },
-    {
-     "tex": "x\\text{ 대신 }\\frac x2:\\ \\frac{x^2}4-2x+4\\le f\\!\\left(\\frac x2\\right)\\le\\frac{x^2}4-2x+5"
-    },
-    {
-     "tex": "\\lim_{x\\to\\infty}\\frac{\\frac{x^2}4-2x+4}{x^2+1}=\\lim_{x\\to\\infty}\\frac{\\frac{x^2}4-2x+5}{x^2+1}=\\frac14"
+     "tex": "f\\!\\left(\\tfrac x2\\right)=\\tfrac{x^2}4-2x+(4\\sim5)\\Rightarrow\\frac14"
     }
    ]
   },
@@ -75,13 +51,7 @@
    "answer": "②\\ 1",
    "steps": [
     {
-     "tex": "x^3+2x^2-x-2=(x-1)(x+1)(x+2),\\quad x^3+4x^2+x-6=(x-1)(x+2)(x+3)"
-    },
-    {
-     "tex": "x>1\\text{ 이므로 }x-1\\text{ 로 나누면 }(x+1)(x+2)\\le f(x)\\le(x+2)(x+3)"
-    },
-    {
-     "tex": "\\lim_{x\\to\\infty}\\frac{(x+1)(x+2)}{x^2+2x}=\\lim_{x\\to\\infty}\\frac{(x+2)(x+3)}{x^2+2x}=1"
+     "tex": "(x+1)(x+2)\\le f(x)\\le(x+2)(x+3)\\Rightarrow\\frac{f(x)}{x^2+2x}\\to1"
     }
    ]
   }

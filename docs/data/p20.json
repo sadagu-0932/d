@@ -6,16 +6,7 @@
    "answer": "-2",
    "steps": [
     {
-     "tex": "\\lim_{x\\to1-}f(x)g(x)=(1+3)(2+a)=4(2+a)"
-    },
-    {
-     "tex": "\\lim_{x\\to1+}f(x)g(x)=(-1+2)(2+a)=2+a"
-    },
-    {
-     "tex": "4(2+a)=2+a\\Rightarrow a=-2,\\quad g(x)=2x-2"
-    },
-    {
-     "tex": "g(3)=4,\\quad f(g(3))=f(4)=-4+2=-2"
+     "tex": "4(2+a)=2+a\\Rightarrow a=-2,\\ f(g(3))=f(4)=-2"
     }
    ]
   },
@@ -24,16 +15,7 @@
    "answer": "3",
    "steps": [
     {
-     "tex": "\\lim_{x\\to\\infty}\\frac{ax-2}{x+b}=a=2"
-    },
-    {
-     "tex": "b\\ne0\\text{ 이면 }\\lim_{x\\to0-}f(x)=-\\frac2b\\text{ (유한)}\\Rightarrow b=0"
-    },
-    {
-     "tex": "b=0:\\ x\\to0-\\text{ 일 때 }\\frac{2x-2}{x}\\to\\frac{-2}{0-}=\\infty\\ (\\text{성립})"
-    },
-    {
-     "tex": "f(x)=\\frac{2x-2}{x},\\quad f(-2)=\\frac{-6}{-2}=3"
+     "tex": "a=2,\\ b=0\\ (\\text{점근선 }x=0),\\ f(-2)=\\frac{-6}{-2}=3"
     }
    ]
   },
@@ -42,16 +24,7 @@
    "answer": "17",
    "steps": [
     {
-     "tex": "\\frac1{\\sqrt{x+2}}-\\frac12=\\frac{2-\\sqrt{x+2}}{2\\sqrt{x+2}}=\\frac{2-x}{2\\sqrt{x+2}(2+\\sqrt{x+2})}"
-    },
-    {
-     "tex": "\\frac{x^2}{(2-x)(2+x)}\\cdot\\frac{2-x}{2\\sqrt{x+2}(2+\\sqrt{x+2})}=\\frac{x^2}{(2+x)\\cdot2\\sqrt{x+2}(2+\\sqrt{x+2})}"
-    },
-    {
-     "tex": "\\lim_{x\\to2}(\\cdots)=\\frac{4}{4\\cdot4\\cdot4}=\\frac1{16}=\\frac qp"
-    },
-    {
-     "tex": "p=16,\\ q=1,\\quad p+q=17"
+     "tex": "\\frac{x^2}{(x+2)\\cdot2\\sqrt{x+2}(2+\\sqrt{x+2})}\\to\\frac{4}{64}=\\frac1{16}\\Rightarrow p+q=17"
     }
    ]
   },
@@ -60,16 +33,7 @@
    "answer": "2",
    "steps": [
     {
-     "tex": "x\\to a:\\ (\\text{분모})\\to0\\Rightarrow(\\text{분자})\\to0:\\ \\sqrt{4a^2}-2a=2|a|-2a=0\\Rightarrow a\\ge0"
-    },
-    {
-     "tex": "a=0\\text{ 이면 }\\frac{|x|}{x^2}\\to\\infty\\text{ 이므로 }a>0"
-    },
-    {
-     "tex": "\\frac{\\sqrt{x^2+3a^2}-2a}{x^2-a^2}=\\frac{1}{\\sqrt{x^2+3a^2}+2a}\\to\\frac1{4a}"
-    },
-    {
-     "tex": "\\frac1{4a}=\\frac a{16}\\Rightarrow a^2=4\\Rightarrow a=2"
+     "tex": "a>0,\\ \\frac1{\\sqrt{x^2+3a^2}+2a}\\to\\frac1{4a}=\\frac a{16}\\Rightarrow a=2"
     }
    ]
   },
@@ -78,13 +42,7 @@
    "answer": "4",
    "steps": [
     {
-     "tex": "(\\text{가})\\ f(x)=cx^2+\\cdots\\Rightarrow f(2x)=4cx^2+\\cdots,\\ \\frac1{4c}=1\\Rightarrow c=\\frac14"
-    },
-    {
-     "tex": "(\\text{나})\\ f(1)=0\\Rightarrow f(x)=(x-1)\\left(\\frac14x+m\\right),\\ \\frac14+m=\\frac32\\Rightarrow m=\\frac54"
-    },
-    {
-     "tex": "f(x)=\\frac14(x-1)(x+5),\\quad f(3)=\\frac14\\cdot2\\cdot8=4"
+     "tex": "c=\\frac14,\\ f=\\frac14(x-1)(x+5),\\ f(3)=4"
     }
    ]
   },
@@ -93,13 +51,7 @@
    "answer": "1",
    "steps": [
     {
-     "tex": "P\\left(t,\\frac1{t+2}\\right),\\ Q\\left(t,-\\frac2{t+2}-1\\right)"
-    },
-    {
-     "tex": "\\overline{PQ}=\\frac3{t+2}+1=\\frac{t+5}{t+2},\\quad\\overline{OP}=\\sqrt{t^2+\\frac1{(t+2)^2}}"
-    },
-    {
-     "tex": "\\frac{t\\times\\overline{PQ}}{\\overline{OP}}=\\frac{\\frac{t+5}{t+2}}{\\sqrt{1+\\frac1{t^2(t+2)^2}}}\\to\\frac11=1"
+     "tex": "\\overline{PQ}=\\frac{t+5}{t+2},\\ \\overline{OP}\\approx t\\Rightarrow\\frac{t\\cdot PQ}{OP}\\to1"
     }
    ]
   }

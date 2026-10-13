@@ -6,13 +6,7 @@
    "answer": "③\\ 6",
    "steps": [
     {
-     "tex": "\\lim_{x\\to1-}f(x)=1+2=3,\\quad \\lim_{x\\to1+}f(x)=1+a"
-    },
-    {
-     "tex": "3=1+a\\ \\Rightarrow\\ a=2"
-    },
-    {
-     "tex": "f(2)=2^2+2=6"
+     "tex": "3=1+a\\Rightarrow a=2,\\ f(2)=6"
     }
    ]
   },
@@ -21,13 +15,7 @@
    "answer": "⑤\\ -\\frac{15}{2}",
    "steps": [
     {
-     "tex": "\\lim_{x\\to-2-}f(x)=-2a+2,\\quad \\lim_{x\\to-2+}f(x)=2+3=5"
-    },
-    {
-     "tex": "-2a+2=5=b\\ \\Rightarrow\\ a=-\\frac32,\\ b=5"
-    },
-    {
-     "tex": "ab=-\\frac{15}{2}"
+     "tex": "-2a+2=5=b\\Rightarrow a=-\\frac32,\\ ab=-\\frac{15}2"
     }
    ]
   },
@@ -36,16 +24,7 @@
    "answer": "3",
    "steps": [
     {
-     "tex": "g(x)=\\frac{x^k}{x|x|}"
-    },
-    {
-     "tex": "x>0:\\ g(x)=x^{k-2},\\qquad x<0:\\ g(x)=-x^{k-2}"
-    },
-    {
-     "tex": "k=1:\\ \\pm\\frac1x\\ \\text{발산},\\quad k=2:\\ \\lim_{x\\to0+}g=1\\ne\\lim_{x\\to0-}g=-1"
-    },
-    {
-     "tex": "k=3:\\ \\lim_{x\\to0+}x=0=\\lim_{x\\to0-}(-x)\\ \\Rightarrow\\ \\text{최솟값 }3"
+     "tex": "x>0:\\ x^{k-2},\\ x<0:\\ -x^{k-2}\\Rightarrow k-2\\ge1\\Rightarrow k=3"
     }
    ]
   },
@@ -72,10 +51,7 @@
    "answer": "④\\ 14",
    "steps": [
     {
-     "tex": "\\{f(x)\\}^2+\\{g(x)\\}^2=\\{f(x)+g(x)\\}^2-2f(x)g(x)"
-    },
-    {
-     "tex": "\\lim_{x\\to\\infty}(\\cdots)=4^2-2\\cdot1=14"
+     "tex": "(f+g)^2-2fg\\to16-2=14"
     }
    ]
   }

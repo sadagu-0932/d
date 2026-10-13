@@ -6,16 +6,7 @@
    "answer": "④\\ 9",
    "steps": [
     {
-     "tex": "\\lim_{x\\to2}f(x)=\\alpha,\\ \\lim_{x\\to2}g(x)=\\beta"
-    },
-    {
-     "tex": "4\\alpha-\\beta=\\alpha+\\beta\\ \\Rightarrow\\ \\alpha=\\frac23\\beta"
-    },
-    {
-     "tex": "\\alpha\\beta=\\frac23\\beta^2=6\\ \\Rightarrow\\ \\beta^2=9"
-    },
-    {
-     "tex": "\\lim_{x\\to2}\\{g(x)\\}^2=\\beta^2=9"
+     "tex": "3\\alpha=2\\beta,\\ \\alpha\\beta=6\\Rightarrow\\beta^2=9"
     }
    ]
   },
@@ -33,13 +24,7 @@
    "answer": "①\\ 11",
    "steps": [
     {
-     "tex": "3f(x)-2g(x)=h(x)\\text{ 로 놓으면 }\\lim_{x\\to\\infty}h(x)=3,\\ g(x)=\\frac{3f(x)-h(x)}{2}"
-    },
-    {
-     "tex": "\\frac{f+3g-2}{2f-g+1}=\\frac{11f-3h-4}{f+h+2}=\\frac{11-\\frac{3h+4}{f}}{1+\\frac{h+2}{f}}"
-    },
-    {
-     "tex": "f(x)\\to\\infty\\ \\Rightarrow\\ \\lim_{x\\to\\infty}(\\cdots)=11"
+     "tex": "g=\\frac{3f-h}{2}\\ (h\\to3):\\ \\frac{11f-3h-4}{f+h+2}\\to11"
     }
    ]
   },
@@ -57,10 +42,7 @@
    "answer": "⑤\\ \\frac12",
    "steps": [
     {
-     "tex": "x^3-6x^2+11x-6=(x-1)(x-2)(x-3),\\quad x^2+2x-3=(x-1)(x+3)"
-    },
-    {
-     "tex": "\\lim_{x\\to1}\\frac{(x-2)(x-3)}{x+3}=\\frac{(-1)(-2)}{4}=\\frac12"
+     "tex": "\\frac{(x-1)(x-2)(x-3)}{(x-1)(x+3)}\\to\\frac{(-1)(-2)}{4}=\\frac12"
     }
    ]
   },
@@ -69,13 +51,7 @@
    "answer": "③\\ 3",
    "steps": [
     {
-     "tex": "\\frac{x^2\\{f(x)\\}^2-a^2x^2}{f(x)-a}=\\frac{x^2\\{f(x)-a\\}\\{f(x)+a\\}}{f(x)-a}=x^2\\{f(x)+a\\}"
-    },
-    {
-     "tex": "\\lim_{x\\to1}x^2\\{f(x)+a\\}=1\\cdot2a=6\\ \\Rightarrow\\ a=3"
-    },
-    {
-     "tex": "\\lim_{x\\to3}\\frac{x(x-3)}{x-3}=3"
+     "tex": "x^2\\{f(x)+a\\}\\to2a=6\\Rightarrow a=3,\\ \\lim_{x\\to3}x=3"
     }
    ]
   }

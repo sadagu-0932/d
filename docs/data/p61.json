@@ -6,13 +6,7 @@
    "answer": "②\\ \\frac85",
    "steps": [
     {
-     "tex": "y'=-6x^2+8x"
-    },
-    {
-     "tex": "l:\\ y'(1)=2\\Rightarrow y=2x+1,\\qquad m:\\ y'(2)=-8\\Rightarrow y=-8(x-2)+1=-8x+17"
-    },
-    {
-     "tex": "2x+1=-8x+17\\Rightarrow x=\\frac85"
+     "tex": "l:\\ y=2x+1,\\ m:\\ y=-8x+17\\Rightarrow x=\\frac85"
     }
    ]
   },
@@ -21,16 +15,7 @@
    "answer": "⑤\\ 8",
    "steps": [
     {
-     "tex": "\\text{접선이 }(0,4),\\ (3,1)\\text{ 을 지남}\\Rightarrow\\text{기울기 }-1"
-    },
-    {
-     "tex": "y'(-1)=3-2a=-1\\Rightarrow a=2"
-    },
-    {
-     "tex": "\\text{접선 }y=-x+4\\text{ 위의 점 }(-1,\\ 5)=(-1,\\ -1+a+b)\\Rightarrow b=4"
-    },
-    {
-     "tex": "ab=8"
+     "tex": "\\text{접선 }y=-x+4:\\ 3-2a=-1,\\ (-1,5)\\Rightarrow a=2,\\ b=4"
     }
    ]
   },
@@ -39,16 +24,7 @@
    "answer": "⑤\\ \\frac5{18}\\pi",
    "steps": [
     {
-     "tex": "f(-2)=-8a+6=\\frac23\\Rightarrow a=\\frac23,\\quad f'(x)=2x^2+4x+1,\\ f'(-2)=1"
-    },
-    {
-     "tex": "\\angle BCA=90^\\circ\\Rightarrow f'(b)=-1:\\ 2b^2+4b+2=0\\Rightarrow b=-1,\\ B\\left(-1,\\frac13\\right)"
-    },
-    {
-     "tex": "\\text{외접원의 지름}=\\overline{AB},\\ \\overline{AB}^2=1+\\frac19=\\frac{10}9"
-    },
-    {
-     "tex": "\\text{넓이}=\\pi\\cdot\\frac{\\overline{AB}^2}{4}=\\frac{5}{18}\\pi"
+     "tex": "a=\\frac23,\\ f'(b)=-1\\Rightarrow B(-1,\\tfrac13),\\ \\pi\\cdot\\frac{AB^2}4=\\frac{5}{18}\\pi"
     }
    ]
   },
@@ -57,13 +33,7 @@
    "answer": "③\\ -7",
    "steps": [
     {
-     "tex": "y'=-3x^2+6x+1\\Rightarrow y'(2)=1"
-    },
-    {
-     "tex": "\\text{수직인 직선}:\\ y-6=-(x-2)\\Rightarrow x+y-8=0"
-    },
-    {
-     "tex": "a=1,\\ b=-8\\Rightarrow a+b=-7"
+     "tex": "y'(2)=1\\Rightarrow\\text{수직선 }x+y-8=0"
     }
    ]
   },
@@ -72,16 +42,7 @@
    "answer": "④\\ 15",
    "steps": [
     {
-     "tex": "\\text{수직인 직선의 기울기}=\\frac{2-(-1)}{3-(-3)}=\\frac12\\Rightarrow\\text{접선의 기울기 }-2"
-    },
-    {
-     "tex": "y'=x^2+a,\\ 9+a=-2\\Rightarrow a=-11"
-    },
-    {
-     "tex": "9+3a+b=2\\Rightarrow b=26"
-    },
-    {
-     "tex": "a+b=15"
+     "tex": "\\text{접선 기울기 }-2=9+a\\Rightarrow a=-11,\\ b=26"
     }
    ]
   },
@@ -90,16 +51,7 @@
    "answer": "①\\ \\frac12",
    "steps": [
     {
-     "tex": "2+a=0\\Rightarrow a=-2,\\qquad1+b+c=0"
-    },
-    {
-     "tex": "y=2x^2-2x:\\ y'(1)=2,\\qquad y=x^3+bx^2+c:\\ y'(1)=3+2b"
-    },
-    {
-     "tex": "2(3+2b)=-1\\Rightarrow b=-\\frac74,\\ c=\\frac34"
-    },
-    {
-     "tex": "a-b+c=-2+\\frac74+\\frac34=\\frac12"
+     "tex": "a=-2,\\ 2(3+2b)=-1\\Rightarrow b=-\\frac74,\\ c=\\frac34"
     }
    ]
   }

@@ -18,16 +18,7 @@
    "answer": "④\\ 4",
    "steps": [
     {
-     "tex": "\\text{모든 }t\\text{ 에 대해 교점 1개}\\Rightarrow\\text{실수 전체에서 증가 또는 감소}"
-    },
-    {
-     "tex": "f'(x)=3kx^2+2(k+2)x+3:\\ \\frac D4=(k+2)^2-9k\\le0"
-    },
-    {
-     "tex": "k^2-5k+4\\le0\\Rightarrow1\\le k\\le4\\Rightarrow k=1,2,3,4"
-    },
-    {
-     "tex": "\\text{이때 }k>0,\\ f'(x)\\ge0\\text{ 이므로 증가함수}\\Rightarrow\\text{교점은 항상 1개}"
+     "tex": "\\frac D4=(k+2)^2-9k\\le0\\Rightarrow1\\le k\\le4"
     }
    ]
   },
@@ -36,19 +27,7 @@
    "answer": "⑤\\ \\frac73",
    "steps": [
     {
-     "tex": "f'(x)=x^2-2(a+1)x+a^2+2a=(x-a)(x-a-2)\\Rightarrow[a,\\ a+2]\\text{ 에서 감소}"
-    },
-    {
-     "tex": "x<1:\\ f(x)\\text{ 증가}\\Rightarrow a\\ge1,\\qquad x\\ge1:\\ f(x+2)\\ (x+2\\ge3)\\text{ 증가}\\Rightarrow a+2\\le3"
-    },
-    {
-     "tex": "a=1,\\ f(x)=\\frac13x^3-2x^2+3x"
-    },
-    {
-     "tex": "\\text{연속}:\\ f(1)=f(3)+b\\Rightarrow\\frac43=0+b"
-    },
-    {
-     "tex": "a+b=1+\\frac43=\\frac73"
+     "tex": "[a,a+2]\\text{ 감소}:\\ a\\ge1,\\ a+2\\le3\\Rightarrow a=1,\\ b=f(1)-f(3)=\\frac43"
     }
    ]
   },
@@ -69,16 +48,7 @@
    "answer": "⑤\\ \\frac92",
    "steps": [
     {
-     "tex": "f'(x)=-x^2+2ax-4\\le0\\iff2ax\\le x^2+4\\ (-1\\le x\\le2)"
-    },
-    {
-     "tex": "0<x\\le2:\\ a\\le\\frac x2+\\frac2x\\ (\\text{최솟값 }x=2\\text{ 에서 }2)\\Rightarrow a\\le2"
-    },
-    {
-     "tex": "-1\\le x<0:\\ a\\ge\\frac x2+\\frac2x\\ (\\text{최댓값 }x=-1\\text{ 에서 }-\\frac52)\\Rightarrow a\\ge-\\frac52"
-    },
-    {
-     "tex": "M-m=2+\\frac52=\\frac92"
+     "tex": "0<x\\le2:\\ a\\le\\tfrac x2+\\tfrac2x\\ (\\min2),\\ -1\\le x<0:\\ a\\ge\\tfrac x2+\\tfrac2x\\ (\\max-\\tfrac52)"
     }
    ]
   },
@@ -87,13 +57,7 @@
    "answer": "③\\ -3",
    "steps": [
     {
-     "tex": "f'(x)=3x^2+2ax+b,\\ [0,2]\\text{ 감소},\\ [2,\\infty)\\text{ 증가}\\Rightarrow f'(x)=3(x-2)(x-r),\\ r\\le0"
-    },
-    {
-     "tex": "2a=-3(2+r),\\ b=6r"
-    },
-    {
-     "tex": "a+b=-3-\\frac32r+6r=-3+\\frac92r\\le-3\\Rightarrow\\text{최댓값 }-3\\ (r=0)"
+     "tex": "f'=3(x-2)(x-r),\\ r\\le0\\Rightarrow a+b=-3+\\frac92r\\le-3"
     }
    ]
   }

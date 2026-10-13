@@ -6,10 +6,7 @@
    "answer": "④\\ \\frac32",
    "steps": [
     {
-     "tex": "f(2)=1,\\quad f'(2)=6"
-    },
-    {
-     "tex": "\\frac{f(\\sqrt x)-1}{x-4}=\\frac{f(\\sqrt x)-f(2)}{\\sqrt x-2}\\cdot\\frac{1}{\\sqrt x+2}\\to f'(2)\\cdot\\frac14=\\frac32"
+     "tex": "f'(2)\\cdot\\frac1{2+2}=\\frac32"
     }
    ]
   },
@@ -30,13 +27,7 @@
    "answer": "②\\ 4",
    "steps": [
     {
-     "tex": "\\lim_{h\\to0}\\frac{f(-1+h)-f(-1)}{2h}=\\frac12f'(-1)=1\\Rightarrow f'(-1)=2"
-    },
-    {
-     "tex": "\\text{접선}:\\ y=2(x+1)+2"
-    },
-    {
-     "tex": "12=2(a+1)+2\\Rightarrow a=4"
+     "tex": "f'(-1)=2,\\ y=2x+4\\Rightarrow12=2a+4,\\ a=4"
     }
    ]
   },
@@ -45,10 +36,7 @@
    "answer": "3",
    "steps": [
     {
-     "tex": "f(x)=x(x-3)=x^2-3x\\ (\\text{그래프가 }x=0,\\ 3\\text{ 에서 }x\\text{축과 만남})"
-    },
-    {
-     "tex": "f'(x)=2x-3\\Rightarrow f'(3)=3"
+     "tex": "f=x^2-3x,\\ f'(3)=3"
     }
    ]
   },
@@ -57,16 +45,7 @@
    "answer": "ㄱ,\\ ㄷ",
    "steps": [
     {
-     "text": "ㄱ. x = 0 에서 증가 → f′(0) > 0"
-    },
-    {
-     "text": "ㄴ. x = a 에서 감소 → f′(a) < 0"
-    },
-    {
-     "text": "ㄷ. x = b 에서 증가 → f′(b) > 0"
-    },
-    {
-     "text": "ㄹ. x = c 에서 x축에 접함 → f′(c) = 0"
+     "tex": "f'(0)>0,\\ f'(a)<0,\\ f'(b)>0,\\ f'(c)=0"
     }
    ]
   },
@@ -75,16 +54,7 @@
    "answer": "ㄱ,\\ ㄷ",
    "steps": [
     {
-     "tex": "f(0)=0,\\ y=x\\text{ 는 원점에서의 접선}\\Rightarrow f'(0)=1,\\ \\text{접선의 기울기는 점점 감소}"
-    },
-    {
-     "tex": "\\text{ㄱ. }\\frac{f(b)-f(a)}{b-a}=\\text{두 점 잇는 직선의 기울기}<1\\ (\\text{참})"
-    },
-    {
-     "tex": "\\text{ㄴ. }a<b\\Rightarrow f'(a)>f'(b)\\ (\\text{거짓})"
-    },
-    {
-     "tex": "\\text{ㄷ. }\\frac{f(a)-f(0)}{a-0}>f'(a)\\Rightarrow f(a)>af'(a)\\ (\\text{참})"
+     "tex": "f'\\text{ 감소}:\\ \\text{ㄱ 할선 기울기}<1,\\ \\text{ㄷ }\\frac{f(a)}a>f'(a)"
     }
    ]
   }

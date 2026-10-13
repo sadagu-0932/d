@@ -1,27 +1,13 @@
 section: 유형 08 두 곡선에 동시에 접하는 직선 · 유형 09 접선과 좌표축으로 둘러싸인 도형
 @ 31 | ②\ -15
-f(x)=x^3+x^2,\ g(x)=-x^2+7x-4:\ f(t)=g(t),\ f'(t)=g'(t)
-3t^2+2t=-2t+7\Rightarrow t=1\ \text{또는}\ t=-\frac73
-t=1:\ f(1)=g(1)=2\ (\text{성립}),\quad t=-\frac73:\ f\ne g
-y=5(x-1)+2=5x-3\Rightarrow ab=-15
+3t^2+4t-7=0,\ f(1)=g(1)\Rightarrow t=1:\ y=5x-3
 @ 32 | ②\ 4
-h(x)=f(x)-g(x)=-2x^3+(a-2)x^2+2x-2\text{ 가 중근을 가짐}:\ h(t)=h'(t)=0
-h'(t)=0\Rightarrow(a-2)t^2=3t^3-t
-h(t)=t^3+t-2=0\Rightarrow t=1
-a-2=3-1\Rightarrow a=4
+h=f-g,\ h(t)=h'(t)=0\Rightarrow t=1,\ a=4
 @ 33 | 12
--1-a=-3\Rightarrow a=2,\qquad1-b+c=-3
-3x^2+a\Big|_{x=-1}=5,\quad2x+b\Big|_{x=-1}=b-2=5\Rightarrow b=7
-c=b-4=3\Rightarrow a+b+c=12
+a=2,\ b-2=5\Rightarrow b=7,\ c=3
 @ 34 | ③\ \frac52
-y'=6x^2-10x+1,\ y'(2)=5\Rightarrow y=5x-5
-x\text{절편 }1,\ y\text{절편 }-5\Rightarrow\frac12\cdot1\cdot5=\frac52
+y=5x-5:\ \frac12\cdot1\cdot5
 @ 35 | ⑤\ \frac{49}4
-x+2y-3=0\text{ 의 기울기 }-\frac12\Rightarrow\text{접선 기울기 }2
-2x-4=2\Rightarrow x=3,\ y=-1\Rightarrow y=2x-7
-\frac12\cdot\frac72\cdot7=\frac{49}4
+2x-4=2\Rightarrow y=2x-7:\ \frac12\cdot\frac72\cdot7
 @ 36 | 2
-y=x(x-2)^2,\ y'=(3x-2)(x-2)
-\text{접점 }a:\ 0=(3a-2)(a-2)(2-a)+a(a-2)^2=(a-2)^2(2-2a)\Rightarrow a=1
-\text{접점 }(1,1),\ \text{기울기 }-1\Rightarrow y=-x+2
-\frac12\cdot2\cdot2=2
+(a-2)^2(2-2a)=0\Rightarrow a=1:\ y=-x+2,\ \frac12\cdot2\cdot2

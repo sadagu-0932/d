@@ -15,6 +15,4 @@ f'(c)=3c^2-5=-2\Rightarrow c=\pm1,\ -1<c<2\Rightarrow c=1
 \frac{f(2)-f(a)}{2-a}=\frac{10-a^2-3a}{2-a}=\frac{(2-a)(a+5)}{2-a}=a+5
 f'(-1)=2(-1)+3=1\Rightarrow a+5=1\Rightarrow a=-4
 @ 42 | 4
-\text{평균값 정리}:\ \frac{f(5)-f(1)}{5-1}=f'(c)\ (1<c<5)
-f(5)=f(1)+4f'(c)\ge0+4\cdot1=4
-f(x)=x-1\text{ 일 때 등호}\Rightarrow\text{최솟값 }4
+f(5)=f(1)+4f'(c)\ge4

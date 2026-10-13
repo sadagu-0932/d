@@ -6,19 +6,7 @@
    "answer": "④\\ ㄱ,\\ ㄷ",
    "steps": [
     {
-     "tex": "x^2+(y-2)^2=9:\\ \\text{중심 }(0,2),\\ r=3,\\quad d^2=t^2+4"
-    },
-    {
-     "tex": "t^2+4<9\\ (|t|<\\sqrt5):\\ f=0,\\quad |t|=\\sqrt5:\\ f=1,\\quad |t|>\\sqrt5:\\ f=2"
-    },
-    {
-     "tex": "\\text{ㄱ. }f(0)=0\\ (\\text{참})"
-    },
-    {
-     "tex": "\\text{ㄴ. }\\lim_{t\\to\\sqrt5-}f(t)=0\\ne\\lim_{t\\to\\sqrt5+}f(t)=2\\ (\\text{거짓})"
-    },
-    {
-     "tex": "\\text{ㄷ. }t\\to\\sqrt5-\\text{ 이면 }t^2\\to5-,\\ 5>\\sqrt5\\Rightarrow f(t^2)=2\\ (\\text{참})"
+     "tex": "d^2=t^2+4\\ \\text{vs}\\ 9:\\ f=0\\ (|t|<\\sqrt5),\\ 2\\ (|t|>\\sqrt5)\\Rightarrow\\text{ㄱ 참, ㄴ 거짓, ㄷ 참}"
     }
    ]
   },
@@ -27,19 +15,7 @@
    "answer": "②\\ 1",
    "steps": [
     {
-     "tex": "||x|-1|=0\\text{ 은 }x=\\pm1\\text{ 에서만 나오는데 }f(\\pm1)=4\\Rightarrow0\\notin P"
-    },
-    {
-     "tex": "x=0\\text{ 에서 빠진 값 1은 }x=\\pm2\\text{ 에서 나옴}\\Rightarrow\\text{양수는 모두 }P\\text{ 에 포함}"
-    },
-    {
-     "tex": "P=\\{y\\mid y>0\\}"
-    },
-    {
-     "tex": "Q=\\left\\{\\lim_{t\\to x}f(t)\\right\\}=\\{||x|-1|\\}=\\{y\\mid y\\ge0\\}"
-    },
-    {
-     "tex": "Q-P=\\{0\\}\\ \\Rightarrow\\ 1\\text{개}"
+     "tex": "P=\\{y>0\\}\\ (0\\text{ 은 }f(\\pm1)=4\\text{ 라 빠짐}),\\ Q=\\{y\\ge0\\}\\Rightarrow Q-P=\\{0\\}"
     }
    ]
   },
@@ -48,16 +24,7 @@
    "answer": "①\\ -\\frac1{16}",
    "steps": [
     {
-     "tex": "A(t,\\sqrt{1-t^2}),\\ C(-1,0):\\ \\overline{AC}^2=(t+1)^2+1-t^2=2t+2"
-    },
-    {
-     "tex": "\\overline{AB}^2=\\{2\\sqrt{1-t^2}\\}^2=4(1-t)(1+t)"
-    },
-    {
-     "tex": "\\frac{\\sqrt{2t+2}-2}{4(1-t)(1+t)}=\\frac{2(t-1)}{(\\sqrt{2t+2}+2)\\cdot4(1-t)(1+t)}=\\frac{-2}{4(1+t)(\\sqrt{2t+2}+2)}"
-    },
-    {
-     "tex": "\\lim_{t\\to1-}(\\cdots)=\\frac{-2}{4\\cdot2\\cdot4}=-\\frac1{16}"
+     "tex": "\\overline{AC}^2=2t+2,\\ \\overline{AB}^2=4(1-t^2):\\ \\frac{-2}{4(1+t)(\\sqrt{2t+2}+2)}\\to-\\frac1{16}"
     }
    ]
   }

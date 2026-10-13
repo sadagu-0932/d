@@ -6,13 +6,7 @@
    "answer": "③\\ -12",
    "steps": [
     {
-     "tex": "(\\text{가})\\Rightarrow\\text{축 }x=1:\\ f(x)=k(x-1)^2+c\\ (k>0)"
-    },
-    {
-     "tex": "f'(x)=2k(x-1),\\ f'(3)=4k=8\\Rightarrow k=2"
-    },
-    {
-     "tex": "f'(-2)=4\\cdot(-3)=-12"
+     "tex": "f=2(x-1)^2+c\\Rightarrow f'(-2)=4(-3)=-12"
     }
    ]
   },
@@ -21,13 +15,7 @@
    "answer": "③\\ 0",
    "steps": [
     {
-     "tex": "(\\text{가})\\Rightarrow f(x)=(x-p)^2,\\quad f'(x)=2(x-p)"
-    },
-    {
-     "tex": "(\\text{나})\\Rightarrow f'(4)=4:\\ 2(4-p)=4\\Rightarrow p=2"
-    },
-    {
-     "tex": "f(2)=0"
+     "tex": "f=(x-p)^2,\\ 2(4-p)=4\\Rightarrow p=2,\\ f(2)=0"
     }
    ]
   },
@@ -36,13 +24,7 @@
    "answer": "①\\ -7",
    "steps": [
     {
-     "tex": "(\\text{가})\\Rightarrow f(x)=ax^3+bx\\ (a>0)"
-    },
-    {
-     "tex": "f(2)=8a+2b=-8,\\quad f'(2)=12a+b=4"
-    },
-    {
-     "tex": "a=1,\\ b=-8\\Rightarrow f(1)=-7"
+     "tex": "f=ax^3+bx:\\ 8a+2b=-8,\\ 12a+b=4\\Rightarrow f=x^3-8x,\\ f(1)=-7"
     }
    ]
   },
@@ -63,13 +45,7 @@
    "answer": "⑤\\ 5",
    "steps": [
     {
-     "tex": "f(x)=x^9-x^7+x^5-x^3+x\\text{ 로 놓으면 }f(-1)=-1"
-    },
-    {
-     "tex": "\\lim_{x\\to-1}\\frac{f(x)-f(-1)}{x-(-1)}=f'(-1)"
-    },
-    {
-     "tex": "f'(x)=9x^8-7x^6+5x^4-3x^2+1\\Rightarrow f'(-1)=5"
+     "tex": "(x^9-x^7+x^5-x^3+x)'_{x=-1}=9-7+5-3+1=5"
     }
    ]
   },

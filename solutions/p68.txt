@@ -6,6 +6,7 @@ section: 유형 13 증가·감소 조건 · 유형 14 주어진 구간에서 증
 \text{모든 }t\text{ 에 대해 교점 1개}\Rightarrow\text{실수 전체에서 증가 또는 감소}
 f'(x)=3kx^2+2(k+2)x+3:\ \frac D4=(k+2)^2-9k\le0
 k^2-5k+4\le0\Rightarrow1\le k\le4\Rightarrow k=1,2,3,4
+\text{이때 }k>0,\ f'(x)\ge0\text{ 이므로 증가함수}\Rightarrow\text{교점은 항상 1개}
 @ 51 | ⑤\ \frac73
 f'(x)=x^2-2(a+1)x+a^2+2a=(x-a)(x-a-2)\Rightarrow[a,\ a+2]\text{ 에서 감소}
 x<1:\ f(x)\text{ 증가}\Rightarrow a\ge1,\qquad x\ge1:\ f(x+2)\ (x+2\ge3)\text{ 증가}\Rightarrow a+2\le3

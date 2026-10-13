@@ -25,6 +25,9 @@
     },
     {
      "tex": "k^2-5k+4\\le0\\Rightarrow1\\le k\\le4\\Rightarrow k=1,2,3,4"
+    },
+    {
+     "tex": "\\text{이때 }k>0,\\ f'(x)\\ge0\\text{ 이므로 증가함수}\\Rightarrow\\text{교점은 항상 1개}"
     }
    ]
   },

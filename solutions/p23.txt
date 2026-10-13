@@ -18,7 +18,7 @@ f(1)\text{ 이 정의되지 않음 (빈 원)}\Rightarrow x=1\text{ 에서 불연
 @ 09 | \text{연속}
 \lim_{x\to1-}(-x+1)=0,\quad\lim_{x\to1+}\sqrt{x-1}=0,\quad f(1)=0
 @ 10 | (-\infty,\ \infty)
-\text{다항함수는 모든 실수에서 연속}
+f(x)=2x^2+x-1\text{ 은 다항함수}\Rightarrow\text{모든 실수에서 연속}
 @ 11 | (-\infty,-1)\cup(-1,\infty)
 x+1\ne0\Rightarrow x\ne-1
 @ 12 | [-2,\ \infty)

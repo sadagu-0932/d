@@ -87,7 +87,7 @@
    "answer": "(-\\infty,\\ \\infty)",
    "steps": [
     {
-     "tex": "\\text{다항함수는 모든 실수에서 연속}"
+     "tex": "f(x)=2x^2+x-1\\text{ 은 다항함수}\\Rightarrow\\text{모든 실수에서 연속}"
     }
    ]
   },

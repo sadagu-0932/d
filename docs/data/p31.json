@@ -78,10 +78,16 @@
    "answer": "3",
    "steps": [
     {
-     "tex": "g=f(x)-x:\\ g(-1)>0,\\ g(0)=f(0)<-2<0"
+     "tex": "g(x)=f(x)-x"
     },
     {
-     "tex": "f(1)<0\\Rightarrow g(1)<0,\\quad f(2)>2\\Rightarrow g(2)>0,\\quad g(3)<0"
+     "tex": "(\\text{가})\\ g(-1)=f(-1)+1>0,\\quad(\\text{나})\\ f(0)<-f(-1)<-2\\Rightarrow g(0)<0"
+    },
+    {
+     "tex": "(\\text{다})\\ f(1)<0\\Rightarrow g(1)<0,\\quad(\\text{라})\\ f(1)\\{f(2)-2\\}<0\\Rightarrow f(2)>2\\Rightarrow g(2)>0"
+    },
+    {
+     "tex": "(\\text{마})\\ g(3)=f(3)-3<0"
     },
     {
      "tex": "(-1,0),\\ (1,2),\\ (2,3)\\text{ 에 실근}\\Rightarrow n=3"

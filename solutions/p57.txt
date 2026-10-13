@@ -7,14 +7,19 @@ f'(x)=2x+2=2(x+1)>0\ (x>-1)
 f'(x)=-3x^2<0\ (x<0)
 @ 24 | (-\infty,-2]\ \text{감소},\ [-2,\infty)\ \text{증가}
 f'(x)=2x+4=0\Rightarrow x=-2
+x<-2:\ f'<0\ (\text{감소}),\quad x>-2:\ f'>0\ (\text{증가})
 @ 25 | (-\infty,0]\ \text{증가},\ \left[0,\frac23\right]\ \text{감소},\ \left[\frac23,\infty\right)\ \text{증가}
 f'(x)=3x^2-2x=x(3x-2)=0\Rightarrow x=0,\ \frac23
+x<0:\ f'>0,\quad0<x<\frac23:\ f'<0,\quad x>\frac23:\ f'>0
 @ 26 | (-\infty,-2]\ \text{증가},\ [-2,0]\ \text{감소},\ [0,\infty)\ \text{증가}
 f'(x)=3x^2+6x=3x(x+2)=0\Rightarrow x=-2,\ 0
+x<-2:\ f'>0,\quad-2<x<0:\ f'<0,\quad x>0:\ f'>0
 @ 27 | x=a,\ c,\ e,\ g
-" 증가 → 감소로 바뀌는 점 (극대)
+\text{그래프가 증가하다가 감소로 바뀌는 점}
+x=a,\ c,\ e,\ g
 @ 28 | x=b,\ d,\ f
-" 감소 → 증가로 바뀌는 점 (극소, x = d 는 뾰족점이지만 극소)
+\text{그래프가 감소하다가 증가로 바뀌는 점}
+x=b,\ d\ (\text{뾰족점}),\ f
 @ 29 | \text{극댓값 }0,\ \text{극솟값 }-32
 f'(x)=3x^2-12x=3x(x-4)=0\Rightarrow x=0,\ 4
 f(0)=0\ (\text{극대}),\quad f(4)=64-96=-32\ (\text{극소})

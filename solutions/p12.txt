@@ -14,7 +14,7 @@ k=3:\ \text{좌·우극한 모두 }0\Rightarrow\text{최솟값 }3
 @ 14 | ④\ \frac43
 \lim_{x\to1}\frac{f(x)-2}{x^2-4}=\frac{-2-2}{1-4}=\frac43
 @ 15 | 5
-2\cdot2+3\cdot1-2\cdot1=5
+\lim_{x\to-2}\{2f(x)+3g(x)-f(x)g(x)\}=2\cdot2+3\cdot1-2\cdot1=5
 @ 16 | ④\ 14
 \{f(x)\}^2+\{g(x)\}^2=\{f(x)+g(x)\}^2-2f(x)g(x)
 \lim_{x\to\infty}(\cdots)=4^2-2\cdot1=14

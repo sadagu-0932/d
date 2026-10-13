@@ -8,6 +8,9 @@ f\text{ 는 }x=1\text{ 에서만 불연속 (좌 }-2,\ \text{값 }0,\ \text{우 }
 x=1:\ f(1-k)=0\Rightarrow k=1,2,\qquad x=1+k:\ f(1+k)=0\Rightarrow k=1
 k=1
 @ 06 | ⑤\ \frac{40}9
-|f|\text{ 연속}:\ 1-a+b=\pm1,\ 4+2a+b=\pm2,\ (\text{나})\Rightarrow\text{최솟값}<-2
-(1,-2):\ f=x^2-2x-2\ (ab=4),\quad(-1,-2):\ a=-\frac43,\ b=-\frac{10}3\ (ab=\frac{40}9)
-\text{나머지 두 경우는 최댓값이 }2\text{ 이하}\Rightarrow\text{최댓값 }\frac{40}9
+(\text{가})\ x=-1:\ |1-a+b|=1,\quad x=2:\ |4+2a+b|=2
+1-a+b=p,\ 4+2a+b=q\Rightarrow a=\frac{q-p-3}3,\ b=p-1+a
+(\text{나})\ [-1,2)\text{ 에서 }x^2+ax+b\text{ 의 최솟값}<-2\text{ 이어야 함}
+(p,q)=(1,2):\ a=b=-\tfrac23,\ \min=-\tfrac79\ (\times)\qquad(-1,2):\ f=x^2-2,\ \min=-2\ (\times)
+(1,-2):\ f=x^2-2x-2,\ \min=-3,\ ab=4\qquad(-1,-2):\ a=-\tfrac43,\ b=-\tfrac{10}3,\ ab=\tfrac{40}9
+ab\text{ 의 최댓값 }\frac{40}9

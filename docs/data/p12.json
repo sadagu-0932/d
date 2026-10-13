@@ -60,7 +60,7 @@
    "answer": "5",
    "steps": [
     {
-     "tex": "2\\cdot2+3\\cdot1-2\\cdot1=5"
+     "tex": "\\lim_{x\\to-2}\\{2f(x)+3g(x)-f(x)g(x)\\}=2\\cdot2+3\\cdot1-2\\cdot1=5"
     }
    ]
   },

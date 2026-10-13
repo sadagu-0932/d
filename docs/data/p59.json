@@ -72,7 +72,10 @@
    "answer": "k=0\\ \\text{또는}\\ k=4",
    "steps": [
     {
-     "tex": "-k=0\\ \\text{또는}\\ -k=-4\\ (\\text{접할 때})"
+     "tex": "g(x)=x^3+6x^2+9x\\text{ 와 직선 }y=-k:\\ \\text{극대 }g(-3)=0,\\ \\text{극소 }g(-1)=-4"
+    },
+    {
+     "tex": "\\text{접할 때 (중근)}:\\ -k=0\\text{ 또는 }-k=-4\\Rightarrow k=0,\\ 4"
     }
    ]
   },
@@ -81,7 +84,10 @@
    "answer": "k<0\\ \\text{또는}\\ k>4",
    "steps": [
     {
-     "tex": "-k>0\\ \\text{또는}\\ -k<-4"
+     "tex": "g(x)=x^3+6x^2+9x\\text{ 와 직선 }y=-k:\\ \\text{극대 }0,\\ \\text{극소 }-4"
+    },
+    {
+     "tex": "\\text{교점 1개}:\\ -k>0\\text{ 또는 }-k<-4\\Rightarrow k<0\\text{ 또는 }k>4"
     }
    ]
   },

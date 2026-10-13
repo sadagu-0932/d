@@ -14,20 +14,23 @@ f'(x)=\lim_{h\to0}\frac{(x+h+2)-(x+2)}{h}=\lim_{h\to0}\frac hh=1
 @ 30 | f'(x)=-6x+1
 \lim_{h\to0}\frac{-3(x+h)^2+(x+h)+2-(-3x^2+x+2)}{h}=\lim_{h\to0}\frac{-6xh-3h^2+h}{h}=-6x+1
 @ 31 | y'=1
-y=x\Rightarrow y'=1
+(x)'=1
 @ 32 | y'=4x^3
 (x^n)'=nx^{n-1}\Rightarrow(x^4)'=4x^3
 @ 33 | y'=10x^9
-(x^{10})'=10x^9
+(x^n)'=nx^{n-1}\Rightarrow(x^{10})'=10x^{10-1}=10x^9
 @ 34 | y'=0
-\text{상수함수의 도함수는 }0
+(c)'=0\ (\text{상수함수})\Rightarrow(-1)'=0
 @ 35 | y'=4x+1
 y'=2\cdot2x+1=4x+1
 @ 36 | y'=10x
 y'=5\cdot2x=10x
 @ 37 | y'=3x^2+1
+y'=(x^3)'+(x)'-(1)'=3x^2+1-0=3x^2+1
 @ 38 | y'=-4x+3
+y'=-2\cdot2x+3-0=-4x+3
 @ 39 | y'=4x^3+8x-1
+y'=4x^3+4\cdot2x-1+0=4x^3+8x-1
 @ 40 | y'=2x^3-3x^2+4x+1
 y'=\frac12\cdot4x^3-3x^2+2\cdot2x+1
 @ 41 | y'=3x^2-1

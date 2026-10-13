@@ -17,9 +17,11 @@ g(x)=x^3+6x^2+9x\text{ 와 }y=-k\text{ 의 교점}
 g'(x)=3(x+1)(x+3):\ g(-3)=0\ (\text{극대}),\ g(-1)=-4\ (\text{극소})
 -4<-k<0\Rightarrow0<k<4
 @ 44 | k=0\ \text{또는}\ k=4
--k=0\ \text{또는}\ -k=-4\ (\text{접할 때})
+g(x)=x^3+6x^2+9x\text{ 와 직선 }y=-k:\ \text{극대 }g(-3)=0,\ \text{극소 }g(-1)=-4
+\text{접할 때 (중근)}:\ -k=0\text{ 또는 }-k=-4\Rightarrow k=0,\ 4
 @ 45 | k<0\ \text{또는}\ k>4
--k>0\ \text{또는}\ -k<-4
+g(x)=x^3+6x^2+9x\text{ 와 직선 }y=-k:\ \text{극대 }0,\ \text{극소 }-4
+\text{교점 1개}:\ -k>0\text{ 또는 }-k<-4\Rightarrow k<0\text{ 또는 }k>4
 @ 46 | 2
 f'(x)=3x(x+2):\ f(-2)=4,\ f(0)=0\Rightarrow4\cdot0=0\Rightarrow2\text{개}
 @ 47 | 1

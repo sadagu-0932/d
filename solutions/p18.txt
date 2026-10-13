@@ -1,13 +1,25 @@
 section: 유형 13 미정계수의 결정 (3)
 @ 47 | 40
-f=(x+1)(2x+m),\ \frac{m-2}{-2}=-1\Rightarrow m=4,\ f(3)=2\cdot4\cdot5=40
+(\text{가})\Rightarrow f\text{ 는 최고차항 계수 2인 이차},\ (\text{나})\Rightarrow f(-1)=0
+f=(x+1)(2x+m):\ \frac{-2+m}{-2}=-1\Rightarrow m=4
+f=2(x+1)(x+2),\ f(3)=40
 @ 48 | ⑤\ 5
-f=-2x+c,\ f(2)=3\Rightarrow c=7,\ f(1)=5
+(\text{나})\Rightarrow f(x)=-2x+c
+f(2)=-4+c=3\Rightarrow c=7
+f(1)=-2+7=5
 @ 49 | 33
-f=(x-1)(3x+m),\ 3+m=2\Rightarrow f(4)=3\cdot11=33
+(\text{가})\Rightarrow f(x)\text{ 는 최고차항의 계수가 3인 이차함수}
+(\text{나})\Rightarrow f(1)=0,\ f(x)=(x-1)(3x+m),\ 3+m=2\Rightarrow m=-1
+f(x)=(x-1)(3x-1),\quad f(4)=3\cdot11=33
 @ 50 | ③\ 0
-f=-x^2+\cdots,\ (x-2)^2\text{ 인수}\Rightarrow f=-(x-2)^2,\ \text{최댓값 }0
+(\text{가})\Rightarrow f(x)-x^2=-2x^2+\cdots\Rightarrow f(x)=-x^2+bx+c
+(\text{나})\Rightarrow f(2)=0,\ f(x)=(x-2)(-x+m),\ \lim_{x\to2}(-x+m)=-2+m=0
+f(x)=-(x-2)^2\le0\ \Rightarrow\ \text{최댓값 }0
 @ 51 | ①\ -2
-f=-x^3+x+d,\ f(1)=0\Rightarrow d=0,\ k=\lim\{-x(x+1)\}=-2
+(\text{가})\Rightarrow f(x)+x^3+x=2x+d\Rightarrow f(x)=-x^3+x+d
+(\text{나})\Rightarrow f(1)=0:\ -1+1+d=0,\ d=0
+f(x)=-x(x-1)(x+1)\ \Rightarrow\ k=\lim_{x\to1}\{-x(x+1)\}=-2
 @ 52 | ③\ 9
-f\text{ 일차 이하 }(\text{이차면 }\tfrac{a+1}{1-a}=1\Rightarrow a=0),\ f=3(x+1),\ f(2)=9
+f\text{ 가 3차 이상이면 극한 }-1,\ f=ax^2+\cdots\text{ 이면 }\frac{a+1}{1-a}=1\Rightarrow a=0
+\Rightarrow f\text{ 는 일차 이하},\ (\text{나})\Rightarrow f=3(x+1)
+f(2)=9

@@ -1,14 +1,22 @@
 section: 유형 06 미분계수의 기하적 의미
 @ 25 | ④\ \frac32
-f'(2)\cdot\frac1{2+2}=\frac32
+f(2)=1,\quad f'(2)=6
+\frac{f(\sqrt x)-1}{x-4}=\frac{f(\sqrt x)-f(2)}{\sqrt x-2}\cdot\frac{1}{\sqrt x+2}\to f'(2)\cdot\frac14=\frac32
 @ 26 | ③\ -\frac34
 \text{접선이 }(4,0),\ (0,3)\text{ 을 지남}
 f'(1)=\frac{3-0}{0-4}=-\frac34
 @ 27 | ②\ 4
-f'(-1)=2,\ y=2x+4\Rightarrow12=2a+4,\ a=4
+\lim_{h\to0}\frac{f(-1+h)-f(-1)}{2h}=\frac12f'(-1)=1\Rightarrow f'(-1)=2
+\text{접선}:\ y=2(x+1)+2
+12=2(a+1)+2\Rightarrow a=4
 @ 28 | 3
-f=x^2-3x,\ f'(3)=3
+f(x)=x(x-3)=x^2-3x\ (\text{그래프가 }x=0,\ 3\text{ 에서 }x\text{축과 만남})
+f'(x)=2x-3\Rightarrow f'(3)=3
 @ 29 | ㄱ,\ ㄷ
-f'(0)>0,\ f'(a)<0,\ f'(b)>0,\ f'(c)=0
+x=0,\ b\text{ 에서 증가}\Rightarrow f'(0)>0,\ f'(b)>0
+x=a\text{ 에서 감소}\Rightarrow f'(a)<0,\quad x=c\text{ 에서 접함}\Rightarrow f'(c)=0
+\text{양수: ㄱ, ㄷ}
 @ 30 | ㄱ,\ ㄷ
-f'\text{ 감소}:\ \text{ㄱ 할선 기울기}<1,\ \text{ㄷ }\frac{f(a)}a>f'(a)
+f'(0)=1,\ \text{접선 기울기는 점점 감소}
+\text{ㄱ. 두 점 잇는 기울기}<1\ (\text{참}),\quad\text{ㄴ. }f'(a)>f'(b)\ (\text{거짓})
+\text{ㄷ. }\frac{f(a)}{a}>f'(a)\ (\text{참})

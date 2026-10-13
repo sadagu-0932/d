@@ -6,7 +6,13 @@
    "answer": "2",
    "steps": [
     {
-     "tex": "f(x-k)\\text{ 불연속점 }k\\pm1=g\\text{ 의 근 }1,3\\Rightarrow k=2"
+     "tex": "f\\text{ 는 }x=\\pm1\\text{ 에서 불연속}\\Rightarrow f(x-k)\\text{ 는 }x=k\\pm1\\text{ 에서 불연속}"
+    },
+    {
+     "tex": "g(k-1)=g(k+1)=0,\\ g=(x-1)(x-3)"
+    },
+    {
+     "tex": "k-1=1,\\ k+1=3\\Rightarrow k=2"
     }
    ]
   },
@@ -15,7 +21,13 @@
    "answer": "①\\ 1",
    "steps": [
     {
-     "tex": "f(1-k)=0\\ (k=1,2),\\ f(1+k)=0\\ (k=1)\\Rightarrow k=1"
+     "tex": "f\\text{ 는 }x=1\\text{ 에서만 불연속 (좌 }-2,\\ \\text{값 }0,\\ \\text{우 }2)"
+    },
+    {
+     "tex": "x=1:\\ f(1-k)=0\\Rightarrow k=1,2,\\qquad x=1+k:\\ f(1+k)=0\\Rightarrow k=1"
+    },
+    {
+     "tex": "k=1"
     }
    ]
   },
@@ -24,7 +36,13 @@
    "answer": "⑤\\ \\frac{40}9",
    "steps": [
     {
-     "tex": "|f(-1)|=1,\\ |f(2-)|=2,\\ \\text{꼭짓점}<-2:\\ (a,b)=(-\\tfrac43,-\\tfrac{10}3)\\Rightarrow ab=\\frac{40}9"
+     "tex": "|f|\\text{ 연속}:\\ 1-a+b=\\pm1,\\ 4+2a+b=\\pm2,\\ (\\text{나})\\Rightarrow\\text{최솟값}<-2"
+    },
+    {
+     "tex": "(1,-2):\\ f=x^2-2x-2\\ (ab=4),\\quad(-1,-2):\\ a=-\\frac43,\\ b=-\\frac{10}3\\ (ab=\\frac{40}9)"
+    },
+    {
+     "tex": "\\text{나머지 두 경우는 최댓값이 }2\\text{ 이하}\\Rightarrow\\text{최댓값 }\\frac{40}9"
     }
    ]
   }

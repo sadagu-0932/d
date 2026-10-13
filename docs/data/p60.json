@@ -6,7 +6,13 @@
    "answer": "①\\ -6",
    "steps": [
     {
-     "tex": "1+2a=-3\\Rightarrow a=-2,\\ a+b=2\\Rightarrow b=4"
+     "tex": "f(1)=1+a-2+b=1\\Rightarrow a+b=2"
+    },
+    {
+     "tex": "f'(x)=3x^2+2ax-2,\\ f'(1)=1+2a=-3\\Rightarrow a=-2,\\ b=4"
+    },
+    {
+     "tex": "a-b=-6"
     }
    ]
   },
@@ -27,7 +33,10 @@
    "answer": "3",
    "steps": [
     {
-     "tex": "3t^2-3a^2<0\\Rightarrow-a<t<a,\\ 2a-1=5"
+     "tex": "y'=3t^2-3a^2<0\\Rightarrow-a<t<a"
+    },
+    {
+     "tex": "\\text{정수 }t\\text{ 의 개수 }2a-1=5\\Rightarrow a=3"
     }
    ]
   },
@@ -36,7 +45,13 @@
    "answer": "④\\ 4",
    "steps": [
     {
-     "tex": "y'(1)=2:\\ y=2x+2"
+     "tex": "y'=4x^3-2\\Rightarrow x=1:\\ 2"
+    },
+    {
+     "tex": "y-4=2(x-1)\\Rightarrow y=2x+2,\\ m=2,\\ n=2"
+    },
+    {
+     "tex": "mn=4"
     }
    ]
   },
@@ -45,7 +60,13 @@
    "answer": "②\\ -21",
    "steps": [
     {
-     "tex": "12+a=-2\\Rightarrow a=-14,\\ -11=-4+b\\Rightarrow b=-7"
+     "tex": "y'=3x^2+a,\\ x=2:\\ 12+a=-2\\Rightarrow a=-14"
+    },
+    {
+     "tex": "\\text{접점 }(2,\\ 8-28+9)=(2,-11)\\text{ 이 }y=-2x+b\\text{ 위}:\\ -11=-4+b\\Rightarrow b=-7"
+    },
+    {
+     "tex": "a+b=-21"
     }
    ]
   },
@@ -54,7 +75,13 @@
    "answer": "⑤\\ \\frac72",
    "steps": [
     {
-     "tex": "f'(2)=-2:\\ y=-2x+7\\Rightarrow x=\\frac72"
+     "tex": "\\lim_{h\\to0}\\frac{f(2+h)-f(2-h)}{h}=2f'(2)=-4\\Rightarrow f'(2)=-2"
+    },
+    {
+     "tex": "y-3=-2(x-2)\\Rightarrow y=-2x+7"
+    },
+    {
+     "tex": "y=0\\Rightarrow x=\\frac72"
     }
    ]
   }

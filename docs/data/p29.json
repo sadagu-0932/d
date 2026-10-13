@@ -6,7 +6,13 @@
    "answer": "①\\ 1",
    "steps": [
     {
-     "tex": "(-3)(-2-a)=3(4-a)\\Rightarrow a=1"
+     "tex": "\\lim_{x\\to0-}f(x)=f(0)=-2,\\quad\\lim_{x\\to0+}f(x)=4"
+    },
+    {
+     "tex": "(-2-1)(-2-a)=(4-1)(4-a)"
+    },
+    {
+     "tex": "3(2+a)=3(4-a)\\Rightarrow a=1"
     }
    ]
   },
@@ -15,7 +21,13 @@
    "answer": "②\\ -\\frac34",
    "steps": [
     {
-     "tex": "2g(1)=g(1)\\Rightarrow g(1)=4a+3=0,\\ a=-\\frac34"
+     "tex": "\\lim_{x\\to1}f(x)=2,\\quad f(1)=1,\\quad g(1)=4+2a+2a-1=4a+3"
+    },
+    {
+     "tex": "2g(1)=1\\cdot g(1)\\Rightarrow g(1)=0"
+    },
+    {
+     "tex": "4a+3=0\\Rightarrow a=-\\frac34"
     }
    ]
   },
@@ -24,7 +36,13 @@
    "answer": "⑤\\ 100",
    "steps": [
     {
-     "tex": "g(2)=g(4)=0\\Rightarrow g=x^2-6x+8,\\ 36+64=100"
+     "tex": "x=2:\\ 2g(2)=4g(2)\\Rightarrow g(2)=0"
+    },
+    {
+     "tex": "x=4:\\ 4g(4)=2g(4)\\Rightarrow g(4)=0"
+    },
+    {
+     "tex": "g=(x-2)(x-4)=x^2-6x+8\\Rightarrow36+64=100"
     }
    ]
   },
@@ -33,7 +51,13 @@
    "answer": "①\\ -2",
    "steps": [
     {
-     "tex": "1\\cdot g(1)=3g(1)\\Rightarrow g(1)=2+a=0,\\ a=-2"
+     "tex": "\\lim_{x\\to1-}|f(x)|=1,\\quad |f(1)|=\\lim_{x\\to1+}|f(x)|=3"
+    },
+    {
+     "tex": "1\\cdot g(1)=3g(1)\\Rightarrow g(1)=0"
+    },
+    {
+     "tex": "2+a=0\\Rightarrow a=-2"
     }
    ]
   }

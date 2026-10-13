@@ -6,7 +6,13 @@
    "answer": "④\\ 4",
    "steps": [
     {
-     "tex": "-3(a-1)=a-1\\Rightarrow a=1,\\ g(3)=4"
+     "tex": "x=-1\\text{ 에서 연속}:\\ \\lim_{x\\to-1-}f(x)g(x)=(-3)(a-1),\\quad f(-1)g(-1)=1\\cdot(a-1)"
+    },
+    {
+     "tex": "-3(a-1)=a-1\\Rightarrow a=1"
+    },
+    {
+     "tex": "g(3)=3+1=4"
     }
    ]
   },
@@ -15,7 +21,13 @@
    "answer": "③\\ 4",
    "steps": [
     {
-     "tex": "2+a=2(2+a)\\Rightarrow a=-2,\\ f(1)g(2)=2\\cdot2=4"
+     "tex": "\\lim_{x\\to1-}f(x)g(x)=1\\cdot(2+a),\\quad f(1)g(1)=2(2+a)"
+    },
+    {
+     "tex": "2+a=2(2+a)\\Rightarrow a=-2"
+    },
+    {
+     "tex": "f(1)g(2)=2\\cdot(4-2)=4"
     }
    ]
   },
@@ -24,7 +36,13 @@
    "answer": "④\\ 7",
    "steps": [
     {
-     "tex": "3a(a^2+a)=-3a\\Rightarrow a=0,\\ f(5)+g(4)=-1+8=7"
+     "tex": "\\lim_{x\\to a-}f(x)g(x)=(a^2+a)\\cdot3a,\\quad f(a)g(a)=-1\\cdot3a"
+    },
+    {
+     "tex": "3a(a^2+a)=-3a\\Rightarrow3a(a^2+a+1)=0\\Rightarrow a=0\\ (a^2+a+1>0)"
+    },
+    {
+     "tex": "f(5)+g(4)=-1+8=7"
     }
    ]
   },
@@ -33,7 +51,13 @@
    "answer": "③\\ 4",
    "steps": [
     {
-     "tex": "(1+a)(b-2)=-2\\Rightarrow\\text{정수쌍 }4\\text{개}"
+     "tex": "x=1:\\ \\lim_{x\\to1-}f(x)g(x)=(1+a)(b-2),\\quad f(1)g(1)=2\\cdot(-1)=-2"
+    },
+    {
+     "tex": "(1+a)(b-2)=-2"
+    },
+    {
+     "tex": "(1+a,\\ b-2)=(1,-2),(-1,2),(2,-1),(-2,1)\\Rightarrow4\\text{개}"
     }
    ]
   },
@@ -42,7 +66,13 @@
    "answer": "②\\ 3",
    "steps": [
     {
-     "tex": "f(0)=0,\\ f(2)=0\\Rightarrow f=x^2-2x,\\ f(3)=3"
+     "tex": "x=0:\\ \\lim_{x\\to0-}f(x)g(x)=-2f(0),\\ f(0)g(0)=f(0)\\Rightarrow f(0)=0\\Rightarrow b=0"
+    },
+    {
+     "tex": "x=2:\\ \\lim_{x\\to2-}f(x)g(x)=f(2),\\ f(2)g(2)=-f(2)\\Rightarrow f(2)=0\\Rightarrow4+2a=0,\\ a=-2"
+    },
+    {
+     "tex": "f(x)=x^2-2x,\\quad f(3)=3"
     }
    ]
   },
@@ -51,7 +81,13 @@
    "answer": "12",
    "steps": [
     {
-     "tex": "x^2+a\\text{ 가 }x=2\\text{ 에서 }0\\Rightarrow a=-4,\\ g(-4)=12"
+     "tex": "f(2)g(2)=4\\cdot1=4"
+    },
+    {
+     "tex": "\\lim_{x\\to2-}\\frac{x^2+a}{x-2}=4\\Rightarrow4+a=0,\\ a=-4\\ \\Big(\\frac{(x-2)(x+2)}{x-2}\\to4\\Big)"
+    },
+    {
+     "tex": "g(a)=g(-4)=16-4=12"
     }
    ]
   }

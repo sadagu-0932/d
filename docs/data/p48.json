@@ -18,7 +18,13 @@
    "answer": "84",
    "steps": [
     {
-     "tex": "2f(2)f'(2)=2\\cdot2\\cdot21=84"
+     "tex": "\\frac{\\{f(x)\\}^2-\\{f(2)\\}^2}{x-2}=\\frac{f(x)-f(2)}{x-2}\\{f(x)+f(2)\\}\\to f'(2)\\cdot2f(2)"
+    },
+    {
+     "tex": "f(2)=16-8-6=2,\\quad f'(x)=4x^3-4x-3\\Rightarrow f'(2)=21"
+    },
+    {
+     "tex": "2\\cdot2\\cdot21=84"
     }
    ]
   },
@@ -27,7 +33,13 @@
    "answer": "④\\ 16",
    "steps": [
     {
-     "tex": "-2f'(2)=-2\\cdot(-8)=16"
+     "tex": "\\frac{f(1-x)-f(3+x)}{x+1}=\\frac{f(2-(x+1))-f(2)}{-(x+1)}\\cdot(-1)-\\frac{f(2+(x+1))-f(2)}{x+1}"
+    },
+    {
+     "tex": "\\to-f'(2)-f'(2)=-2f'(2)"
+    },
+    {
+     "tex": "f'(x)=-3x^2+4\\Rightarrow f'(2)=-8\\Rightarrow16"
     }
    ]
   },
@@ -36,7 +48,13 @@
    "answer": "⑤\\ 57",
    "steps": [
     {
-     "tex": "\\{xf(x)-x^2\\}'_{x=3}=f(3)+3f'(3)-6=3+60-6=57"
+     "tex": "f(3)=3\\Rightarrow3f(3)-9=0"
+    },
+    {
+     "tex": "\\frac{xf(x)-x^2}{x-3}\\to\\{xf(x)\\}'_{x=3}-6=f(3)+3f'(3)-6"
+    },
+    {
+     "tex": "f'(3)=20\\Rightarrow3+60-6=57"
     }
    ]
   },
@@ -45,7 +63,13 @@
    "answer": "③\\ 0",
    "steps": [
     {
-     "tex": "3f'(1)=0"
+     "tex": "f(1)=2\\Rightarrow f(1)+f(1)-4=0"
+    },
+    {
+     "tex": "\\frac{f(x^2)-f(1)}{x^2-1}(x+1)+\\frac{f(x)-f(1)}{x-1}\\to2f'(1)+f'(1)=3f'(1)"
+    },
+    {
+     "tex": "f'(x)=6x-6\\Rightarrow f'(1)=0\\Rightarrow0"
     }
    ]
   },
@@ -54,7 +78,13 @@
    "answer": "④\\ \\frac{11}4",
    "steps": [
     {
-     "tex": "\\frac{f'(2)}{4-g'(2)}=\\frac{11}{4}"
+     "tex": "f(2)=3,\\ g(2)=4"
+    },
+    {
+     "tex": "\\frac{f(x)-f(2)}{(x^2-4)-(g(x)-g(2))}\\to\\frac{f'(2)}{4-g'(2)}"
+    },
+    {
+     "tex": "f'(2)=11,\\ g'(2)=0\\Rightarrow\\frac{11}4"
     }
    ]
   }

@@ -6,7 +6,13 @@
    "answer": "③\\ 6",
    "steps": [
     {
-     "tex": "3=1+a\\Rightarrow a=2,\\ f(2)=6"
+     "tex": "\\lim_{x\\to1-}f(x)=1+2=3,\\quad \\lim_{x\\to1+}f(x)=1+a"
+    },
+    {
+     "tex": "3=1+a\\ \\Rightarrow\\ a=2"
+    },
+    {
+     "tex": "f(2)=2^2+2=6"
     }
    ]
   },
@@ -15,7 +21,13 @@
    "answer": "⑤\\ -\\frac{15}{2}",
    "steps": [
     {
-     "tex": "-2a+2=5=b\\Rightarrow a=-\\frac32,\\ ab=-\\frac{15}2"
+     "tex": "\\lim_{x\\to-2-}f(x)=-2a+2,\\quad \\lim_{x\\to-2+}f(x)=2+3=5"
+    },
+    {
+     "tex": "-2a+2=5=b\\ \\Rightarrow\\ a=-\\frac32,\\ b=5"
+    },
+    {
+     "tex": "ab=-\\frac{15}{2}"
     }
    ]
   },
@@ -24,7 +36,13 @@
    "answer": "3",
    "steps": [
     {
-     "tex": "x>0:\\ x^{k-2},\\ x<0:\\ -x^{k-2}\\Rightarrow k-2\\ge1\\Rightarrow k=3"
+     "tex": "g(x)=\\frac{x^k}{x|x|}:\\ x>0\\text{ 이면 }x^{k-2},\\ x<0\\text{ 이면 }-x^{k-2}"
+    },
+    {
+     "tex": "k=1:\\ \\pm\\frac1x\\text{ 발산},\\quad k=2:\\ \\text{우극한 }1\\ne\\text{좌극한 }-1"
+    },
+    {
+     "tex": "k=3:\\ \\text{좌·우극한 모두 }0\\Rightarrow\\text{최솟값 }3"
     }
    ]
   },
@@ -51,7 +69,10 @@
    "answer": "④\\ 14",
    "steps": [
     {
-     "tex": "(f+g)^2-2fg\\to16-2=14"
+     "tex": "\\{f(x)\\}^2+\\{g(x)\\}^2=\\{f(x)+g(x)\\}^2-2f(x)g(x)"
+    },
+    {
+     "tex": "\\lim_{x\\to\\infty}(\\cdots)=4^2-2\\cdot1=14"
     }
    ]
   }

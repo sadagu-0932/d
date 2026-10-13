@@ -27,7 +27,10 @@
    "answer": "⑤\\ 80",
    "steps": [
     {
-     "tex": "f(a)=a^3+2a^2+f(0)\\Rightarrow f(4)-f(2)=96-16=80"
+     "tex": "\\frac{f(a)-f(0)}{a}=a^2+2a\\Rightarrow f(a)=a^3+2a^2+f(0)"
+    },
+    {
+     "tex": "f(4)-f(2)=(64+32)-(8+8)=80"
     }
    ]
   },
@@ -36,7 +39,13 @@
    "answer": "③\\ -1",
    "steps": [
     {
-     "tex": "2=2a^2+2a-2\\Rightarrow a=1,-2"
+     "tex": "f:\\ \\frac{f(a+2)-f(a)}2=2"
+    },
+    {
+     "tex": "g:\\ \\frac{g(a+2)-g(a)}2=2a^2+2a-2"
+    },
+    {
+     "tex": "2a^2+2a-2=2\\Rightarrow a=1,-2\\Rightarrow\\text{합 }-1"
     }
    ]
   },
@@ -45,7 +54,13 @@
    "answer": "⑤\\ \\frac{25}8",
    "steps": [
     {
-     "tex": "(a-3)+(a+b-2)=0\\Rightarrow b=5-2a,\\ ab\\le\\frac{25}8\\ (a=\\tfrac54)"
+     "tex": "f\\text{ 의 }p\\to q\\text{ 평균변화율}=p+q-2:\\ (a-3)+(a+b-2)=0\\Rightarrow b=5-2a"
+    },
+    {
+     "tex": "-1<a<b\\Rightarrow-1<a<\\frac53"
+    },
+    {
+     "tex": "ab=-2\\left(a-\\frac54\\right)^2+\\frac{25}8\\Rightarrow\\frac{25}8"
     }
    ]
   },
@@ -54,7 +69,13 @@
    "answer": "③\\ 3",
    "steps": [
     {
-     "tex": "g(k)=0\\text{ 인 자연수 }k\\in\\{2,a-1,a+2\\}\\text{ 가 2개}\\Rightarrow a=-1,1,3"
+     "tex": "g(-1)=0\\Rightarrow\\text{평균변화율 }0\\iff g(k)=0"
+    },
+    {
+     "tex": "g(k)=0\\text{ 인 }k:\\ 2,\\ a-1,\\ a+2\\ (\\text{자연수 2개})"
+    },
+    {
+     "tex": "a=-1\\ \\{1,2\\},\\ a=1\\ \\{2,3\\},\\ a=3\\ \\{2,5\\}\\Rightarrow\\text{합 }3"
     }
    ]
   }

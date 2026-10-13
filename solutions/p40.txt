@@ -5,10 +5,17 @@ f(a+1)-f(1)=(a+1)^2+3(a+1)+1-5=a^2+5a
 @ 02 | ④\ -2
 \frac{f(3)-f(0)}{3}=\frac{(11+3a)-2}{3}=3+a=1\Rightarrow a=-2
 @ 03 | ⑤\ 80
-f(a)=a^3+2a^2+f(0)\Rightarrow f(4)-f(2)=96-16=80
+\frac{f(a)-f(0)}{a}=a^2+2a\Rightarrow f(a)=a^3+2a^2+f(0)
+f(4)-f(2)=(64+32)-(8+8)=80
 @ 04 | ③\ -1
-2=2a^2+2a-2\Rightarrow a=1,-2
+f:\ \frac{f(a+2)-f(a)}2=2
+g:\ \frac{g(a+2)-g(a)}2=2a^2+2a-2
+2a^2+2a-2=2\Rightarrow a=1,-2\Rightarrow\text{합 }-1
 @ 05 | ⑤\ \frac{25}8
-(a-3)+(a+b-2)=0\Rightarrow b=5-2a,\ ab\le\frac{25}8\ (a=\tfrac54)
+f\text{ 의 }p\to q\text{ 평균변화율}=p+q-2:\ (a-3)+(a+b-2)=0\Rightarrow b=5-2a
+-1<a<b\Rightarrow-1<a<\frac53
+ab=-2\left(a-\frac54\right)^2+\frac{25}8\Rightarrow\frac{25}8
 @ 06 | ③\ 3
-g(k)=0\text{ 인 자연수 }k\in\{2,a-1,a+2\}\text{ 가 2개}\Rightarrow a=-1,1,3
+g(-1)=0\Rightarrow\text{평균변화율 }0\iff g(k)=0
+g(k)=0\text{ 인 }k:\ 2,\ a-1,\ a+2\ (\text{자연수 2개})
+a=-1\ \{1,2\},\ a=1\ \{2,3\},\ a=3\ \{2,5\}\Rightarrow\text{합 }3

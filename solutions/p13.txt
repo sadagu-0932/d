@@ -1,13 +1,20 @@
 section: 유형 05 함수의 극한의 성질 · 유형 06 극한값의 계산 (1)
 @ 17 | ④\ 9
-3\alpha=2\beta,\ \alpha\beta=6\Rightarrow\beta^2=9
+\lim f=\alpha,\ \lim g=\beta:\ 4\alpha-\beta=\alpha+\beta\Rightarrow\alpha=\frac23\beta
+\alpha\beta=\frac23\beta^2=6\Rightarrow\beta^2=9
+\lim_{x\to2}\{g(x)\}^2=\beta^2=9
 @ 18 | ②\ 2
 \lim_{x\to0}\frac{f(x)+2x}{x^2g(x)+x}=\lim_{x\to0}\frac{\frac{f(x)}{x}+2}{xg(x)+1}=\frac{2+2}{1+1}=2
 @ 19 | ①\ 11
-g=\frac{3f-h}{2}\ (h\to3):\ \frac{11f-3h-4}{f+h+2}\to11
+3f(x)-2g(x)=h(x)\text{ 로 놓으면 }\lim_{x\to\infty}h(x)=3,\ g(x)=\frac{3f(x)-h(x)}{2}
+\frac{f+3g-2}{2f-g+1}=\frac{11f-3h-4}{f+h+2}=\frac{11-\frac{3h+4}{f}}{1+\frac{h+2}{f}}
+f(x)\to\infty\ \Rightarrow\ \lim_{x\to\infty}(\cdots)=11
 @ 20 | ②\ 12
 \lim_{x\to2}\frac{(x-2)(x^2+2x+4)}{x-2}=4+4+4=12
 @ 21 | ⑤\ \frac12
-\frac{(x-1)(x-2)(x-3)}{(x-1)(x+3)}\to\frac{(-1)(-2)}{4}=\frac12
+x^3-6x^2+11x-6=(x-1)(x-2)(x-3),\quad x^2+2x-3=(x-1)(x+3)
+\lim_{x\to1}\frac{(x-2)(x-3)}{x+3}=\frac{(-1)(-2)}{4}=\frac12
 @ 22 | ③\ 3
-x^2\{f(x)+a\}\to2a=6\Rightarrow a=3,\ \lim_{x\to3}x=3
+\frac{x^2\{f(x)\}^2-a^2x^2}{f(x)-a}=\frac{x^2\{f(x)-a\}\{f(x)+a\}}{f(x)-a}=x^2\{f(x)+a\}
+\lim_{x\to1}x^2\{f(x)+a\}=1\cdot2a=6\ \Rightarrow\ a=3
+\lim_{x\to3}\frac{x(x-3)}{x-3}=3

@@ -4,12 +4,16 @@ section: 유형 02 함수의 연속 (2)
 @ 08 | ③\ 0
 \lim_{x\to-1}(x+a)=-1+a=f(-1)=2a-1\Rightarrow a=0
 @ 09 | ①\ -2
-a=-8,\ \lim(x+4)=6=b\Rightarrow a+b=-2
+x\to2:\ (\text{분모})\to0\Rightarrow(\text{분자})\to0:\ 4+4+a=0,\ a=-8
+\lim_{x\to2}\frac{(x-2)(x+4)}{x-2}=6=b
+a+b=-2
 @ 10 | ①\ -1
 \lim_{x\to a}(x^2+x+a)=a^2+2a=f(a)=a+3
 a^2+a-3=0\ (D>0)\Rightarrow\text{근과 계수의 관계에서 합}=-1
 @ 11 | ④\ -\frac92
-a=-2,\ \frac1{\sqrt{x+6}+2}\to\frac14=-2+b\Rightarrow b=\frac94,\ ab=-\frac92
+x\to-2:\ (\text{분모})\to0\Rightarrow\sqrt4+a=0,\ a=-2
+\lim_{x\to-2}\frac{\sqrt{x+6}-2}{x+2}=\lim_{x\to-2}\frac{1}{\sqrt{x+6}+2}=\frac14
+f(-2)=-2+b=\frac14\Rightarrow b=\frac94,\quad ab=-\frac92
 @ 12 | ④\ -2
 x\ne0:\ \frac{x^2-4|x|}{2|x|}=\frac{|x|^2-4|x|}{2|x|}=\frac{|x|}{2}-2
 \lim_{x\to0}f(x)=-2=f(0)=0+a\Rightarrow a=-2

@@ -6,7 +6,10 @@
    "answer": "③\\ 6",
    "steps": [
     {
-     "tex": "D=a^2-4a<0\\Rightarrow a=1,2,3,\\ \\text{합 }6"
+     "tex": "\\text{모든 실수 }x\\text{ 에서 }x^2+ax+a\\ne0\\Rightarrow D=a^2-4a<0\\Rightarrow0<a<4"
+    },
+    {
+     "tex": "a=1,2,3\\Rightarrow1+2+3=6"
     }
    ]
   },
@@ -27,7 +30,13 @@
    "answer": "④\\ 8",
    "steps": [
     {
-     "tex": "a=0\\text{ 또는 }a^2-8a<0\\Rightarrow a=0,1,\\dots,7\\ (8\\text{개})"
+     "tex": "a=0:\\ f(x)=\\frac{x-2}{2}\\ (\\text{연속})"
+    },
+    {
+     "tex": "a\\ne0:\\ D=a^2-8a<0\\Rightarrow0<a<8\\Rightarrow a=1,\\cdots,7"
+    },
+    {
+     "tex": "0,1,2,\\cdots,7\\Rightarrow8\\text{개}"
     }
    ]
   },
@@ -36,7 +45,13 @@
    "answer": "③\\ -3",
    "steps": [
     {
-     "tex": "g=(x+1)(x+a-1),\\ 1-a=4\\Rightarrow a=-3"
+     "tex": "f\\text{ 는 연속}:\\ \\lim_{x\\to1-}(2x-1)=1=f(1)"
+    },
+    {
+     "tex": "g(x)=x^2+ax+a-1=(x+1)(x+a-1)"
+    },
+    {
+     "tex": "g(x)=0\\text{ 인 }x=-1,\\ 1-a\\text{ 에서만 불연속}\\Rightarrow1-a=4,\\ a=-3"
     }
    ]
   },
@@ -45,7 +60,13 @@
    "answer": "⑤\\ 2",
    "steps": [
     {
-     "tex": "g(-1)=0\\Rightarrow2-a+b=0,\\ a-b=2"
+     "tex": "f(x)\\ne0\\ (\\text{모든 }x),\\ f\\text{ 는 }x=-1\\text{ 에서만 불연속}:\\ \\lim_{x\\to-1-}f=-3,\\ f(-1)=2"
+    },
+    {
+     "tex": "\\lim_{x\\to-1-}\\frac{g(x)}{f(x)}=\\frac{g(-1)}{-3},\\quad\\frac{g(-1)}{f(-1)}=\\frac{g(-1)}{2}\\Rightarrow g(-1)=0"
+    },
+    {
+     "tex": "2-a+b=0\\Rightarrow a-b=2"
     }
    ]
   },
@@ -54,7 +75,13 @@
    "answer": "②\\ \\frac{17}4",
    "steps": [
     {
-     "tex": "b=-2,\\ \\frac1{x(\\sqrt{x+2}+2)}\\to\\frac18=-(2+a)\\Rightarrow a=-\\frac{17}8,\\ ab=\\frac{17}4"
+     "tex": "\\lim_{x\\to2+}f=0\\Rightarrow\\lim_{x\\to2+}\\frac{\\sqrt{x+2}+b}{x(x-2)}\\text{ 수렴}\\Rightarrow b=-2"
+    },
+    {
+     "tex": "\\frac{\\sqrt{x+2}-2}{x(x-2)}=\\frac1{x(\\sqrt{x+2}+2)}\\to\\frac18=\\frac{g(2)}{f(2)}=-(2+a)"
+    },
+    {
+     "tex": "a=-\\frac{17}8\\Rightarrow ab=\\frac{17}4"
     }
    ]
   }

@@ -6,7 +6,13 @@
    "answer": "④\\ ㄱ,\\ ㄷ",
    "steps": [
     {
-     "tex": "d^2=t^2+4\\ \\text{vs}\\ 9:\\ f=0\\ (|t|<\\sqrt5),\\ 2\\ (|t|>\\sqrt5)\\Rightarrow\\text{ㄱ 참, ㄴ 거짓, ㄷ 참}"
+     "tex": "\\text{중심 }(0,2),\\ r=3,\\ d^2=t^2+4:\\ |t|<\\sqrt5\\Rightarrow f=0,\\ |t|=\\sqrt5\\Rightarrow1,\\ |t|>\\sqrt5\\Rightarrow2"
+    },
+    {
+     "tex": "\\text{ㄱ. }f(0)=0\\ (\\text{참}),\\quad\\text{ㄴ. 좌극한 }0\\ne\\text{우극한 }2\\ (\\text{거짓})"
+    },
+    {
+     "tex": "\\text{ㄷ. }t^2\\to5-,\\ 5>\\sqrt5\\Rightarrow f(t^2)=2\\ (\\text{참})"
     }
    ]
   },
@@ -15,7 +21,13 @@
    "answer": "②\\ 1",
    "steps": [
     {
-     "tex": "P=\\{y>0\\}\\ (0\\text{ 은 }f(\\pm1)=4\\text{ 라 빠짐}),\\ Q=\\{y\\ge0\\}\\Rightarrow Q-P=\\{0\\}"
+     "tex": "P:\\ 0\\text{ 은 }x=\\pm1\\text{ 에서만 나오는데 }f(\\pm1)=4\\Rightarrow P=\\{y>0\\}"
+    },
+    {
+     "tex": "Q=\\{||x|-1|\\}=\\{y\\ge0\\}"
+    },
+    {
+     "tex": "Q-P=\\{0\\}\\Rightarrow1\\text{개}"
     }
    ]
   },
@@ -24,7 +36,13 @@
    "answer": "①\\ -\\frac1{16}",
    "steps": [
     {
-     "tex": "\\overline{AC}^2=2t+2,\\ \\overline{AB}^2=4(1-t^2):\\ \\frac{-2}{4(1+t)(\\sqrt{2t+2}+2)}\\to-\\frac1{16}"
+     "tex": "\\overline{AC}^2=(t+1)^2+1-t^2=2t+2,\\quad\\overline{AB}^2=4(1-t)(1+t)"
+    },
+    {
+     "tex": "\\frac{\\sqrt{2t+2}-2}{4(1-t)(1+t)}=\\frac{-2}{4(1+t)(\\sqrt{2t+2}+2)}"
+    },
+    {
+     "tex": "\\to\\frac{-2}{4\\cdot2\\cdot4}=-\\frac1{16}"
     }
    ]
   }

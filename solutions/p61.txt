@@ -1,13 +1,25 @@
 section: 유형 02 접선의 방정식 · 유형 03 접선과 수직인 직선의 방정식
 @ 07 | ②\ \frac85
-l:\ y=2x+1,\ m:\ y=-8x+17\Rightarrow x=\frac85
+y'=-6x^2+8x
+l:\ y'(1)=2\Rightarrow y=2x+1,\qquad m:\ y'(2)=-8\Rightarrow y=-8(x-2)+1=-8x+17
+2x+1=-8x+17\Rightarrow x=\frac85
 @ 08 | ⑤\ 8
-\text{접선 }y=-x+4:\ 3-2a=-1,\ (-1,5)\Rightarrow a=2,\ b=4
+\text{접선이 }(0,4),\ (3,1)\text{ 지남}\Rightarrow\text{기울기 }-1
+y'(-1)=3-2a=-1\Rightarrow a=2
+(-1,5)\text{ 가 곡선 위}:\ -1+2+b=5\Rightarrow b=4,\ ab=8
 @ 09 | ⑤\ \frac5{18}\pi
-a=\frac23,\ f'(b)=-1\Rightarrow B(-1,\tfrac13),\ \pi\cdot\frac{AB^2}4=\frac{5}{18}\pi
+f(-2)=\frac23\Rightarrow a=\frac23,\ f'(-2)=1
+\angle C=90^\circ\Rightarrow f'(b)=-1\Rightarrow B\left(-1,\tfrac13\right)
+\text{지름 }AB,\ AB^2=\frac{10}9\Rightarrow\pi\cdot\frac{10}{36}=\frac5{18}\pi
 @ 10 | ③\ -7
-y'(2)=1\Rightarrow\text{수직선 }x+y-8=0
+y'=-3x^2+6x+1\Rightarrow y'(2)=1
+\text{수직인 직선}:\ y-6=-(x-2)\Rightarrow x+y-8=0
+a=1,\ b=-8\Rightarrow a+b=-7
 @ 11 | ④\ 15
-\text{접선 기울기 }-2=9+a\Rightarrow a=-11,\ b=26
+\text{수직선 기울기 }\frac{3}{6}=\frac12\Rightarrow\text{접선 기울기 }-2
+9+a=-2\Rightarrow a=-11
+9-33+b=2\Rightarrow b=26,\ a+b=15
 @ 12 | ①\ \frac12
-a=-2,\ 2(3+2b)=-1\Rightarrow b=-\frac74,\ c=\frac34
+2+a=0\Rightarrow a=-2,\quad1+b+c=0
+\text{기울기 }2,\ 3+2b:\ 2(3+2b)=-1\Rightarrow b=-\frac74,\ c=\frac34
+a-b+c=\frac12

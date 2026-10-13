@@ -6,7 +6,13 @@
    "answer": "④\\ -3",
    "steps": [
     {
-     "tex": "f(1)=2+a+b=0,\\ f'(1)=6+2a=0\\Rightarrow a=-3,\\ b=1"
+     "tex": "f(x)=2x^3+ax^2+b:\\ f(1)=0,\\ f'(1)=0"
+    },
+    {
+     "tex": "2+a+b=0,\\quad6+2a=0\\Rightarrow a=-3,\\ b=1"
+    },
+    {
+     "tex": "ab=-3"
     }
    ]
   },
@@ -15,7 +21,13 @@
    "answer": "23",
    "steps": [
     {
-     "tex": "f'(-1)=-14+a=1,\\ f(-1)=6-a=-1+b\\Rightarrow a=15,\\ b=-8"
+     "tex": "f(x)=x^4+5x^2+ax=(x+1)^2Q(x)+x+b"
+    },
+    {
+     "tex": "f(-1)=6-a=-1+b,\\quad f'(x)=4x^3+10x+a\\Rightarrow f'(-1)=-14+a=1"
+    },
+    {
+     "tex": "a=15,\\ b=-8\\Rightarrow a-b=23"
     }
    ]
   },
@@ -24,7 +36,13 @@
    "answer": "②\\ -51",
    "steps": [
     {
-     "tex": "P(2)=0\\Rightarrow a=-1,\\ R=P'(2)(x-2)=17(x-2),\\ R(-1)=-51"
+     "tex": "R(x)=P'(2)(x-2)+P(2),\\ P(2)=0\\Rightarrow a=-1"
+    },
+    {
+     "tex": "P'(2)=8+9=17\\Rightarrow R(x)=17(x-2)"
+    },
+    {
+     "tex": "R(-1)=-51"
     }
    ]
   },
@@ -33,7 +51,13 @@
    "answer": "②\\ -4",
    "steps": [
     {
-     "tex": "f=px^2+qx+r\\text{ 계수비교}\\Rightarrow f=-x^2+\\frac52x-5,\\ f(2)=-4"
+     "tex": "f=px^2+qx+r\\text{ 대입 후 계수비교}"
+    },
+    {
+     "tex": "2p=-3-p,\\ 4p+q=1-q,\\ 2q=-r\\Rightarrow p=-1,\\ q=\\frac52,\\ r=-5"
+    },
+    {
+     "tex": "f(2)=-4+5-5=-4"
     }
    ]
   },
@@ -42,7 +66,13 @@
    "answer": "①\\ 1",
    "steps": [
     {
-     "tex": "2x^2-x=cx^2+(a-c)x+b+ac\\Rightarrow c=2,\\ a=1,\\ b=-2;\\ f(0)=1"
+     "tex": "f'(x)=2x-1,\\ f(1)=a"
+    },
+    {
+     "tex": "2x^2-x=cx^2+(a-c)x+b+ac\\Rightarrow c=2,\\ a=1,\\ b=-2"
+    },
+    {
+     "tex": "f(b+c)=f(0)=1"
     }
    ]
   },
@@ -51,7 +81,13 @@
    "answer": "⑤\\ 5",
    "steps": [
     {
-     "tex": "n=3\\text{ 차},\\ 3f-xf'=ax^2+2bx+3c\\Rightarrow f=x^3+2x^2+2,\\ f(1)=5"
+     "tex": "n\\text{ 차이면 }x^n\\text{ 계수 }3-n:\\ n=2\\text{ 이면 }1\\ne2,\\ n\\ge4\\text{ 불가}\\Rightarrow n=3"
+    },
+    {
+     "tex": "f=x^3+ax^2+bx+c:\\ 3f-xf'=ax^2+2bx+3c=2x^2+6"
+    },
+    {
+     "tex": "a=2,\\ b=0,\\ c=2\\Rightarrow f(1)=5"
     }
    ]
   }

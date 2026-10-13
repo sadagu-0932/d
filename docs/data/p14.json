@@ -30,7 +30,10 @@
    "answer": "⑤\\ 10",
    "steps": [
     {
-     "tex": "\\frac{\\sqrt{3x+3}-3}{x-2}=\\frac{3}{\\sqrt{3x+3}+3}\\to\\frac12\\Rightarrow\\lim f(x)=5\\div\\frac12=10"
+     "tex": "\\frac{\\sqrt{3x+3}-3}{x-2}=\\frac{3x+3-9}{(x-2)(\\sqrt{3x+3}+3)}=\\frac{3}{\\sqrt{3x+3}+3}\\to\\frac36=\\frac12"
+    },
+    {
+     "tex": "\\lim_{x\\to2}f(x)=\\lim_{x\\to2}\\frac{(\\sqrt{3x+3}-3)f(x)}{x-2}\\div\\frac{\\sqrt{3x+3}-3}{x-2}=5\\div\\frac12=10"
     }
    ]
   },
@@ -48,7 +51,13 @@
    "answer": "②\\ \\frac43",
    "steps": [
     {
-     "tex": "\\frac{16x-8}{12x-12}\\to\\frac43"
+     "tex": "(2x+1)^2-(2x-3)^2=(4x-2)\\cdot4=16x-8"
+    },
+    {
+     "tex": "(x+2)^2-(x-4)^2=(2x-2)\\cdot6=12x-12"
+    },
+    {
+     "tex": "\\lim_{x\\to\\infty}\\frac{16x-8}{12x-12}=\\frac{16}{12}=\\frac43"
     }
    ]
   },

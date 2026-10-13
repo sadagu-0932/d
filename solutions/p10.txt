@@ -1,11 +1,18 @@
 section: 유형 01 함수의 수렴과 발산 · 유형 02 좌극한, 우극한 (1)
 @ 01 | ③\ 0
+\lim_{x\to-1}f(x)=-1,\quad \lim_{x\to2}f(x)=1
 -1+1=0
 @ 02 | 2
-f(x)=-\frac12x+1\ (f(2)=0,\ f(0)=1)\Rightarrow f(-2)=2
+f(x)=ax+b:\ \lim_{x\to2}f(x)=2a+b=0,\ \lim_{x\to0}f(x)=b=1
+a=-\frac12,\ b=1\ \Rightarrow\ f(x)=-\frac12x+1
+f(-2)=1+1=2
 @ 03 | 0
-|{-1}|+\lim_{t\to-2}f(t)=1+(-1)=0
+\lim_{x\to2}|f(x)|=|-1|=1
+-x=t\text{ 로 놓으면 }x\to2\text{ 일 때 }t\to-2:\ \lim_{x\to2}f(-x)=\lim_{t\to-2}f(t)=-1
+1+(-1)=0
 @ 04 | ③\ -1
+\lim_{x\to-2-}f(x)=1,\quad \lim_{x\to1+}f(x)=-2
 1+(-2)=-1
 @ 05 | ⑤\ 5
+\lim_{x\to1+}f(x)=1,\quad f(1)=2
 1+2\cdot2=5

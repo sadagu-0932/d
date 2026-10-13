@@ -1,13 +1,25 @@
 section: 유형 11 미정계수의 결정 (1) · 유형 12 미정계수의 결정 (2)
 @ 41 | ⑤\ -30
-9+3a+b=0,\ 6+a=1\Rightarrow a=-5,\ b=6
+x\to3\text{ 일 때 (분모)}\to0\text{ 이므로 (분자)}\to0:\ 9+3a+b=0
+x^2+ax+b=(x-3)(x+3+a)\ \Rightarrow\ \lim_{x\to3}(x+3+a)=6+a=1
+a=-5,\ b=6,\quad ab=-30
 @ 42 | ③\ 0
-a=1,\ \lim\frac1x=-1=b\Rightarrow a+b=0
+x\to-1\text{ 일 때 (분모)}\to0\Rightarrow\text{(분자)}\to0:\ -1+a=0,\ a=1
+\lim_{x\to-1}\frac{x+1}{x(x+1)}=\lim_{x\to-1}\frac1x=-1=b
+a+b=0
 @ 43 | ①\ 2
-b=-\sqrt{2+a},\ \frac1{2\sqrt{2+a}}=\frac12\Rightarrow a=b=-1
+x\to2:\ \sqrt{2+a}+b=0\ \Rightarrow\ b=-\sqrt{2+a}
+\frac{\sqrt{x+a}-\sqrt{2+a}}{x-2}=\frac{1}{\sqrt{x+a}+\sqrt{2+a}}\to\frac{1}{2\sqrt{2+a}}=\frac12
+\sqrt{2+a}=1\ \Rightarrow\ a=-1,\ b=-1,\quad a^2+b^2=2
 @ 44 | ⑤\ 2
-x^2+ax+b=(x+2)(x+a-2),\ \frac{-4}{a-4}=2\Rightarrow a=2,\ b=0
+(\text{분자})\to0,\ \text{극한}\ne0\Rightarrow(\text{분모})\to0:\ 4-2a+b=0
+x^2+ax+2a-4=(x+2)(x+a-2)
+\frac{-4}{a-4}=2\Rightarrow a=2,\ b=0,\ a-b=2
 @ 45 | ③\ \frac32
-1+2a=0\Rightarrow a=-\frac12,\ b=\frac{3}{3/2}=2
+(\text{분자})\to0,\ b\ne0\Rightarrow(\text{분모})\to0:\ 1+2a=0,\ a=-\frac12
+x^2-\frac12x-\frac12=(x-1)\left(x+\frac12\right)
+b=\lim_{x\to1}\frac{x^2+x+1}{x+\frac12}=2\Rightarrow a+b=\frac32
 @ 46 | ③\ 8
-b=4a+4,\ \frac{\sqrt{\cdots}+2}{a}\to\frac4a=4\Rightarrow a=1,\ b=8
+(\text{분자})\to0\Rightarrow\sqrt{-4a+b}=2,\ b=4a+4
+\sqrt{ax+4a+4}-2=\frac{a(x+4)}{\sqrt{ax+4a+4}+2}
+\lim\frac{\sqrt{\cdots}+2}{a}=\frac4a=4\Rightarrow a=1,\ b=8,\ ab=8

@@ -1,13 +1,25 @@
 section: 유형 07 곡선 위에 있지 않은 점에서 그은 접선
 @ 25 | ④\ -2
--2=-2a^3\Rightarrow a=1:\ y=6x-2
+\text{접점 }(a,\ a^3+3a):\ y=(3a^2+3)(x-a)+a^3+3a
+(0,-2)\text{ 대입}:\ -2=-2a^3\Rightarrow a=1\Rightarrow y=6x-2
+y\text{절편 }-2
 @ 26 | ④\ 4
-a^2-6a+8=0\Rightarrow\text{기울기 }0,\ 4
+\text{접점 }(a,\ a^2-4a+1):\ y=(2a-4)(x-a)+a^2-4a+1
+(3,-3)\text{ 대입}:\ a^2-6a+8=0\Rightarrow a=2,\ 4
+\text{기울기 }2a-4=0,\ 4\Rightarrow\text{최댓값 }4
 @ 27 | ①\ -5
-2a^3+2=0\Rightarrow y=-x,\ 5=-k
+\text{접점 }(a,\ -a^3+2a+2):\ y=(-3a^2+2)(x-a)-a^3+2a+2
+(0,0)\text{ 대입}:\ 2a^3+2=0\Rightarrow a=-1\Rightarrow y=-x
+5=-k\Rightarrow k=-5
 @ 28 | ②\ \frac12
-a(2a^2-a-8)=0\Rightarrow0+\frac12
+(-1,-3)\text{ 대입}:\ -3=(3a^2-8a+3)(-1-a)+a^3-4a^2+3a
+\Rightarrow a(2a^2-a-8)=0
+\text{세 근의 합}=0+\frac12=\frac12
 @ 29 | ④\ 9
-a=2,\ l:\ y=3x-3,\ B(-4,-15):\ \frac12|{-30}+12|=9
+(0,-3)\text{ 대입}:\ -3=-\frac12a^3+1\Rightarrow a=2,\ A(2,3),\ l:\ y=3x-3
+\frac14x^3+1=3x-3\Rightarrow(x-2)^2(x+4)=0,\ B(-4,-15)
+\triangle OAB=\frac12|2\cdot(-15)-(-4)\cdot3|=9
 @ 30 | ⑤\ -\frac13
-2a^2+(3-3t)a-6t=0\text{ 중근}:\ 3t^2+10t+3=0\Rightarrow t=-\frac13
+(t,0)\text{ 대입}:\ a\{2a^2+(3-3t)a-6t\}=0
+a=0\text{ 외 근이 하나}\Rightarrow\text{중근}\ (0\text{ 이 근이면 }t=0):\ 9t^2+30t+9=0
+t=-3,\ -\frac13\Rightarrow t=-\frac13

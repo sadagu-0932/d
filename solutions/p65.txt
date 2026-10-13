@@ -1,13 +1,24 @@
 section: 유형 08 두 곡선에 동시에 접하는 직선 · 유형 09 접선과 좌표축으로 둘러싸인 도형
 @ 31 | ②\ -15
-3t^2+4t-7=0,\ f(1)=g(1)\Rightarrow t=1:\ y=5x-3
+f'(t)=g'(t):\ 3t^2+4t-7=0\Rightarrow t=1,\ -\frac73
+f(1)=g(1)=2\ (t=-\tfrac73\text{ 는 }f\ne g)
+y=5x-3\Rightarrow ab=-15
 @ 32 | ②\ 4
-h=f-g,\ h(t)=h'(t)=0\Rightarrow t=1,\ a=4
+h=f-g=-2x^3+(a-2)x^2+2x-2,\ h(t)=h'(t)=0
+h'(t)=0\Rightarrow(a-2)t^2=3t^3-t,\ h(t)=t^3+t-2=0\Rightarrow t=1
+a-2=2\Rightarrow a=4
 @ 33 | 12
-a=2,\ b-2=5\Rightarrow b=7,\ c=3
+-1-a=-3\Rightarrow a=2,\qquad1-b+c=-3
+3x^2+a\Big|_{x=-1}=5,\quad2x+b\Big|_{x=-1}=b-2=5\Rightarrow b=7
+c=b-4=3\Rightarrow a+b+c=12
 @ 34 | ③\ \frac52
-y=5x-5:\ \frac12\cdot1\cdot5
+y'=6x^2-10x+1,\ y'(2)=5\Rightarrow y=5x-5
+x\text{절편 }1,\ y\text{절편 }-5\Rightarrow\frac12\cdot1\cdot5=\frac52
 @ 35 | ⑤\ \frac{49}4
-2x-4=2\Rightarrow y=2x-7:\ \frac12\cdot\frac72\cdot7
+x+2y-3=0\text{ 의 기울기 }-\frac12\Rightarrow\text{접선 기울기 }2
+2x-4=2\Rightarrow x=3,\ y=-1\Rightarrow y=2x-7
+\frac12\cdot\frac72\cdot7=\frac{49}4
 @ 36 | 2
-(a-2)^2(2-2a)=0\Rightarrow a=1:\ y=-x+2,\ \frac12\cdot2\cdot2
+y=x(x-2)^2,\ y'=(3x-2)(x-2)
+(2,0)\text{ 대입}:\ (a-2)^2(2-2a)=0\Rightarrow a=1,\ y=-x+2
+\frac12\cdot2\cdot2=2

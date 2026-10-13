@@ -3,13 +3,21 @@ section: 유형 12 함수의 증가와 감소 · 유형 13 증가 또는 감소�
 f'(x)=3x^2+12x+9=3(x+1)(x+3)\le0\Rightarrow-3\le x\le-1
 [a,b]\subset[-3,-1]\Rightarrow b-a\text{ 의 최댓값 }2
 @ 44 | ⑤\ 7
-f'=-x(x-10)\ge0\Rightarrow0\le a\le7
+f'(x)=-x^2+10x=-x(x-10)\ge0\Rightarrow0\le x\le10
+[a,\ a+3]\subset[0,10]\Rightarrow0\le a\le7
+M+m=7+0=7
 @ 45 | ①\ -9
-f'=3(x+5)(x-1)\Rightarrow a=6,\ b=-15
+f'(x)=3x^2+2ax+b\le0\iff-5\le x\le1\Rightarrow f'(x)=3(x+5)(x-1)
+3x^2+12x-15\Rightarrow a=6,\ b=-15
+a+b=-9
 @ 46 | ④\ \frac43
 f'(x)=3x^2-4x+a\ge0\ (\text{모든 }x)
 \frac D4=4-3a\le0\Rightarrow a\ge\frac43
 @ 47 | 3
-f'\le0:\ a^2-9\le0
+x_1<x_2\Rightarrow f(x_1)>f(x_2):\ \text{실수 전체에서 감소}
+f'(x)=-3x^2+2ax-3\le0\Rightarrow\frac D4=a^2-9\le0\Rightarrow-3\le a\le3
+\text{최댓값 }3
 @ 48 | ②\ \frac13
-\frac D4=1-3a(a+\tfrac23)\le0\Rightarrow(3a-1)(a+1)\ge0
+f'(x)=3ax^2+2x+a+\frac23\ge0\ (a>0)
+\frac D4=1-3a\left(a+\frac23\right)\le0\Rightarrow3a^2+2a-1\ge0\Rightarrow(3a-1)(a+1)\ge0
+a>0\Rightarrow a\ge\frac13

@@ -12,9 +12,9 @@ f:\ \frac{f(a+2)-f(a)}2=2
 g:\ \frac{g(a+2)-g(a)}2=2a^2+2a-2
 2a^2+2a-2=2\Rightarrow a=1,-2\Rightarrow\text{합 }-1
 @ 05 | ⑤\ \frac{25}8
-f\text{ 의 }p\to q\text{ 평균변화율}=p+q-2:\ (a-3)+(a+b-2)=0\Rightarrow b=5-2a
--1<a<b\Rightarrow-1<a<\frac53
-ab=-2\left(a-\frac54\right)^2+\frac{25}8\Rightarrow\frac{25}8
+\frac{f(q)-f(p)}{q-p}=\frac{(q^2-p^2)-2(q-p)}{q-p}=p+q-2
+(-1+a-2)+(a+b-2)=0\Rightarrow b=5-2a,\quad-1<a<b\Rightarrow-1<a<\frac53
+ab=a(5-2a)=-2\left(a-\frac54\right)^2+\frac{25}8\Rightarrow a=\frac54\text{ 일 때 최댓값 }\frac{25}8
 @ 06 | ③\ 3
 g(x)=(x+1)(x-2)(x-a+1)(x-a-2),\ g(-1)=0
 \text{평균변화율}=\frac{g(k)-g(-1)}{k+1}=0\iff g(k)=0\iff k\in\{2,\ a-1,\ a+2\}

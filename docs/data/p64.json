@@ -66,13 +66,16 @@
    "answer": "④\\ 9",
    "steps": [
     {
-     "tex": "(0,-3)\\text{ 대입}:\\ -3=-\\frac12a^3+1\\Rightarrow a=2,\\ A(2,3),\\ l:\\ y=3x-3"
+     "tex": "\\text{접점 }(a,\\tfrac14a^3+1),\\ \\text{접선 }y=\\tfrac34a^2(x-a)+\\tfrac14a^3+1\\text{ 에 }(0,-3)\\text{ 대입}"
     },
     {
-     "tex": "\\frac14x^3+1=3x-3\\Rightarrow(x-2)^2(x+4)=0,\\ B(-4,-15)"
+     "tex": "-3=-\\frac12a^3+1\\Rightarrow a=2:\\ A(2,3),\\ l:\\ y=3x-3"
     },
     {
-     "tex": "\\triangle OAB=\\frac12|2\\cdot(-15)-(-4)\\cdot3|=9"
+     "tex": "\\frac14x^3+1=3x-3\\Rightarrow x^3-12x+16=(x-2)^2(x+4)=0\\Rightarrow B(-4,-15)"
+    },
+    {
+     "tex": "l\\text{ 의 }y\\text{절편 }C(0,-3):\\ \\triangle OAB=\\triangle OCA+\\triangle OCB=\\frac12\\cdot3\\cdot2+\\frac12\\cdot3\\cdot4=9"
     }
    ]
   },

@@ -54,13 +54,13 @@
    "answer": "⑤\\ \\frac{25}8",
    "steps": [
     {
-     "tex": "f\\text{ 의 }p\\to q\\text{ 평균변화율}=p+q-2:\\ (a-3)+(a+b-2)=0\\Rightarrow b=5-2a"
+     "tex": "\\frac{f(q)-f(p)}{q-p}=\\frac{(q^2-p^2)-2(q-p)}{q-p}=p+q-2"
     },
     {
-     "tex": "-1<a<b\\Rightarrow-1<a<\\frac53"
+     "tex": "(-1+a-2)+(a+b-2)=0\\Rightarrow b=5-2a,\\quad-1<a<b\\Rightarrow-1<a<\\frac53"
     },
     {
-     "tex": "ab=-2\\left(a-\\frac54\\right)^2+\\frac{25}8\\Rightarrow\\frac{25}8"
+     "tex": "ab=a(5-2a)=-2\\left(a-\\frac54\\right)^2+\\frac{25}8\\Rightarrow a=\\frac54\\text{ 일 때 최댓값 }\\frac{25}8"
     }
    ]
   },

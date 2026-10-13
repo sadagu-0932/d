@@ -8,9 +8,10 @@ f(x)=x^4+5x^2+ax=(x+1)^2Q(x)+x+b
 f(-1)=6-a=-1+b,\quad f'(x)=4x^3+10x+a\Rightarrow f'(-1)=-14+a=1
 a=15,\ b=-8\Rightarrow a-b=23
 @ 69 | ②\ -51
-R(x)=P'(2)(x-2)+P(2),\ P(2)=0\Rightarrow a=-1
-P'(2)=8+9=17\Rightarrow R(x)=17(x-2)
-R(-1)=-51
+P(x)=(x^2-1)(x^2+ax)-6=(x-2)^2Q(x)+R(x),\ R(x)=px+q
+P(2)=R(2),\ P'(2)=R'(2)=p\ \ (\text{양변 미분 후 }x=2\text{ 대입})
+R(2)=0\Rightarrow P(2)=3(4+2a)-6=0\Rightarrow a=-1
+p=P'(2)=2\cdot2(4-2)+3(4-1)=17,\ R(x)=17(x-2)\Rightarrow R(-1)=-51
 @ 70 | ②\ -4
 f=px^2+qx+r\text{ 대입 후 계수비교}
 2p=-3-p,\ 4p+q=1-q,\ 2q=-r\Rightarrow p=-1,\ q=\frac52,\ r=-5

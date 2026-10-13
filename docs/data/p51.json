@@ -36,13 +36,16 @@
    "answer": "②\\ -51",
    "steps": [
     {
-     "tex": "R(x)=P'(2)(x-2)+P(2),\\ P(2)=0\\Rightarrow a=-1"
+     "tex": "P(x)=(x^2-1)(x^2+ax)-6=(x-2)^2Q(x)+R(x),\\ R(x)=px+q"
     },
     {
-     "tex": "P'(2)=8+9=17\\Rightarrow R(x)=17(x-2)"
+     "tex": "P(2)=R(2),\\ P'(2)=R'(2)=p\\ \\ (\\text{양변 미분 후 }x=2\\text{ 대입})"
     },
     {
-     "tex": "R(-1)=-51"
+     "tex": "R(2)=0\\Rightarrow P(2)=3(4+2a)-6=0\\Rightarrow a=-1"
+    },
+    {
+     "tex": "p=P'(2)=2\\cdot2(4-2)+3(4-1)=17,\\ R(x)=17(x-2)\\Rightarrow R(-1)=-51"
     }
    ]
   },

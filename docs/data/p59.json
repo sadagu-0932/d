@@ -45,10 +45,10 @@
      "tex": "f'(x)=4x^3-12x+8=4(x-1)^2(x+2)"
     },
     {
-     "tex": "f(-2)=-27\\ (\\text{극소}),\\ f(1)=0"
+     "tex": "x<-2:\\ f'<0,\\ x>-2:\\ f'\\ge0\\Rightarrow\\text{극솟값 }f(-2)=16-24-16-3=-27<0\\ (x=1\\text{ 은 극값 아님})"
     },
     {
-     "tex": "f(x)=(x-1)^3(x+3)\\Rightarrow x=1,\\ -3\\Rightarrow2\\text{개}"
+     "tex": "\\text{감소하다가 증가하는 그래프의 최솟값이 음수}\\Rightarrow x\\text{축과 2번 만남}\\Rightarrow2\\text{개}"
     }
    ]
   },

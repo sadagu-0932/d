@@ -60,13 +60,16 @@
    "answer": "⑤\\ \\frac92",
    "steps": [
     {
-     "tex": "-x^2+2ax-4\\le0\\iff2ax\\le x^2+4"
+     "tex": "f'(x)=-x^2+2ax-4=-(x-a)^2+a^2-4\\le0\\ \\ (-1\\le x\\le2)"
     },
     {
-     "tex": "0<x\\le2:\\ a\\le\\frac x2+\\frac2x\\ (\\min2),\\quad-1\\le x<0:\\ a\\ge\\frac x2+\\frac2x\\ (\\max-\\tfrac52)"
+     "tex": "-1\\le a\\le2:\\ \\text{최댓값 }f'(a)=a^2-4\\le0\\Rightarrow-1\\le a\\le2"
     },
     {
-     "tex": "M-m=2+\\frac52=\\frac92"
+     "tex": "a<-1:\\ \\text{최댓값 }f'(-1)=-2a-5\\le0\\Rightarrow-\\frac52\\le a<-1,\\qquad a>2:\\ f'(2)=4a-8>0\\ (\\times)"
+    },
+    {
+     "tex": "-\\frac52\\le a\\le2\\Rightarrow M-m=2+\\frac52=\\frac92"
     }
    ]
   },
@@ -75,13 +78,13 @@
    "answer": "③\\ -3",
    "steps": [
     {
-     "tex": "f'(x)=3x^2+2ax+b,\\ [0,2]\\text{ 감소},\\ [2,\\infty)\\text{ 증가}\\Rightarrow f'(x)=3(x-2)(x-r),\\ r\\le0"
+     "tex": "[0,2]\\text{ 감소},\\ [2,\\infty)\\text{ 증가}\\Rightarrow f'(2)=0,\\ f'(0)\\le0"
     },
     {
-     "tex": "2a=-3(2+r),\\ b=6r"
+     "tex": "f'(x)=3x^2+2ax+b:\\ 12+4a+b=0,\\ b\\le0"
     },
     {
-     "tex": "a+b=-3-\\frac32r+6r=-3+\\frac92r\\le-3\\Rightarrow\\text{최댓값 }-3\\ (r=0)"
+     "tex": "a=-\\frac{12+b}4\\Rightarrow a+b=-3+\\frac34b\\le-3\\ (b=0\\text{ 일 때 최댓값 }-3)"
     }
    ]
   }

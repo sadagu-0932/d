@@ -63,13 +63,16 @@
    "answer": "①\\ \\frac{19}4",
    "steps": [
     {
-     "tex": "(\\text{분모})\\to0\\Rightarrow f(1)g(1)=ab=3"
+     "tex": "x\\to1:\\ (\\text{분모})\\to0\\Rightarrow(\\text{분자})\\to0:\\ f(1)g(1)=3,\\ f(1)=a,\\ g(1)=b\\Rightarrow ab=3"
     },
     {
-     "tex": "\\frac{f'(1)g(1)+f(1)g'(1)}{g'(1)}=3:\\ (3+2a)b+a(4+b)=3(4+b)"
+     "tex": "\\frac{f(x)g(x)-f(1)g(1)}{g(x)-g(1)}=\\frac{\\frac{f(x)g(x)-f(1)g(1)}{x-1}}{\\frac{g(x)-g(1)}{x-1}}\\to\\frac{\\{f(x)g(x)\\}'_{x=1}}{g'(1)}"
     },
     {
-     "tex": "3ab+4a=12\\Rightarrow a=\\frac34,\\ b=4,\\ a+b=\\frac{19}4"
+     "tex": "\\frac{(3+2a)b+a(4+b)}{4+b}=3\\Rightarrow3ab+4a=12\\Rightarrow a=\\frac34,\\ b=4"
+    },
+    {
+     "tex": "a+b=\\frac{19}4"
     }
    ]
   },

@@ -43,12 +43,35 @@ EPS_DECAY_GAMES = 300  # 이 정도 게임 수가 지나면 epsilon이 EPS_END �
 
 SET_SIZE = 100  # 몇 게임을 '1세트'로 묶어서 세트별 최고 기록을 다시 집계할지
 
+# ---- 안전 성향 다이얼(safety_level) ---------------------------------------
+# "위험할 때 얼마나 안전한 방향을 선호할지"를 0.0(끔, 기존과 완전히 동일) ~
+# 1.0(최대 안전) 사이의 값 하나로 조절하는 다이얼. reward나 학습 방식은 전혀
+# 건드리지 않는다 — 신경망이 학습한 Q값은 그대로 두고, "행동을 고르는 순간"에만
+# state에 이미 들어있는 안전 신호(각 방향의 reachable_area, can_reach_tail —
+# game.py의 state[15:18], state[18:21])에 가중치를 줘서 Q값에 더하는 것뿐이다.
+#
+# score(a) = Q(a) + safety_level * (SAFETY_AREA_WEIGHT * reachable_area(a)
+#                                    + SAFETY_TAIL_WEIGHT * can_reach_tail(a))
+#
+# safety_level=0.0이면 score == Q라서 원래의 순수 greedy DQN과 완전히 동일한
+# 행동을 한다. 값을 올릴수록 "먹이로 가는 Q값이 조금 더 높아도, 훨씬 넓고
+# 꼬리까지 닿는 안전한 방향이 있으면 그쪽을 택하는" 성향이 강해진다.
+# epsilon-greedy의 "무작위 탐험" 분기에는 적용하지 않는다 — 탐험은 편향 없이
+# 다양한 상황을 겪어야 학습에 도움이 되기 때문에, 이 다이얼은 "활용(exploit)"
+# 행동 선택에만 영향을 준다.
+SAFETY_AREA_WEIGHT = 20.0  # safety_level=1.0일 때 reachable_area(0~1)에 곱해지는 최대 가중치
+SAFETY_TAIL_WEIGHT = 20.0  # safety_level=1.0일 때 can_reach_tail(0/1)에 곱해지는 가중치
+
 
 class Agent:
-    def __init__(self):
+    def __init__(self, safety_level: float = 0.0):
         self.n_games = 0
         self.gamma = 0.9  # 미래 보상 할인율 (벨만 방정식에 사용)
         self.memory = deque(maxlen=MAX_MEMORY)  # Experience Replay Buffer
+
+        # 안전 성향 다이얼 (0.0~1.0). set_safety_level()로 언제든 실시간으로 바꿀 수 있다.
+        self.safety_level = 0.0
+        self.set_safety_level(safety_level)
 
         # SET_SIZE(기본 100)게임을 '1세트'로 묶어서 세트별 평균 점수를 비교한다.
         # - 진행 중인 세트 안에서의 최고 기록 에피소드는 current_set_*에 임시로 담아둔다.
@@ -81,12 +104,21 @@ class Agent:
         ratio = min(self.n_games / EPS_DECAY_GAMES, 1.0)
         return EPS_START + ratio * (EPS_END - EPS_START)
 
+    def set_safety_level(self, level: float) -> None:
+        """안전 성향 다이얼을 0.0~1.0 범위로 잘라서 설정. 언제든 실시간으로 바꿀 수 있다."""
+        self.safety_level = max(0.0, min(1.0, level))
+
     def get_action(self, state, explore: bool = True):
         """
         epsilon-greedy 정책으로 행동을 선택.
 
         explore=True  : 확률 epsilon으로 무작위 행동(탐험), 그 외에는 Q값이 가장 큰 행동(활용)
         explore=False : 항상 신경망이 예측한 최선의 행동만 선택 (play.py에서 사용)
+
+        "활용(exploit)" 분기에서는, Q값에 안전 성향 다이얼(self.safety_level)만큼 안전 신호
+        (state[15:18]의 reachable_area, state[18:21]의 can_reach_tail — action 순서([직진,
+        우회전, 좌회전])와 정확히 같은 순서로 저장돼 있음)를 섞어서 최종 행동을 고른다.
+        safety_level=0.0이면 섞는 양이 0이라 순수 Q값 argmax와 완전히 같다.
         """
         final_move = [0, 0, 0]
 
@@ -96,7 +128,19 @@ class Agent:
             state_tensor = torch.tensor(state, dtype=torch.float)
             with torch.no_grad():
                 prediction = self.model(state_tensor)
-            move = torch.argmax(prediction).item()
+
+            if self.safety_level > 0.0:
+                area = state[15:18]       # [직진, 우회전, 좌회전] reachable_area (0~1)
+                can_reach_tail = state[18:21]  # [직진, 우회전, 좌회전] can_reach_tail (0/1)
+                safety_bonus = self.safety_level * (
+                    SAFETY_AREA_WEIGHT * torch.tensor(area, dtype=torch.float)
+                    + SAFETY_TAIL_WEIGHT * torch.tensor(can_reach_tail, dtype=torch.float)
+                )
+                score = prediction + safety_bonus
+            else:
+                score = prediction
+
+            move = torch.argmax(score).item()
 
         final_move[move] = 1
         return final_move

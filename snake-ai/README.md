@@ -153,6 +153,16 @@ reward는 동일하게 `REWARD_DEATH`입니다.
   방식(경사하강)으로 지금까지 가장 안정적으로 잘했던 구간의 플레이 쪽을 조금씩 더
   강화하는 형태입니다. `train.py` 콘솔에 세트가 끝날 때마다 평균/최고 점수와 챔피언
   교체 여부가 출력됩니다.
+- **안전 성향 다이얼** (`Agent(safety_level=...)` / `Agent.set_safety_level()`): "위험할 때
+  얼마나 안전한 방향을 선호할지"를 0.0(끔, 기본값) ~ 1.0(최대 안전) 사이의 값 하나로
+  실시간 조절합니다. reward나 학습 방식은 전혀 건드리지 않습니다 — 신경망이 학습한
+  Q값은 그대로 두고, "행동을 고르는 순간"(`get_action`의 활용/exploit 분기)에만 state에
+  이미 들어있는 안전 신호(각 방향의 `reachable_area`, `can_reach_tail` — state[15:21])에
+  가중치를 줘서 Q값에 더합니다: `score(a) = Q(a) + safety_level * (SAFETY_AREA_WEIGHT *
+  reachable_area(a) + SAFETY_TAIL_WEIGHT * can_reach_tail(a))`. `safety_level=0.0`이면
+  `score == Q`라서 원래의 순수 greedy DQN과 완전히 동일하게 동작합니다. epsilon-greedy의
+  무작위 탐험 분기에는 적용하지 않습니다(탐험은 편향 없이 다양한 상황을 겪어야 학습에
+  도움이 되므로). `python play.py --safety 0.7`처럼 CLI에서 바로 조절할 수 있습니다.
 
 ## 진행 순서 (개발 시 권장)
 

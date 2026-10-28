@@ -1,15 +1,15 @@
-# Snake AI (DQN)
+# Snake AI (유전 알고리즘)
 
-Pygame으로 만든 스네이크 게임을, PyTorch 기반 DQN(Deep Q-Network) 에이전트가
-스스로 플레이하며 점점 잘하도록 학습하는 프로젝트입니다.
+Pygame으로 만든 스네이크 게임을, 신경망 개체들의 집단(population)을 유전
+알고리즘(genetic algorithm)으로 진화시켜 점점 잘 플레이하게 만드는 프로젝트입니다.
 
 ## 프로젝트 구조
 
 ```
 snake-ai/
 ├── game.py           # 20x20 grid 스네이크 게임 (Gym 스타일 reset/step 인터페이스)
-├── model.py           # Q-Network(신경망) + QTrainer(학습 로직, Double DQN + 타겟 네트워크)
-├── agent.py           # DQN 에이전트 (Experience Replay, epsilon-greedy, 에피소드별 loss 집계)
+├── model.py           # 신경망 구조만 정의 (Linear_QNet) — 가중치 "학습"은 agent.py가 담당
+├── agent.py           # 유전 알고리즘: Population(개체 집단), crossover/mutation
 ├── train.py           # 학습 루프 + 실시간 학습 곡선(matplotlib) + 체크포인트/CSV 로그 저장
 ├── play.py            # 학습된 모델(best.pth)로 실제 플레이 화면 보여주기
 ├── requirements.txt   # 필요 패키지 목록
@@ -42,18 +42,26 @@ python game.py
 python train.py
 ```
 
-- 매 에피소드(한 판)가 끝날 때마다 `Game N | Score | Record | Epsilon | Avg Loss` 형태로
-  콘솔에 출력됩니다.
-- matplotlib 창에 에피소드별 점수와 누적 평균 점수 그래프가 실시간으로 갱신됩니다.
-- 최고 점수를 갱신할 때마다 `model/best.pth`에 체크포인트가 저장됩니다.
-- 매 에피소드마다 `episode, score, mean_score, avg_loss` 네 컬럼을 `training_log.csv`
-  (실행할 때마다 새로 덮어씀)에 기록합니다. `avg_loss`는 그 에피소드 동안의 모든 학습
-  스텝(`QTrainer.train_step`) loss의 평균으로, 점수가 주기적으로 진동하는 구간과 loss가
-  튀는 구간이 겹치는지 나중에 분석하는 데 씁니다.
-- 학습을 더 빠르게 돌리고 싶다면 `train.py` 상단의 `RENDER_WHILE_TRAINING = False`로
-  바꿔 게임 화면 렌더링을 끄세요 (matplotlib 학습 곡선은 계속 표시됩니다).
-- 대략 수십~수백 에피소드가 지나면 평균 점수가 눈에 띄게 오르는 것을 확인할 수 있습니다.
-  (게임을 종료하려면 콘솔에서 Ctrl+C)
+- 매 세대(generation)마다 `POPULATION_SIZE`(기본 50)개체 각각을
+  `GAMES_PER_INDIVIDUAL`(기본 3)판씩 플레이시킵니다 — 매 판마다
+  `SnakeGameAI.reset(randomize=True)`로 뱀의 길이와 장애물 배치를 무작위로 바꿔서
+  "한 맵만이 아니라 다양한 필드에서" 평가합니다. 그 점수들의 평균이 그 개체의
+  적합도(fitness)가 됩니다.
+- 적합도 상위 `NUM_PARENTS`(기본 4)개체를 부모로 선정합니다. 이 부모들은 그대로
+  다음 세대에 보존되고(엘리티즘), 나머지 자리는 부모 중 무작위로 2명을 골라
+  가중치를 섞고(crossover) 살짝 변형(mutation)해서 채웁니다. **경사하강/역전파는
+  전혀 쓰지 않습니다.**
+- 매 세대마다 `Gen N | Best | Avg | Worst | Record` 형태로 콘솔에 출력됩니다.
+- matplotlib 창에 세대별 최고/평균/최저 적합도 그래프가 실시간으로 갱신됩니다.
+- 지금까지 한 판에서 나온 최고 점수(record)를 세우면 그 개체의 가중치를
+  `model/best.pth`로 저장합니다.
+- 매 세대마다 `generation, best_score, avg_score, worst_score, record` 다섯 컬럼을
+  `training_log.csv`(실행할 때마다 새로 덮어씀)에 기록합니다.
+- 학습을 더 빠르게 돌리고 싶다면 `train.py` 상단의 `RENDER_WHILE_TRAINING = False`
+  (기본값)를 유지하세요 — 한 세대에 `POPULATION_SIZE * GAMES_PER_INDIVIDUAL`판을
+  전부 플레이해야 해서, 화면 렌더링을 켜면 훨씬 느려집니다.
+- 대략 수십 세대가 지나면 최고/평균 적합도가 눈에 띄게 오르는 것을 확인할 수
+  있습니다. (게임을 종료하려면 콘솔에서 Ctrl+C)
 
 ### 3. 학습된 모델로 플레이 보기
 
@@ -105,57 +113,53 @@ python play.py --model model/best.pth
 | 상수 | 값 | 적용 시점 |
 |---|---|---|
 | `REWARD_FOOD` | `+10` | 먹이를 먹은 스텝 |
-| `REWARD_DEATH` | `-10` | 사망한 스텝 (벽/몸통 충돌, 타임아웃 불문 — **항상 이 고정값**, 길이/score와 무관) |
+| `REWARD_DEATH` | `-10` | 사망한 스텝 (벽/몸통/장애물 충돌, 타임아웃 불문 — **항상 이 고정값**, 길이/score와 무관) |
 | `LENGTH_BONUS_COEF` | `0.01` | **사망이 아닌 모든 생존 스텝마다**: `+LENGTH_BONUS_COEF * len(snake)` (먹이 섭취 스텝 포함) |
+
+참고로 유전 알고리즘은 이 reward를 직접 쓰지 않고, 한 판이 끝났을 때의 **점수
+(score, 먹은 먹이 수)**를 그대로 적합도(fitness)로 씁니다 — reward는 신경망이
+"학습"할 때(경사하강)만 의미가 있는 신호라서, 경사하강을 쓰지 않는 지금은
+점수만으로 개체 간 우열을 가립니다.
 
 먹이를 못 먹었을 때 게임을 강제 종료시키는 타임아웃 기준은 `TIMEOUT_STEPS_PER_SEGMENT`(기본 150)로,
 `game.py` 상단에서 조절할 수 있습니다. 몸이 길어질수록 허용 스텝도 함께 늘어나므로,
 사실상 "최근에 먹이를 못 먹은 시간"과 비슷하게 동작합니다. 타임아웃으로 죽든 충돌로 죽든
 reward는 동일하게 `REWARD_DEATH`입니다.
 
-### 에이전트 / 신경망
+### 신경망 구조
 
-- 신경망: `state(11) → Linear(256) → ReLU → Linear(3)` (`model.py`의 `Linear_QNet`)
-- Experience Replay Buffer: `deque(maxlen=100_000)`, 배치 크기 1,000
-- epsilon-greedy 탐험: 게임 수(`n_games`)가 늘수록 `epsilon`이 300게임에 걸쳐 1.0 → 0.02로
-  선형 감소 (`agent.py`의 `EPS_DECAY_GAMES`/`EPS_END`). 예전 값(150게임)에서는 평균 점수가
-  오르기 시작하는 시점(100~200게임)에 탐험이 사실상 끝나버려서, 그 이후 수백~수천 게임
-  동안 점수가 정체(plateau)되는 현상이 실측 학습 로그에서 확인됨 — 탐험 기간(`EPS_DECAY_GAMES`)만
-  150→300으로 늘려 정체 시점을 늦춤. (한때 탐험 바닥값 `EPS_END`도 0.02→0.05로 같이 올려봤지만,
-  head-to-head 비교 실험 결과 학습이 끝난 뒤에도 남는 5% 무작위 행동이 뱀이 길어질수록
-  치명적이라 최종 도달 점수 자체가 더 낮은 수준에서 다시 정체되는 역효과가 확인되어
-  `EPS_END`는 원래 값 0.02로 되돌림)
-- 학습 안정화: 벨만 타겟 계산에 별도의 **타겟 네트워크**를 사용하고,
-  일정 스텝(기본 100)마다 policy 네트워크의 가중치로 동기화(hard update)합니다.
-- **Double DQN**: 다음 상태(s')에서의 행동 선택은 online 네트워크(`argmax_a' Q_online(s', a')`)로,
-  그 행동의 가치 평가는 target 네트워크(`Q_target(s', a*)`)로 분리해서 계산합니다
-  (`model.py`의 `QTrainer.train_step`). vanilla DQN처럼 target 네트워크 하나로 선택과
-  평가를 모두 처리하면 Q-value가 과대추정(overestimation)되는 경향이 있는데, Double DQN은
-  이를 완화해 학습을 더 안정적으로 수렴시킵니다.
-- 매 스텝 즉시 학습(`train_short_memory`) + 매 에피소드 종료 시 리플레이 버퍼에서
-  샘플링한 배치로 추가 학습(`train_long_memory`)을 병행합니다.
-- **챔피언 세트 기반 추가 학습**: `SET_SIZE`(기본 100)게임을 '1세트'로 묶습니다. 세트가
-  끝날 때마다 그 세트의 평균 점수를, 지금까지 채택하고 있던 **챔피언 세트**의 평균 점수와
-  비교해서 — 더 높으면 챔피언을 이번 세트로 교체하고, 더 낮으면 기존 챔피언을 그대로
-  유지합니다. 매 에피소드가 끝나면 `train_long_memory()` 뒤에, 이 챔피언 세트 안에서
-  가장 점수가 높았던 한 판의 transition만 따로 뽑아 한 번 더 학습합니다
-  (`train_from_best_episode`). 정책을 통째로 그 판으로 덮어쓰는 게 아니라, 평소와 같은
-  방식(경사하강)으로 지금까지 가장 안정적으로 잘했던 구간의 플레이 쪽을 조금씩 더
-  강화하는 형태입니다. `train.py` 콘솔에 세트가 끝날 때마다 평균/최고 점수와 챔피언
-  교체 여부가 출력됩니다.
-- **학습 시 환경 다양화 (domain randomization, `SnakeGameAI.reset(randomize=True)`)**:
-  `train.py`의 학습 루프에서만, 매 게임 시작 시 뱀의 길이를 3~10(`RANDOM_LENGTH_MIN/MAX`)
-  중 무작위로 주고, 30%(`OBSTACLE_CHANCE`) 확률로 무작위 장애물 3~15개(`OBSTACLE_COUNT_MIN/MAX`)
-  를 깔아놓습니다(`_place_obstacles`). state가 머리 바로 옆 1칸만 보는 가장 단순한
-  형태라, "위험하면 안전하게, 안전하면 먹이로"를 신경망이 직접 경험으로 배우려면
-  실제로 위험한 상황(긴 꼬리로 좁은 곳을 헤쳐 나가기, 장애물 피하기)을 자주 겪어봐야
-  하기 때문입니다. 장애물은 `is_collision()`에도 반영되어 부딪히면 벽/몸통과
-  동일하게 `REWARD_DEATH`로 죽습니다. 사람 플레이(`game.py`)와 `play.py`(감상 모드)는
-  항상 `randomize=False`(기본값) — 표준 보드(길이 3, 장애물 없음)로 시작합니다.
+`state(11) → Linear(256) → ReLU → Linear(3)` (`model.py`의 `Linear_QNet`).
+이 구조(레이어 수·뉴런 수)는 우리가 미리 고정해 둔 값입니다 — **AI가 스스로 뉴런
+개수나 레이어 구조를 바꾸지는 않습니다.** 신경망의 토폴로지 자체를 탐색하는 것
+(NEAT류 알고리즘)은 훨씬 큰 별도 작업이라 이번 범위에는 포함하지 않았습니다.
+유전 알고리즘이 "학습"하는 대상은 이 고정된 구조 안의 **가중치**뿐입니다.
+
+### 학습 방식 — 유전 알고리즘 (초기화됨: 경사하강 대신)
+
+예전에는 Double DQN + Experience Replay + epsilon-greedy로 가중치를 역전파
+학습시켰는데, "세트 내 가장 우수한 모델을 토대로 4개를 정해서 부모로 삼고, 섞고
+살짝씩 바꿔가며 학습하자"는 요청에 따라 경사하강을 전혀 쓰지 않는 유전
+알고리즘으로 교체했습니다 (`agent.py`의 `Population`).
+
+- **Population**: 신경망 `POPULATION_SIZE`(기본 50)개를 한 세대(generation)로
+  묶어서 관리합니다.
+- **다양한 필드에서 평가 (`GAMES_PER_INDIVIDUAL`, 기본 3)**: 각 개체를 매번
+  다르게 무작위화된 맵(길이·장애물이 다른 "필드") 여러 판 플레이시켜 평균 점수를
+  그 개체의 적합도(fitness)로 삼습니다. 한 맵만 보면 운에 좌우되는 평가가 되는
+  문제를 줄이기 위함입니다.
+- **Selection + Elitism**: 적합도 상위 `NUM_PARENTS`(기본 4)개체를 부모로
+  선정합니다. 이 개체들은 그대로 다음 세대에 보존되어(엘리티즘) 지금까지 찾은
+  가장 좋은 개체를 잃지 않습니다.
+- **Crossover + Mutation**: 나머지 자리는 부모 중 무작위로 2명을 골라, 가중치
+  각 성분마다 50% 확률로 둘 중 하나를 물려받도록 섞고(`crossover`), 그 중
+  `MUTATION_RATE`(기본 10%)의 가중치에 평균 0·표준편차 `MUTATION_STRENGTH`
+  (기본 0.1)인 가우시안 노이즈를 더해(`mutate`) 살짝 변형해서 채웁니다.
+- **기록 저장**: 어느 개체든 한 판에서 역대 최고 점수(`record`)를 세우면 그
+  가중치를 `model/best.pth`로 저장합니다(`Population.save_best_if_new_record`).
 
 ## 진행 순서 (개발 시 권장)
 
 1. `python game.py`로 방향키 기본 플레이 확인
 2. state/reward 설계 확인 (`SnakeGameAI._get_state`, `SnakeGameAI.step`)
-3. `agent.py`의 DQN 에이전트로 `train.py` 실행 → 학습 곡선으로 성능 확인
+3. `agent.py`의 `Population`으로 `train.py` 실행 → 세대별 적합도 곡선으로 성능 확인
 4. `python play.py`로 학습된 모델의 실제 플레이 성능 확인

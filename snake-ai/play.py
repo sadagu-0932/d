@@ -7,7 +7,6 @@ play.py
     python play.py                     # 기본 FPS(20)로 재생
     python play.py --fps 40            # 더 빠르게 재생
     python play.py --model model/best.pth --episodes 5
-    python play.py --safety 0.7        # 안전 성향 다이얼을 0.7로 올려서 더 조심스럽게 플레이
 """
 
 import argparse
@@ -25,24 +24,20 @@ def parse_args():
                          help="게임 진행 속도 = 초당 프레임 수 (기본: 20)")
     parser.add_argument("--episodes", type=int, default=0,
                          help="플레이할 게임 수. 0이면 무한 반복 (기본: 0)")
-    parser.add_argument("--safety", type=float, default=0.0,
-                         help="안전 성향 다이얼 0.0(끔, 기본값, 순수 Q값 greedy) ~ 1.0(최대 안전). "
-                              "높일수록 먹이로 가는 Q값이 더 높아도, 더 넓고 꼬리까지 닿는 "
-                              "안전한 방향이 있으면 그쪽을 택하는 성향이 강해짐")
     return parser.parse_args()
 
 
-def play(model_path: str, fps: int, episodes: int, safety: float = 0.0):
+def play(model_path: str, fps: int, episodes: int):
     if not os.path.exists(model_path):
         raise FileNotFoundError(
             f"'{model_path}' 를 찾을 수 없습니다. 먼저 train.py를 실행해 모델을 학습시켜 주세요."
         )
 
-    agent = Agent(safety_level=safety)
+    agent = Agent()
     agent.model.load(model_path)  # 학습된 가중치 로드 (내부에서 eval() 모드로 전환)
 
     game = SnakeGameAI(render=True, speed=fps)
-    state = game.reset()
+    state = game.reset()  # randomize=False(기본값) -> 감상 모드는 항상 표준 보드(길이 3, 장애물 없음)
 
     games_played = 0
     while episodes == 0 or games_played < episodes:
@@ -58,4 +53,4 @@ def play(model_path: str, fps: int, episodes: int, safety: float = 0.0):
 
 if __name__ == "__main__":
     args = parse_args()
-    play(args.model, args.fps, args.episodes, args.safety)
+    play(args.model, args.fps, args.episodes)

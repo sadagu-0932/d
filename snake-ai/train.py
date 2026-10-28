@@ -64,7 +64,9 @@ def train():
 
     agent = Agent()
     game = SnakeGameAI(render=RENDER_WHILE_TRAINING, speed=GAME_SPEED)
-    state_old = game.reset()
+    # randomize=True -> 꼬리 길이를 무작위로 주고 가끔 장애물도 깔아서, 위험한 상황에
+    # 실제로 자주 놓여봐야 "위험하면 안전하게, 안전하면 먹이로"를 경험으로 배울 수 있다.
+    state_old = game.reset(randomize=True)
     episode_transitions = []  # 현재 진행 중인 한 판의 transition들을 순서대로 모아둠
 
     log_file = open(TRAINING_LOG_PATH, "w", newline="", encoding="utf-8")
@@ -90,7 +92,7 @@ def train():
 
         if done:
             # 한 판이 끝났으므로 환경을 초기화하고, 리플레이 버퍼로 장기 학습 수행
-            state_old = game.reset()
+            state_old = game.reset(randomize=True)
             agent.n_games += 1
             agent.train_long_memory()
 

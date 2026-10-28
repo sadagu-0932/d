@@ -64,41 +64,31 @@ python play.py --episodes 5          # 5판만 플레이하고 종료
 python play.py --model model/best.pth
 ```
 
-⚠️ **`model/best.pth`는 현재 신경망 구조와 호환되지 않습니다.** 이 체크포인트는
-state가 15차원이던 시절(flood-fill 기반 reachability feature 추가 이전)에 학습된
-것이라, 지금의 21차원 입력 신경망과 shape이 맞지 않습니다. `python play.py`로 이
-파일을 불러오려 하면 (원인을 명확히 알려주는) `RuntimeError`가 발생합니다 —
-`train.py`를 실행해서 처음부터 새로 학습시켜 주세요. 새로 학습된 체크포인트가
-`model/best.pth`를 덮어씁니다.
+⚠️ **`model/best.pth`는 현재 신경망 구조와 호환되지 않습니다.** state 설계가
+여러 차례 바뀌어서(최종적으로 11차원 — 아래 참고) 지금의 신경망과 shape이 맞지
+않습니다. `python play.py`로 이 파일을 불러오려 하면 (원인을 명확히 알려주는)
+`RuntimeError`가 발생합니다 — `train.py`를 실행해서 처음부터 새로 학습시켜
+주세요. 새로 학습된 체크포인트가 `model/best.pth`를 덮어씁니다.
 
 ## 설계 개요
 
-### State (21차원 벡터, `STATE_SIZE`)
+### State (11차원 벡터, `STATE_SIZE`) — 초기화됨
 
 | 인덱스 | 의미 |
 |---|---|
-| 0~2 | 직진 방향으로 1~3칸 앞의 충돌(위험) 여부 (`FORWARD_LOOKAHEAD=3`) |
-| 3~4 | 우회전 방향으로 1~2칸 앞의 위험 여부 (`SIDE_LOOKAHEAD=2`) |
-| 5~6 | 좌회전 방향으로 1~2칸 앞의 위험 여부 (`SIDE_LOOKAHEAD=2`) |
-| 7~10 | 현재 이동 방향 one-hot (상/하/좌/우) |
-| 11~14 | 먹이의 머리 기준 상대 방향 (상/하/좌/우, boolean) |
-| 15~17 | 직진/우회전/좌회전 각 후보 방향의 정규화된 flood-fill 도달 가능 면적 (0~1) |
-| 18~20 | 직진/우회전/좌회전 각 후보 방향에서 꼬리 칸에 도달 가능한지 여부 (boolean) |
+| 0 | 직진 방향으로 머리 바로 옆 1칸(주변 블럭)의 위험(충돌) 여부 |
+| 1 | 우회전 방향으로 머리 바로 옆 1칸의 위험 여부 |
+| 2 | 좌회전 방향으로 머리 바로 옆 1칸의 위험 여부 |
+| 3~6 | 현재 이동 방향 one-hot (상/하/좌/우) |
+| 7~10 | 먹이의 머리 기준 상대 방향 (상/하/좌/우, boolean) |
 
-원래는 직진/좌/우 모두 딱 1칸 앞의 위험만 봤는데, 그러면 코앞에 닥쳐야만 위험을
-인지할 수 있어 미리 대비하기 어려웠습니다. 그래서 직진 방향은 더 멀리(3칸), 좌우는
-그보다 조금 덜 멀리(2칸)까지 내다보도록 확장해서, 한발 앞서 판단할 수 있는 정보를
-줍니다. `FORWARD_LOOKAHEAD` / `SIDE_LOOKAHEAD`는 `game.py` 상단에서 조절할 수 있고,
-이 값을 바꾸면 `STATE_SIZE`(따라서 신경망 입력 크기)도 자동으로 함께 바뀝니다.
-
-lookahead는 "바로 근처가 막혔는지"만 보는 국소적인 정보라, 당장은 안 막혀 보여도
-사실 좁은 구석에 갇히는 길일 수 있습니다. 그래서 직진/우회전/좌회전 각 후보 행동에
-대해 BFS(flood-fill, `_flood_fill_from`)로 그 방향이 실제로 얼마나 넓은 공간으로
-이어지는지(`reachable_area`)와, 그 안에서 최소한의 순환/탈출 경로가 있는지를
-어림하는 `can_reach_tail`(꼬리 칸에 도달 가능한지)까지 함께 봅니다. BFS의 장애물
-판정에서 몸통은 막힌 칸으로 취급하되, 그 후보 행동이 먹이를 먹는 행동이 아니라면
-꼬리는 다음 스텝에 비워지므로 장애물에서 제외합니다(먹이를 먹는 행동이라면 꼬리도
-그대로 남으므로 포함).
+한동안 직진 3칸/좌우 2칸 lookahead와 flood-fill 기반 `reachable_area`/
+`can_reach_tail`(총 21차원)까지 늘렸었는데, "모든 규칙을 초기화하고 주변 블럭만
+감지해서 위험/안전을 구분하자"는 요청에 따라 전부 걷어내고 가장 단순한 형태로
+되돌렸습니다: 직진/우회전/좌회전 방향으로 머리에 바로 붙어있는 1칸(`_danger_in_direction`)
+만 보고 위험 여부를 판단합니다. 그 대신 "위험하면 안전하게, 안전하면 먹이로"라는
+행동을 신경망이 직접 경험으로 배우게 하기 위해, 아래 "학습 시 환경 다양화"로
+위험한 상황 자체를 학습 중에 더 자주 만들어줍니다.
 
 행동(action)은 절대 방향이 아니라 **머리 기준 상대 방향**([직진, 우회전, 좌회전])의
 3가지 one-hot으로 정의합니다. 사람 플레이(방향키, 절대 방향)는
@@ -125,7 +115,7 @@ reward는 동일하게 `REWARD_DEATH`입니다.
 
 ### 에이전트 / 신경망
 
-- 신경망: `state(21) → Linear(256) → ReLU → Linear(3)` (`model.py`의 `Linear_QNet`)
+- 신경망: `state(11) → Linear(256) → ReLU → Linear(3)` (`model.py`의 `Linear_QNet`)
 - Experience Replay Buffer: `deque(maxlen=100_000)`, 배치 크기 1,000
 - epsilon-greedy 탐험: 게임 수(`n_games`)가 늘수록 `epsilon`이 300게임에 걸쳐 1.0 → 0.02로
   선형 감소 (`agent.py`의 `EPS_DECAY_GAMES`/`EPS_END`). 예전 값(150게임)에서는 평균 점수가
@@ -153,16 +143,15 @@ reward는 동일하게 `REWARD_DEATH`입니다.
   방식(경사하강)으로 지금까지 가장 안정적으로 잘했던 구간의 플레이 쪽을 조금씩 더
   강화하는 형태입니다. `train.py` 콘솔에 세트가 끝날 때마다 평균/최고 점수와 챔피언
   교체 여부가 출력됩니다.
-- **안전 성향 다이얼** (`Agent(safety_level=...)` / `Agent.set_safety_level()`): "위험할 때
-  얼마나 안전한 방향을 선호할지"를 0.0(끔, 기본값) ~ 1.0(최대 안전) 사이의 값 하나로
-  실시간 조절합니다. reward나 학습 방식은 전혀 건드리지 않습니다 — 신경망이 학습한
-  Q값은 그대로 두고, "행동을 고르는 순간"(`get_action`의 활용/exploit 분기)에만 state에
-  이미 들어있는 안전 신호(각 방향의 `reachable_area`, `can_reach_tail` — state[15:21])에
-  가중치를 줘서 Q값에 더합니다: `score(a) = Q(a) + safety_level * (SAFETY_AREA_WEIGHT *
-  reachable_area(a) + SAFETY_TAIL_WEIGHT * can_reach_tail(a))`. `safety_level=0.0`이면
-  `score == Q`라서 원래의 순수 greedy DQN과 완전히 동일하게 동작합니다. epsilon-greedy의
-  무작위 탐험 분기에는 적용하지 않습니다(탐험은 편향 없이 다양한 상황을 겪어야 학습에
-  도움이 되므로). `python play.py --safety 0.7`처럼 CLI에서 바로 조절할 수 있습니다.
+- **학습 시 환경 다양화 (domain randomization, `SnakeGameAI.reset(randomize=True)`)**:
+  `train.py`의 학습 루프에서만, 매 게임 시작 시 뱀의 길이를 3~10(`RANDOM_LENGTH_MIN/MAX`)
+  중 무작위로 주고, 30%(`OBSTACLE_CHANCE`) 확률로 무작위 장애물 3~15개(`OBSTACLE_COUNT_MIN/MAX`)
+  를 깔아놓습니다(`_place_obstacles`). state가 머리 바로 옆 1칸만 보는 가장 단순한
+  형태라, "위험하면 안전하게, 안전하면 먹이로"를 신경망이 직접 경험으로 배우려면
+  실제로 위험한 상황(긴 꼬리로 좁은 곳을 헤쳐 나가기, 장애물 피하기)을 자주 겪어봐야
+  하기 때문입니다. 장애물은 `is_collision()`에도 반영되어 부딪히면 벽/몸통과
+  동일하게 `REWARD_DEATH`로 죽습니다. 사람 플레이(`game.py`)와 `play.py`(감상 모드)는
+  항상 `randomize=False`(기본값) — 표준 보드(길이 3, 장애물 없음)로 시작합니다.
 
 ## 진행 순서 (개발 시 권장)
 

@@ -10,9 +10,22 @@ agent.py
                가중치를 섞고(crossover) 살짝 변형(mutation)해서 — 다음 세대를
                만듭니다. 경사하강(역전파)은 전혀 쓰지 않습니다.
 
-신경망 구조(Linear_QNet, 11 -> 256 -> 3)는 model.py에 고정돼 있고, 여기서 바뀌는
-건 그 가중치뿐입니다 — "뉴런 개수나 레이어 구조를 AI가 알아서 정하는" 것은 아니고,
-구조는 우리가 미리 정해둔 채로 가중치만 진화시킵니다.
+신경망 구조(Linear_QNet, STATE_SIZE -> 256 -> OUTPUT_SIZE)는 model.py에 고정돼
+있고, 여기서 바뀌는 건 그 가중치뿐입니다 — "뉴런 개수나 레이어 구조를 AI가
+알아서 정하는" 것은 아니고, 구조는 우리가 미리 정해둔 채로 가중치만 진화시킵니다.
+
+하이브리드 구조 (안전한 순환 경로 + 지름길 결정) — "같은 자리를 맴도는" 문제 해법
+--------------------------------------------------------------------------
+신경망이 매 스텝 3방향 이동을 전부 직접 고르면, 순전히 반응형(reactive) state만
+보고 판단하다가 똑같은 상황이 반복돼 제자리를 맴도는 루프에 갇히기 쉽다. 그래서
+기본 이동은 game.py에 미리 계산해 둔 안전한 순환 경로(HAMILTONIAN_CYCLE — 보드
+전체를 한 번씩 방문하고 돌아오는 고정 경로, 그대로 따라가면 자기 몸과 절대
+부딪히지 않음)로 고정하고, 신경망은 오직 **"이 경로를 벗어나 먹이로 직행하는
+지름길을 탈지 말지"** 2-way 결정만 내린다(greedy_action의 출력이 바로 이 결정이고,
+resolve_action()이 그 결정을 game.py의 cycle_action()/shortcut_action()과 엮어서
+실제 3-way 이동 action으로 바꿔준다). 지름길은 1칸 앞만 보고 안전해 보여도 나중에
+꼬리에 막혀 죽을 위험이 남아있는 선택 — 그래도 먹이 보상(REWARD_FOOD)이 사망
+페널티(REWARD_DEATH)보다 훨씬 크므로, 적절히 지름길을 타는 쪽이 fitness에 유리하다.
 """
 
 import copy
@@ -25,7 +38,10 @@ from game import STATE_SIZE
 from model import Linear_QNet
 
 HIDDEN_SIZE = 256
-OUTPUT_SIZE = 3
+# 신경망의 출력은 더 이상 "3방향 중 어디로 이동할지"가 아니라 "순환 경로를 따라갈지
+# (0), 지름길을 탈지(1)"뿐이다 — 실제 이동 방향은 game.py의 cycle_action()/
+# shortcut_action()이 결정론적으로 계산하고, resolve_action()이 이 둘을 엮는다.
+OUTPUT_SIZE = 2
 
 # ---- 유전 알고리즘 파라미터 -------------------------------------------------
 POPULATION_SIZE = 50     # 한 세대에 몇 개체(신경망)를 둘지
@@ -39,15 +55,36 @@ MUTATION_STRENGTH = 0.1  # 변이가 일어날 때 더해지는 가우시안 노
 
 
 def greedy_action(model: Linear_QNet, state):
-    """신경망 하나로부터 결정적으로(탐험 없이) 행동을 뽑는다 — 선호도 점수가 가장 높은 쪽."""
+    """
+    신경망 하나로부터 결정적으로(탐험 없이) 선호도 점수가 가장 높은 쪽을 뽑는다.
+    길이 OUTPUT_SIZE(2)의 one-hot — [순환 경로 유지, 지름길]. 실제 3-way 이동
+    action으로 바꾸려면 resolve_action()에 game과 함께 넘겨야 한다.
+    """
     state_tensor = torch.tensor(state, dtype=torch.float)
     with torch.no_grad():
         prediction = model(state_tensor)
     move = torch.argmax(prediction).item()
 
-    final_move = [0, 0, 0]
+    final_move = [0] * len(prediction)
     final_move[move] = 1
     return final_move
+
+
+def resolve_action(game, decision):
+    """
+    greedy_action()의 2-way 결정([순환 경로 유지, 지름길])을 실제 3-way 상대
+    action(game.step()에 넘길 [직진, 우회전, 좌회전])으로 바꾼다.
+
+    지름길(decision[1] == 1)을 선택했고 지금 안전해 보이는 지름길이 실제로
+    있으면 그 지름길 action을 쓰고, 그렇지 않으면(순환 경로를 선택했거나 지금
+    지름길이 없으면) 항상 자기 몸과 부딪히지 않는 cycle_action()을 쓴다.
+    """
+    take_shortcut = decision[1] == 1
+    if take_shortcut:
+        shortcut_action, shortcut_exists = game.shortcut_action()
+        if shortcut_exists:
+            return shortcut_action
+    return game.cycle_action()
 
 
 class Agent:
@@ -56,15 +93,17 @@ class Agent:
     def __init__(self):
         self.model = Linear_QNet(STATE_SIZE, HIDDEN_SIZE, OUTPUT_SIZE)
 
-    def get_action(self, state, explore: bool = False):
+    def get_action(self, state, game, explore: bool = False):
         """
-        신경망이 예측한 선호도 점수가 가장 높은 행동을 그대로 선택.
+        신경망이 예측한 "순환 경로 유지 vs 지름길" 결정을 game.py의 순환 경로/
+        지름길 로직과 엮어서, 실제로 step()에 넘길 3-way 이동 action을 반환한다.
 
         explore 인자는 과거 epsilon-greedy DQN 시절의 play.py 호출 형태와
         호환되도록 남겨뒀지만, 유전 알고리즘으로 학습된 개체는 항상 결정적으로
         (탐험 없이) 플레이하므로 실제로는 아무 효과가 없다.
         """
-        return greedy_action(self.model, state)
+        decision = greedy_action(self.model, state)
+        return resolve_action(game, decision)
 
 
 # ----------------------------------------------------------------------------

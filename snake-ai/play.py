@@ -41,7 +41,7 @@ def play(model_path: str, fps: int, episodes: int):
 
     games_played = 0
     while episodes == 0 or games_played < episodes:
-        action = agent.get_action(state)  # 항상 신경망이 예측한 선호도가 가장 높은 행동을 선택
+        action = agent.get_action(state, game)  # 순환 경로 유지/지름길 결정을 실제 이동으로 변환
         state, _, done, score = game.step(action)
 
         if done:

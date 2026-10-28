@@ -24,7 +24,7 @@ import csv
 
 import matplotlib.pyplot as plt
 
-from agent import GAMES_PER_INDIVIDUAL, POPULATION_SIZE, Population, greedy_action
+from agent import GAMES_PER_INDIVIDUAL, POPULATION_SIZE, Population, greedy_action, resolve_action
 from game import SnakeGameAI
 
 # 세대당 POPULATION_SIZE * GAMES_PER_INDIVIDUAL판을 전부 플레이해야 해서 DQN 때보다
@@ -73,7 +73,8 @@ def train():
             done = False
             total_reward = 0.0
             while not done:
-                action = greedy_action(model, state)
+                decision = greedy_action(model, state)       # [순환 경로 유지, 지름길]
+                action = resolve_action(game, decision)       # 실제 3-way 이동 action
                 state, reward, done, score = game.step(action)
                 total_reward += reward
             episodes.append((score, total_reward))

@@ -61,19 +61,23 @@ def train():
 
     def play_episode(model):
         """
-        model(신경망) 하나를 GAMES_PER_INDIVIDUAL판 플레이시켜 점수 리스트를 반환.
-        매 판마다 reset(randomize=True)로 뱀 길이·장애물을 새로 무작위화해서
-        "다양한 필드"에서 평가한다.
+        model(신경망) 하나를 GAMES_PER_INDIVIDUAL판 플레이시켜 (score, total_reward)
+        튜플 리스트를 반환. 매 판마다 reset(randomize=True)로 뱀 길이·장애물을 새로
+        무작위화해서 "다양한 필드"에서 평가한다. total_reward는 그 판의 매 스텝
+        step()이 돌려주는 reward를 전부 더한 값 — Population.evaluate()가 이걸
+        fitness(선택 압력)로 쓰고, score는 record/체크포인트 기준으로 따로 쓴다.
         """
-        scores = []
+        episodes = []
         for _ in range(GAMES_PER_INDIVIDUAL):
             state = game.reset(randomize=True)
             done = False
+            total_reward = 0.0
             while not done:
                 action = greedy_action(model, state)
-                state, _, done, score = game.step(action)
-            scores.append(score)
-        return scores
+                state, reward, done, score = game.step(action)
+                total_reward += reward
+            episodes.append((score, total_reward))
+        return episodes
 
     best_history, avg_history, worst_history = [], [], []
 

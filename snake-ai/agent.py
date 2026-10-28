@@ -138,15 +138,24 @@ class Population:
         현재 세대의 모든 개체를 평가한다.
 
         play_episode(model) : 신경망 하나를 받아 "다양한 필드(서로 다르게
-        무작위화된 맵)"에서 GAMES_PER_INDIVIDUAL판을 플레이시키고, 그 점수들의
-        리스트를 반환하는 콜백(train.py에서 정의). 이 메서드는 그 평균을
-        fitness로, 그 중 최고값을 best_scores로 저장한다.
+        무작위화된 맵)"에서 GAMES_PER_INDIVIDUAL판을 플레이시키고, 각 판의
+        (score, total_reward) 튜플 리스트를 반환하는 콜백(train.py에서 정의).
+
+        - fitness(선택 압력에 쓰이는 값)는 total_reward(판마다 step()이 돌려주는
+          reward를 다 더한 값)의 평균이다. game.py의 REWARD_FOOD/REWARD_DEATH
+          보상 설계를 그대로 선택 압력에 반영하기 위함 — 예전처럼 raw score만
+          쓰면 이 보상 상수들을 바꿔도 어느 개체가 부모가 될지는 전혀 달라지지
+          않는다.
+        - best_scores/record(화면에 보여주고 체크포인트를 저장하는 기준)는 reward
+          가중치와 무관하게, 실제로 "몇 개 먹었는지"(score) 그 자체를 쓴다.
 
         반환값: 이번 세대의 (최고 fitness, 평균 fitness, 최저 fitness)
         """
         for i, model in enumerate(self.individuals):
-            scores = play_episode(model)
-            self.fitnesses[i] = sum(scores) / len(scores)
+            episodes = play_episode(model)
+            scores = [score for score, _ in episodes]
+            rewards = [reward for _, reward in episodes]
+            self.fitnesses[i] = sum(rewards) / len(rewards)
             self.best_scores[i] = max(scores)
 
             if self.best_scores[i] > self.record:

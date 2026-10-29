@@ -1,113 +1,139 @@
 """
 train.py
 --------
-유전 알고리즘(genetic algorithm)으로 스네이크 신경망 집단(population)을 진화시키는
-메인 학습 루프.
+DQN 에이전트를 스네이크 게임 환경에서 반복 학습시키는 메인 학습 루프.
 
 실행 : python train.py
-- 매 세대(generation)마다 POPULATION_SIZE(기본 50)개체 각각을 GAMES_PER_INDIVIDUAL
-  (기본 3)판씩 플레이시킵니다 — 매 판마다 SnakeGameAI.reset(randomize=True)로 뱀의
-  길이와 장애물 배치를 무작위로 바꿔서, "한 맵만이 아니라 다양한 필드에서" 평가합니다.
-  그 점수들의 평균이 그 개체의 적합도(fitness)가 됩니다.
-- 적합도 상위 NUM_PARENTS(기본 4)개체를 부모로 선정합니다. 이 부모들은 그대로
-  다음 세대에 보존되고(엘리티즘), 나머지 자리는 부모 중 무작위로 2명을 골라
-  가중치를 섞고(crossover) 살짝 변형(mutation)해서 채웁니다 (agent.py의
-  Population.evolve 참고). 경사하강/역전파는 전혀 쓰지 않습니다.
-- 지금까지 한 판에서 나온 최고 점수(record)를 세우면 그 개체의 가중치를
-  model/best.pth로 저장합니다. play.py로 바로 재생할 수 있습니다.
-- 매 세대마다 (generation, best_score, avg_score, worst_score, record)를
-  TRAINING_LOG_PATH(기본: training_log.csv)에 한 줄씩 기록합니다.
-- matplotlib 창에 세대별 최고/평균/최저 적합도 그래프가 실시간으로 갱신됩니다.
+- 매 에피소드(한 판)가 끝날 때마다 점수 / 평균 점수를 콘솔에 출력하고,
+  matplotlib 창에 학습 곡선을 실시간으로 갱신합니다.
+- 최고 점수를 갱신하면 model/best.pth 로 체크포인트를 저장합니다.
+- 매 에피소드가 끝나면, 리플레이 버퍼 전체에서 뽑은 배치로 학습(train_long_memory)한
+  뒤에 "100게임을 1세트로 묶었을 때, 현재 세트에서 가장 점수가 높았던 한 판"의
+  transition들만 따로 다시 샘플링해서 한 번 더 학습(train_from_best_episode)합니다.
+  즉, 최근 세트에서 잘 풀렸던 플레이를 기반으로 조금씩(작은 학습률의 경사하강 스텝)
+  정책을 다듬어 나가는 효과를 냅니다. 세트가 다 차면(SET_SIZE게임) 그 세트의
+  평균/최고 점수를 콘솔에 요약 출력하고 다음 세트를 새로 시작합니다.
+- 매 에피소드마다 (episode, score, mean_score, avg_loss)를 TRAINING_LOG_PATH
+  (기본: training_log.csv)에 한 줄씩 기록합니다. avg_loss는 그 에피소드 동안
+  발생한 모든 학습 스텝(QTrainer.train_step)의 loss 평균으로, 점수가 주기적으로
+  진동하는 구간과 loss가 튀는 구간이 겹치는지 나중에 분석하기 위한 용도입니다.
 """
 
 import csv
 
 import matplotlib.pyplot as plt
 
-from agent import GAMES_PER_INDIVIDUAL, POPULATION_SIZE, Population, greedy_action, resolve_action
+from agent import Agent
 from game import SnakeGameAI
 
-# 세대당 POPULATION_SIZE * GAMES_PER_INDIVIDUAL판을 전부 플레이해야 해서 DQN 때보다
-# 한 세대에 훨씬 많은 판을 소화해야 한다. 화면 렌더링을 켜면 그만큼 느려지므로 기본은 끔
-# — 학습된 결과는 play.py로 재생해서 확인하세요.
-RENDER_WHILE_TRAINING = False
-GAME_SPEED = 80  # 렌더링을 켰을 때의 FPS
+# 학습 중 화면 렌더링 여부. True면 게임 화면을 직접 볼 수 있지만, 그만큼 느려짐.
+# 최대한 빠르게 많은 에피소드를 돌리고 싶다면 False로 바꾸세요.
+RENDER_WHILE_TRAINING = True
+GAME_SPEED = 80  # 렌더링을 켰을 때의 FPS (높을수록 화면이 빨리 진행됨)
 
+# 학습 기록(episode, score, mean_score, avg_loss)을 저장할 CSV 경로.
+# train() 실행마다 새로 시작하므로(항상 n_games=0부터), 매번 덮어써서(w 모드) 새로
+# 기록한다.
 TRAINING_LOG_PATH = "training_log.csv"
 
 
 plt.ion()  # matplotlib 대화형(interactive) 모드 -> 창을 새로 띄우지 않고 실시간 갱신
 
 
-def plot(best_scores, avg_scores, worst_scores):
-    """지금까지의 세대별 (최고/평균/최저 적합도) 그래프를 실시간으로 갱신."""
+def plot(scores, mean_scores):
+    """지금까지의 (에피소드별 점수, 누적 평균 점수) 그래프를 실시간으로 갱신."""
     plt.clf()
-    plt.title("Snake AI Genetic Training")
-    plt.xlabel("Generation")
-    plt.ylabel("Fitness (avg score per individual)")
-    plt.plot(best_scores, label="Best")
-    plt.plot(avg_scores, label="Average")
-    plt.plot(worst_scores, label="Worst")
+    plt.title("Snake AI Training")
+    plt.xlabel("Episode")
+    plt.ylabel("Score")
+    plt.plot(scores, label="Score")
+    plt.plot(mean_scores, label="Mean Score")
     plt.ylim(ymin=0)
     plt.legend(loc="upper left")
-    if best_scores:
-        plt.text(len(best_scores) - 1, best_scores[-1], f"{best_scores[-1]:.2f}")
+    if scores:
+        plt.text(len(scores) - 1, scores[-1], str(scores[-1]))
+        plt.text(len(mean_scores) - 1, mean_scores[-1], f"{mean_scores[-1]:.2f}")
     plt.pause(0.001)
 
 
 def train():
+    scores = []        # 에피소드별 점수
+    mean_scores = []   # 에피소드별 누적 평균 점수
+    total_score = 0
+    record = 0          # 지금까지의 최고 점수
+
+    agent = Agent()
     game = SnakeGameAI(render=RENDER_WHILE_TRAINING, speed=GAME_SPEED)
-    population = Population(POPULATION_SIZE)
-
-    def play_episode(model):
-        """
-        model(신경망) 하나를 GAMES_PER_INDIVIDUAL판 플레이시켜 (score, total_reward)
-        튜플 리스트를 반환. 매 판마다 reset(randomize=True)로 뱀 길이·장애물을 새로
-        무작위화해서 "다양한 필드"에서 평가한다. total_reward는 그 판의 매 스텝
-        step()이 돌려주는 reward를 전부 더한 값 — Population.evaluate()가 이걸
-        fitness(선택 압력)로 쓰고, score는 record/체크포인트 기준으로 따로 쓴다.
-        """
-        episodes = []
-        for _ in range(GAMES_PER_INDIVIDUAL):
-            state = game.reset(randomize=True)
-            done = False
-            total_reward = 0.0
-            while not done:
-                decision = greedy_action(model, state)       # [순환 경로 유지, 지름길]
-                action = resolve_action(game, decision)       # 실제 3-way 이동 action
-                state, reward, done, score = game.step(action)
-                total_reward += reward
-            episodes.append((score, total_reward))
-        return episodes
-
-    best_history, avg_history, worst_history = [], [], []
+    state_old = game.reset()
+    episode_transitions = []  # 현재 진행 중인 한 판의 transition들을 순서대로 모아둠
 
     log_file = open(TRAINING_LOG_PATH, "w", newline="", encoding="utf-8")
     log_writer = csv.writer(log_file)
-    log_writer.writerow(["generation", "best_score", "avg_score", "worst_score", "record"])
+    log_writer.writerow(["episode", "score", "mean_score", "avg_loss"])
     log_file.flush()
 
     while True:
-        best_fit, avg_fit, worst_fit = population.evaluate(play_episode)
+        # 1) 현재 state로부터 행동 선택 (epsilon-greedy)
+        action = agent.get_action(state_old)
 
-        if population.save_best_if_new_record():
-            print(f"[체크포인트 저장] Generation {population.generation} 신기록 갱신: {population.record}")
+        # 2) 환경에 행동을 적용하고 결과 관찰 (Gym 스타일 step)
+        state_new, reward, done, score = game.step(action)
 
-        print(
-            f"Gen {population.generation:>5} | Best {best_fit:>6.2f} | Avg {avg_fit:>6.2f} "
-            f"| Worst {worst_fit:>6.2f} | Record {population.record:>3}"
-        )
+        # 3) 방금 겪은 transition으로 즉시(단기) 학습
+        agent.train_short_memory(state_old, action, reward, state_new, done)
 
-        best_history.append(best_fit)
-        avg_history.append(avg_fit)
-        worst_history.append(worst_fit)
-        plot(best_history, avg_history, worst_history)
+        # 4) 리플레이 버퍼에 transition 저장 + 이번 판의 transition 목록에도 기록
+        agent.remember(state_old, action, reward, state_new, done)
+        episode_transitions.append((state_old, action, reward, state_new, done))
 
-        log_writer.writerow([population.generation, round(best_fit, 4), round(avg_fit, 4),
-                              round(worst_fit, 4), population.record])
-        log_file.flush()
+        state_old = state_new
 
-        population.evolve()
+        if done:
+            # 한 판이 끝났으므로 환경을 초기화하고, 리플레이 버퍼로 장기 학습 수행
+            state_old = game.reset()
+            agent.n_games += 1
+            agent.train_long_memory()
+
+            # 이번 판이 (현재 세트 안에서) 최고 기록이면 최고 기록 에피소드로
+            # 저장해두고, 그 에피소드를 기반으로 조금 더 학습한다.
+            sets_completed_before = len(agent.set_history)
+            agent.update_best_episode(episode_transitions, score)
+            agent.train_from_best_episode()
+            episode_transitions = []
+
+            # 이 에피소드 동안(단기/장기/best-episode 학습 전부 포함) 발생한
+            # 학습 loss의 평균. 다음 에피소드를 위해 내부적으로 리셋된다.
+            avg_loss = agent.pop_episode_avg_loss()
+
+            # 방금 이 호출로 한 세트(SET_SIZE게임)가 마감됐다면 요약을 출력
+            if len(agent.set_history) > sets_completed_before:
+                finished_set = agent.set_history[-1]
+                champion_note = "★ 새 챔피언 세트!" if finished_set["is_champion"] else "(기존 챔피언 유지)"
+                print(
+                    f"=== Set {finished_set['set_index']} 완료 (게임 {agent.n_games - 1}까지) "
+                    f"| 평균 {finished_set['avg_score']:.2f} | 세트 내 최고 {finished_set['best_score']} "
+                    f"| {champion_note} (챔피언 평균: {agent.champion_set_avg:.2f}) ==="
+                )
+
+            if score > record:
+                record = score
+                agent.model.save("best.pth")  # model/best.pth 로 체크포인트 저장
+                print(f"[체크포인트 저장] Game {agent.n_games} 신기록 갱신: {record}")
+
+            print(
+                f"Game {agent.n_games:>5} | Score: {score:>3} | Record: {record:>3} "
+                f"| Epsilon: {agent.get_epsilon():.3f} | Avg Loss: {avg_loss:.5f}"
+            )
+
+            scores.append(score)
+            total_score += score
+            mean_score = total_score / agent.n_games
+            mean_scores.append(mean_score)
+            plot(scores, mean_scores)
+
+            # 매 에피소드마다 바로 기록 + flush -> 중간에 Ctrl+C로 꺼도 로그가 남는다.
+            log_writer.writerow([agent.n_games, score, round(mean_score, 6), round(avg_loss, 6)])
+            log_file.flush()
 
 
 if __name__ == "__main__":
